@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "558343175773",
+    "project_id": "doantintuccaothang",
+    "storage_bucket": "doantintuccaothang.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558343175773:android:ad4c43477a90f5e29a17b4",
+        "android_client_info": {
+          "package_name": "com.example.app_tin_tuc_cao_thang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558343175773-gtkf1s8eq0vj2db81okegt5qck7cvmrv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCVhs3ifVKhFwzbsnPF2XUAGCfdVVZkcE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558343175773-gtkf1s8eq0vj2db81okegt5qck7cvmrv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
