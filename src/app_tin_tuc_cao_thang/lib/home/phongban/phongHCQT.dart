@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers
+// ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, file_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 
@@ -10,9 +10,11 @@ class PhongHCQT extends StatefulWidget {
 }
 
 class _PhongHCQTState extends State<PhongHCQT> {
+
   @override
   Widget build(BuildContext context) {
-    _buildDR() {
+
+    _DuongKeNgang() {
       return Padding(
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: Container(
@@ -25,7 +27,7 @@ class _PhongHCQTState extends State<PhongHCQT> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.grey.shade200,
       body: ListView(
         children: [
           Container(
@@ -61,10 +63,6 @@ class _PhongHCQTState extends State<PhongHCQT> {
             child: Column(
               children: [
                 Container(
-                  // decoration: BoxDecoration(
-                  //   border: Border.all(color: Colors.blue, width: 3),
-                  //   borderRadius: BorderRadius.circular(10),
-                  // ),
                   height: 200,
                   child: Image.asset(
                     'images/TuyenSinh.jpg',
@@ -72,12 +70,12 @@ class _PhongHCQTState extends State<PhongHCQT> {
                     fit: BoxFit.fill,
                   ),
                 ),
-                _buildDR(),
-                TinMoiCapNhat(),
-                _buildDR(),
-                TinNoiBat(),
-                _buildDR(),
-                LienHe()
+                _DuongKeNgang(),
+                const TinMoiCapNhat(),
+                const SizedBox(height: 15),
+                const TinNoiBat(),
+                _DuongKeNgang(),
+                const LienHe()
               ],
             ),
           ),

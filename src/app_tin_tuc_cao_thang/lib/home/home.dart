@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
-  var screens = const [PhongCTCT_HSSV(), Noti(), Settings()];
+  var screens = const [News(), Noti(), Settings()];
 
   @override
   Widget build(BuildContext context) {

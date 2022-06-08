@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers
+// ignore_for_file: avoid_unnecessary_containers, deprecated_member_use, prefer_const_constructors, non_constant_identifier_names, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ class _PhongDaoTaoState extends State<PhongDaoTao> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.grey.shade200,
       body: ListView(
         children: [
           Container(
@@ -61,10 +61,6 @@ class _PhongDaoTaoState extends State<PhongDaoTao> {
             child: Column(
               children: [
                 Container(
-                  // decoration: BoxDecoration(
-                  //   border: Border.all(color: Colors.blue, width: 3),
-                  //   borderRadius: BorderRadius.circular(10),
-                  // ),
                   height: 200,
                   child: Image.asset(
                     'images/TuyenSinh.jpg',
@@ -73,9 +69,9 @@ class _PhongDaoTaoState extends State<PhongDaoTao> {
                   ),
                 ),
                 _buildDR(),
-                BuildButton(),
-                _buildDR(),
-                ListPost(),
+                NutBam(),
+                SizedBox(height: 15),
+                TinMoiCapNhat(),
                 _buildDR(),
                 LienHe()
               ],
@@ -87,10 +83,10 @@ class _PhongDaoTaoState extends State<PhongDaoTao> {
   }
 }
 
-class BuildButton extends StatelessWidget {
-  const BuildButton({Key? key}) : super(key: key);
+class NutBam extends StatelessWidget {
+  const NutBam({Key? key}) : super(key: key);
 
-  _containerBTN(String label) {
+  _NutNho(String label) {
     return Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -105,7 +101,7 @@ class BuildButton extends StatelessWidget {
             onPressed: () {}));
   }
 
-  _containerBTN2(String label) {
+  _NutLon(String label) {
     return Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -123,27 +119,23 @@ class BuildButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // decoration: BoxDecoration(
-      //   border: Border.all(color: Colors.blue, width: 3),
-      //   borderRadius: BorderRadius.circular(10),
-      // ),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _containerBTN('Thời khóa biểu'),
-              _containerBTN('Lịch thi'),
-              _containerBTN('Lịch đào tạo'),
-              _containerBTN('Chương trình đào tạo'),
+              _NutNho('Thời khóa biểu'),
+              _NutNho('Lịch thi'),
+              _NutNho('Lịch đào tạo'),
+              _NutNho('Chương trình đào tạo'),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _containerBTN2('Đăng ký học kỳ phụ hè 2021'),
-              _containerBTN2('Lịch phát bằng tốt nghiệp - Cấp bảng điểm'),
+              _NutLon('Đăng ký học kỳ phụ hè 2021'),
+              _NutLon('Lịch phát bằng tốt nghiệp - Cấp bảng điểm'),
             ],
           ),
         ],
@@ -152,8 +144,8 @@ class BuildButton extends StatelessWidget {
   }
 }
 
-class ListPost extends StatelessWidget {
-  const ListPost({Key? key}) : super(key: key);
+class TinMoiCapNhat extends StatelessWidget {
+  const TinMoiCapNhat({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +154,7 @@ class ListPost extends StatelessWidget {
         border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(5),
       ),
-      height: 300,
+      height: 250,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Column(

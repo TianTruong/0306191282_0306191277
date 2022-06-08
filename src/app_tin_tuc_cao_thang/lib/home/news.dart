@@ -1,4 +1,7 @@
+// ignore_for_file: deprecated_member_use, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class News extends StatefulWidget {
   const News({Key? key}) : super(key: key);
@@ -23,7 +26,7 @@ class _NewsState extends State<News> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.grey.shade200,
       body: ListView(
         children: [
           Container(
@@ -65,7 +68,10 @@ class _NewsState extends State<News> {
                 _buildDR(),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
-                  child: Text('Tin mới cập nhật',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  child: Text(
+                    'Tin mới cập nhật',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 ListPost()
               ],
@@ -100,10 +106,6 @@ class BuildButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // decoration: BoxDecoration(
-      //   border: Border.all(color: Colors.blue, width: 3),
-      //   borderRadius: BorderRadius.circular(10),
-      // ),
       child: Column(
         children: [
           Row(
@@ -137,29 +139,42 @@ class Slider extends StatelessWidget {
     final PageController _controller = PageController();
 
     return Container(
-      // decoration: BoxDecoration(
-      //   border: Border.all(color: Colors.blue, width: 3),
-      //   borderRadius: BorderRadius.circular(10),
-      // ),
       height: 200,
-      child: PageView(
-        controller: _controller,
-        children: <Widget>[
-          Image.asset(
-            'images/TuyenSinh.jpg',
-            height: 200,
-            fit: BoxFit.fill,
+      child: Stack(alignment: AlignmentDirectional.bottomCenter, children: [
+        PageView(
+          controller: _controller,
+          children: <Widget>[
+            Image.asset(
+              'images/TuyenSinh.jpg',
+              height: 150,
+              fit: BoxFit.fill,
+            ),
+            Image.asset(
+              'images/LogoChinh.png',
+              height: 150,
+            ),
+            Image.asset(
+              'images/TuyenSinh.jpg',
+              height: 150,
+              fit: BoxFit.fill,
+            ),
+            Image.asset(
+              'images/LogoChinh.png',
+              height: 150,
+            ),
+          ],
+        ),
+        SmoothPageIndicator(
+          controller: _controller,
+          count: 4,
+          effect: JumpingDotEffect(
+            activeDotColor: Colors.grey,
+            dotColor: Colors.grey.shade300,
+            dotHeight: 10,
+            dotWidth: 10,
           ),
-          Image.asset(
-            'images/LogoChinh.png',
-            height: 200,
-          ),
-          Image.asset(
-            'images/LogoChinh.png',
-            height: 200,
-          ),
-        ],
-      ),
+        ),
+      ]),
     );
   }
 }
@@ -174,7 +189,7 @@ class ListPost extends StatelessWidget {
       //   border: Border.all(color: Colors.blue, width: 3),
       //   borderRadius: BorderRadius.circular(10),
       // ),
-      height: 400,
+      height: 250,
       child: ListView(
         children: const [
           Card(

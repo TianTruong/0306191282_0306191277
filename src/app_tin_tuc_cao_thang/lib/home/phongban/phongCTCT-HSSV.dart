@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers, camel_case_types
+// ignore_for_file: avoid_unnecessary_containers, camel_case_types, prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 
@@ -26,7 +26,7 @@ class _PhongCTCT_HSSVState extends State<PhongCTCT_HSSV> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.grey.shade200,
       body: ListView(
         children: [
           Container(
