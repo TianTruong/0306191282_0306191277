@@ -1,3 +1,4 @@
+import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 
@@ -90,10 +91,16 @@ class _TinState extends State<Tin> {
         child: ListView.builder(
             itemCount: 20,
             itemBuilder: (context, index) {
-              return const Card(
+              return Card(
                 child: ListTile(
                   title: Text('Tiêu đề bài viết'),
                   subtitle: Text('Nội dung bài viết'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ChiTietBaiViet()));
+                  },
                 ),
               );
             }),
