@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
+import 'package:app_tin_tuc_cao_thang/home/tintuc/tintuc.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -112,7 +113,27 @@ class BuildButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _containerBTN('Giới thiệu', Colors.blue, Icons.home),
-              _containerBTN('Tin tức', Colors.blue, Icons.home),
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    // border: Border.all(color: Colors.blue, width: 3),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  width: 90,
+                  height: 80,
+                  child: FlatButton(
+                      child: Center(
+                        child: Text('Tin tức',
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 12)),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TinTuc(),
+                            ));
+                      })),
               _containerBTN('Khoa, bộ môn', Colors.blue, Icons.home),
             ],
           ),
