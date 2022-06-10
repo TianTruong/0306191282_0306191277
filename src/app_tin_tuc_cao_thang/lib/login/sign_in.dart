@@ -154,7 +154,7 @@ class _SignInState extends State<SignIn> {
                         CupertinoButton(
                           padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
                             child: const Text('Đã có tài khoản',
-                                style: TextStyle(color:  Color.fromARGB(255, 61, 97, 216),fontSize: 22)),
+                                style: TextStyle(color:  Color.fromARGB(255, 61, 97, 216),fontSize: 20)),
                             onPressed: () {
                               Navigator.pop(context);
                             })
