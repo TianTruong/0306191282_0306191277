@@ -2,6 +2,8 @@ import 'package:app_tin_tuc_cao_thang/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:app_tin_tuc_cao_thang/login/login.dart';
 import 'package:app_tin_tuc_cao_thang/setting/setting.dart';
+import 'package:app_tin_tuc_cao_thang/login/change_password.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Setting(),
+      home: const ChangePassword(),
     );
   }
 }

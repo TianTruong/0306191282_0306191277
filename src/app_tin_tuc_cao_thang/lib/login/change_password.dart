@@ -4,23 +4,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class ChangePassword extends StatefulWidget {
+  const ChangePassword({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<ChangePassword> createState() => _ChangePasswordState();
 }
 
-class _SignInState extends State<SignIn> {
-  TextEditingController _gmailController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
+class _ChangePasswordState extends State<ChangePassword> {
+  TextEditingController _passoldController = TextEditingController();
   TextEditingController _passController = TextEditingController();
   TextEditingController _confirmController = TextEditingController();
 
   @override
   void dispose() {
-    _gmailController.dispose();
-    _nameController.dispose();
+    _passoldController.dispose();
     _passController.dispose();
     _confirmController.dispose();
     super.dispose();
@@ -39,13 +37,11 @@ class _SignInState extends State<SignIn> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
-
                 if (snapshot.hasError) {
                   return const Center(
                     child: Text('Something went wrong'),
                   );
                 }
-
                 if (snapshot.hasData) {
                   return Text("username");
                 }
@@ -53,36 +49,11 @@ class _SignInState extends State<SignIn> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      width: 150,
-                      height: 225,
-                      child: const Image(
-                        image: AssetImage('images/LogoChinh.png'),
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: TextFormField(
-                        controller: _gmailController,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                  color: Colors.black, width: 5),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 61, 97, 216), width: 3)),
-                            hintText: 'Gmail'),
-                        keyboardType: TextInputType.text,
-                      ),
-                    ),
+                    
                       Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextFormField(
-                        controller: _nameController,
+                        controller: _passoldController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -93,7 +64,7 @@ class _SignInState extends State<SignIn> {
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 61, 97, 216), width: 3)),
-                            hintText: 'Họ và Tên'),
+                            hintText: 'Mật khẩu hiện tại'),
                         keyboardType: TextInputType.text,
                       ),
                     ),
@@ -111,7 +82,7 @@ class _SignInState extends State<SignIn> {
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 61, 97, 216), width: 3)),
-                            hintText: 'Mật khẩu'),
+                            hintText: 'Mật khẩu mới'),
                         keyboardType: TextInputType.text,
                       ),
                     ),
@@ -129,7 +100,7 @@ class _SignInState extends State<SignIn> {
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 61, 97, 216), width: 3)),
-                            hintText: 'Xác nhận mật khẩu'),
+                            hintText: 'Nhập lại mật khẩu mới'),
                         keyboardType: TextInputType.text,
                       ),
                     ),
@@ -143,19 +114,36 @@ class _SignInState extends State<SignIn> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 30, vertical: 10),
                           child: Text(
-                            'Đăng ký',
+                            'Thay đổi',
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
                         onPressed: () {
                               Navigator.pop(context);
                             }),
-                    Row(
+                  ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color.fromARGB(255, 61, 97, 216),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0)),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 10),
+                          child: Text(
+                            'Hủy',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ),
+                        onPressed: () {
+                              Navigator.pop(context);
+                            }),
+                                  Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CupertinoButton(
                           padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
-                            child: const Text('Đã có tài khoản',
+                            child: const Text('Quên mật khẩu?',
                                 style: TextStyle(color:  Color.fromARGB(255, 61, 97, 216),fontSize: 20)),
                             onPressed: () {
                               Navigator.pop(context);
