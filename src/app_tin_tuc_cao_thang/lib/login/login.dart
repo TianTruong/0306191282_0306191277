@@ -105,7 +105,7 @@ class _LoginGmailState extends State<LoginGmail> {
                                       borderRadius: BorderRadius.circular(15),
                                       borderSide: BorderSide(
                                           color: Color.fromARGB(255, 61, 97, 216), width: 3)),
-                                  hintText: 'Password'),
+                                  hintText: 'Mật khẩu'),
                               keyboardType: TextInputType.text,
                             ),
                           ),
@@ -119,7 +119,7 @@ class _LoginGmailState extends State<LoginGmail> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 30, vertical: 10),
                                 child: Text(
-                                  'Sign In',
+                                  'Đăng nhập',
                                   style: TextStyle(fontSize: 15),
                                 ),
                               ),
@@ -133,18 +133,29 @@ class _LoginGmailState extends State<LoginGmail> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text('No account?'),
+                             Column(
+                             
+                               children: [
+                                 Container(
+                                   padding: EdgeInsets.fromLTRB(0, 30, 0, 15),
+                                   child: Text('Bạn chưa có tài khoản?', style:
+                                          TextStyle(color:  Colors.black,fontSize: 15)),
+                                 ),
+                       
                               CupertinoButton(
-                                  child: const Text('Sign Up',
+                                  child: const Text('Đăng kí',
                                       style:
-                                          TextStyle(color:  Colors.black)),
+                                          TextStyle(color:  Color.fromARGB(255, 24, 0, 243),fontSize: 20,fontStyle: FontStyle.italic)),
                                   onPressed: () {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 const SignIn()));
-                                  })
+                                  }),
+                               ],
+                             ),
+                             
                             ],
                           )
                         ],

@@ -77,6 +77,24 @@ class _SignInState extends State<SignIn> {
                         keyboardType: TextInputType.text,
                       ),
                     ),
+                      Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: TextFormField(
+                        controller: _gmailController,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                  color: Colors.black, width: 5),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 61, 97, 216), width: 3)),
+                            hintText: 'Họ và Tên'),
+                        keyboardType: TextInputType.text,
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextFormField(
@@ -91,7 +109,7 @@ class _SignInState extends State<SignIn> {
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 61, 97, 216), width: 3)),
-                            hintText: 'Password'),
+                            hintText: 'Mật khẩu'),
                         keyboardType: TextInputType.text,
                       ),
                     ),
@@ -109,7 +127,7 @@ class _SignInState extends State<SignIn> {
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 61, 97, 216), width: 3)),
-                            hintText: 'Confirm Password'),
+                            hintText: 'Xác nhận mật khẩu'),
                         keyboardType: TextInputType.text,
                       ),
                     ),
@@ -123,7 +141,7 @@ class _SignInState extends State<SignIn> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 30, vertical: 10),
                           child: Text(
-                            'Sign Up',
+                            'Đăng ký',
                             style: TextStyle(fontSize: 15),
                           ),
                         ),
