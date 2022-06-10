@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:app_tin_tuc_cao_thang/login/sign_in.dart';
 
 class LoginGmail extends StatefulWidget {
   const LoginGmail({Key? key}) : super(key: key);
@@ -142,7 +143,7 @@ class _LoginGmailState extends State<LoginGmail> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const Text("dsddd")));
+                                                const SignIn()));
                                   })
                             ],
                           )
