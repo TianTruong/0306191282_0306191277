@@ -151,10 +151,10 @@ class _SignInState extends State<SignIn> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Have an account? '),
                         CupertinoButton(
-                            child: const Text('Sign In',
-                                style: TextStyle(color:  Colors.black)),
+                          padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
+                            child: const Text('Đã có tài khoản',
+                                style: TextStyle(color:  Color.fromARGB(255, 61, 97, 216),fontSize: 22)),
                             onPressed: () {
                               Navigator.pop(context);
                             })

@@ -145,7 +145,7 @@ class _LoginGmailState extends State<LoginGmail> {
                               CupertinoButton(
                                   child: const Text('Đăng kí',
                                       style:
-                                          TextStyle(color:  Color.fromARGB(255, 24, 0, 243),fontSize: 20,fontStyle: FontStyle.italic)),
+                                          TextStyle(color:  Color.fromARGB(255, 61, 97, 216),fontSize: 20,fontStyle: FontStyle.italic)),
                                   onPressed: () {
                                     Navigator.push(
                                         context,
