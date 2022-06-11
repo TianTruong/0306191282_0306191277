@@ -49,8 +49,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    
-                      Padding(
+                    Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextFormField(
                         controller: _passoldController,
@@ -63,7 +62,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 61, 97, 216), width: 3)),
+                                    color: Color.fromARGB(255, 61, 97, 216),
+                                    width: 3)),
                             hintText: 'Mật khẩu hiện tại'),
                         keyboardType: TextInputType.text,
                       ),
@@ -81,7 +81,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 61, 97, 216), width: 3)),
+                                    color: Color.fromARGB(255, 61, 97, 216),
+                                    width: 3)),
                             hintText: 'Mật khẩu mới'),
                         keyboardType: TextInputType.text,
                       ),
@@ -99,7 +100,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 61, 97, 216), width: 3)),
+                                    color: Color.fromARGB(255, 61, 97, 216),
+                                    width: 3)),
                             hintText: 'Nhập lại mật khẩu mới'),
                         keyboardType: TextInputType.text,
                       ),
@@ -119,9 +121,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                           ),
                         ),
                         onPressed: () {
-                              Navigator.pop(context);
-                            }),
-                  ElevatedButton(
+                          Navigator.pop(context);
+                        }),
+                    ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: const Color.fromARGB(255, 61, 97, 216),
                           shape: RoundedRectangleBorder(
@@ -136,15 +138,17 @@ class _ChangePasswordState extends State<ChangePassword> {
                           ),
                         ),
                         onPressed: () {
-                              Navigator.pop(context);
-                            }),
-                                  Row(
+                          Navigator.pop(context);
+                        }),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CupertinoButton(
-                          padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
+                            padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
                             child: const Text('Quên mật khẩu?',
-                                style: TextStyle(color:  Color.fromARGB(255, 61, 97, 216),fontSize: 20)),
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 61, 97, 216),
+                                    fontSize: 20)),
                             onPressed: () {
                               Navigator.pop(context);
                             })
@@ -157,6 +161,4 @@ class _ChangePasswordState extends State<ChangePassword> {
           )),
     );
   }
-
-
 }
