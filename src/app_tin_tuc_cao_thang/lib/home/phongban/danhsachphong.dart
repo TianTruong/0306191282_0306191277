@@ -19,7 +19,7 @@ class _DepartmentsState extends State<Departments> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
-      body: ListView(
+      body: Column(
         children: [
           Container(
             color: Colors.blueAccent,
@@ -49,70 +49,71 @@ class _DepartmentsState extends State<Departments> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-              height: 400,
-              child: StreamBuilder<QuerySnapshot>(
-                stream: departments,
-                builder: (
-                  BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot,
-                ) {
-                  if (snapshot.hasError) {
-                    return const Text('Something went wrong.');
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text('Loading');
-                  }
-
-                  final data = snapshot.requireData;
-
-                  return GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithMaxCrossAxisExtent(
-                              maxCrossAxisExtent: 200,
-                              childAspectRatio: 3 / 2,
-                              crossAxisSpacing: 20,
-                              mainAxisSpacing: 20),
-                      itemCount: data.size,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text(data.docs[index]['name']),
-                              decoration: BoxDecoration(
-                                  // color: Colors.amber,
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15)),
-                            ),
-                            onTap: () {
-                              if (data.docs[index]['name'] == 'Phòng đào tạo') {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => PhongDaoTao()));
-                              } else {
-                                if (data.docs[index]['name'] ==
-                                    'Phòng Hành chính - Quản trị') {
+          Expanded(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: departments,
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot,
+                  ) {
+                    if (snapshot.hasError) {
+                      return const Text('Something went wrong.');
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Text('Loading');
+                    }
+          
+                    final data = snapshot.requireData;
+          
+                    return GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 200,
+                                childAspectRatio: 3 / 2,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20),
+                        itemCount: data.size,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: Text(data.docs[index]['name']),
+                                decoration: BoxDecoration(
+                                    // color: Colors.amber,
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15)),
+                              ),
+                              onTap: () {
+                                if (data.docs[index]['name'] == 'Phòng đào tạo') {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => PhongHCQT()));
+                                          builder: (context) => PhongDaoTao()));
                                 } else {
                                   if (data.docs[index]['name'] ==
-                                      'Phòng CTCT - HSSV') {
+                                      'Phòng Hành chính - Quản trị') {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                PhongCTCT_HSSV()));
+                                            builder: (context) => PhongHCQT()));
+                                  } else {
+                                    if (data.docs[index]['name'] ==
+                                        'Phòng CTCT - HSSV') {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PhongCTCT_HSSV()));
+                                    }
                                   }
                                 }
-                              }
-                            });
-                      });
-                },
+                              });
+                        });
+                  },
+                ),
               ),
             ),
           ),
