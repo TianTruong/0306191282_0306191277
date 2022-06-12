@@ -2,6 +2,7 @@ import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
+import 'package:readmore/readmore.dart';
 
 class TinTuc extends StatefulWidget {
   const TinTuc({Key? key}) : super(key: key);
@@ -79,9 +80,8 @@ class Tin extends StatefulWidget {
 }
 
 class _TinState extends State<Tin> {
-   final Stream<QuerySnapshot> posts =
+  final Stream<QuerySnapshot> posts =
       FirebaseFirestore.instance.collection('posts').snapshots();
-
 
   @override
   Widget build(BuildContext context) {
@@ -92,60 +92,60 @@ class _TinState extends State<Tin> {
       ),
       height: 600,
       child: StreamBuilder<QuerySnapshot>(
-                  stream: posts,
-                  builder: (
-                    BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot,
-                  ) {
-                    if (snapshot.hasError) {
-                      return const Text('Something went wrong.');
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Text('Loading');
-                    }
-          
-                    final data = snapshot.requireData;
-          
-                    return ListView.builder(
-                        itemCount: data.size,
-                        itemBuilder: (context, index) {
-                          return 
+        stream: posts,
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<QuerySnapshot> snapshot,
+        ) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong.');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Text('Loading');
+          }
 
-                          Card(
-                child: ListTile(
-                  title: Text(data.docs[index]['title']),
-                  // subtitle: Text('Nội dung bài viết'),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ChiTietBaiViet()));
-                  },
-                ),
-              );
-                          
-                          InkWell(
-                              child: Container(
-                                alignment: Alignment.center,
-                                child: Text(data.docs[index]['title']),
-                                decoration: BoxDecoration(
-                                    // color: Colors.amber,
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15)),
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ChiTietBaiViet()));
-                              });
-                        });
-                  },
-                ),
+          final data = snapshot.requireData;
+
+          return ListView.builder(
+              itemCount: data.size,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Card(
+                    child: ListTile(
+                      title: ReadMoreText(
+                        data.docs[index]['title'],
+                        style: TextStyle(color: Colors.grey[700], fontSize: 18, fontWeight: FontWeight.bold),
+                        trimLines: 1,
+                        trimMode: TrimMode.Line,
+                        trimCollapsedText: '',
+                        // trimExpandedText: 'Show less',
+                        // moreStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: ReadMoreText(
+                        data.docs[index]['content'],
+                        style: TextStyle(color: Colors.grey[700], fontSize: 16),
+                        trimLines: 1,
+                        trimMode: TrimMode.Line,
+                        trimCollapsedText: '',
+                        // trimExpandedText: 'Show less',
+                        // moreStyle: TextStyle(fontSize: 18),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChiTietBaiViet()));
+                      },
+                    ),
+                  ),
+                );
+              });
+        },
+      ),
     );
   }
 }
-
 
 class Trang extends StatefulWidget {
   const Trang({Key? key}) : super(key: key);
