@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
+import 'package:app_tin_tuc_cao_thang/home/phongban/danhsachphong.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/tintuc.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -141,7 +142,28 @@ class BuildButton extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _containerBTN('Phòng ban', Colors.blue, Icons.home),
+              // _containerBTN('Phòng ban', Colors.blue, Icons.home),
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    // border: Border.all(color: Colors.blue, width: 3),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  width: 90,
+                  height: 80,
+                  child: FlatButton(
+                      child: Center(
+                        child: Text('Phòng ban',
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 12)),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Departments(),
+                            ));
+                      })),
               _containerBTN('Tuyển sinh', Colors.blue, Icons.home),
               _containerBTN('Đoàn, hội', Colors.blue, Icons.home),
             ],
