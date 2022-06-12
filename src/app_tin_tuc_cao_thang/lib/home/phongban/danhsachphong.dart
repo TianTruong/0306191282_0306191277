@@ -99,7 +99,16 @@ class _DepartmentsState extends State<Departments> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => PhongHCQT()));
-                                } 
+                                } else {
+                                  if (data.docs[index]['name'] ==
+                                      'Phòng CTCT - HSSV') {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PhongCTCT_HSSV()));
+                                  }
+                                }
                               }
                             });
                       });
