@@ -1,4 +1,5 @@
 import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 
@@ -78,6 +79,10 @@ class Tin extends StatefulWidget {
 }
 
 class _TinState extends State<Tin> {
+   final Stream<QuerySnapshot> posts =
+      FirebaseFirestore.instance.collection('posts').snapshots();
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -86,15 +91,30 @@ class _TinState extends State<Tin> {
         borderRadius: BorderRadius.circular(5),
       ),
       height: 600,
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: ListView.builder(
-            itemCount: 20,
-            itemBuilder: (context, index) {
-              return Card(
+      child: StreamBuilder<QuerySnapshot>(
+                  stream: posts,
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot,
+                  ) {
+                    if (snapshot.hasError) {
+                      return const Text('Something went wrong.');
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Text('Loading');
+                    }
+          
+                    final data = snapshot.requireData;
+          
+                    return ListView.builder(
+                        itemCount: data.size,
+                        itemBuilder: (context, index) {
+                          return 
+
+                          Card(
                 child: ListTile(
-                  title: Text('Tiêu đề bài viết'),
-                  subtitle: Text('Nội dung bài viết'),
+                  title: Text(data.docs[index]['title']),
+                  // subtitle: Text('Nội dung bài viết'),
                   onTap: () {
                     Navigator.push(
                         context,
@@ -103,11 +123,29 @@ class _TinState extends State<Tin> {
                   },
                 ),
               );
-            }),
-      ),
+                          
+                          InkWell(
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: Text(data.docs[index]['title']),
+                                decoration: BoxDecoration(
+                                    // color: Colors.amber,
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15)),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ChiTietBaiViet()));
+                              });
+                        });
+                  },
+                ),
     );
   }
 }
+
 
 class Trang extends StatefulWidget {
   const Trang({Key? key}) : super(key: key);
