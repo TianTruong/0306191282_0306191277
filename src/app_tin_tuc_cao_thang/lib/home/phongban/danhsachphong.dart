@@ -92,7 +92,15 @@ class _DepartmentsState extends State<Departments> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => PhongDaoTao()));
-                              } 
+                              } else {
+                                if (data.docs[index]['name'] ==
+                                    'Phòng Hành chính - Quản trị') {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PhongHCQT()));
+                                } 
+                              }
                             });
                       });
                 },
