@@ -6,7 +6,10 @@ import 'package:app_tin_tuc_cao_thang/login/sign_in.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings.dart';
 import 'package:app_tin_tuc_cao_thang/login/change_password.dart';
 import 'package:app_tin_tuc_cao_thang/account/change_info_account.dart';
-import 'package:app_tin_tuc_cao_thang/chonkhoa/chonkhoa.dart';
+import 'package:app_tin_tuc_cao_thang/khoa/chonkhoa.dart';
+import 'package:app_tin_tuc_cao_thang/khoa/cntt.dart';
+import 'package:app_tin_tuc_cao_thang/home/tintuc/tintuc.dart';
+import 'package:app_tin_tuc_cao_thang/home/news.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ChonKhoa(),
+      home: CNTT(),
     );
   }
 }
