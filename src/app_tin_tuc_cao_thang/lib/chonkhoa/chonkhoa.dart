@@ -2,6 +2,7 @@ import 'package:app_tin_tuc_cao_thang/home/phongban/phongCTCT-HSSV.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/phongHCQT.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/phongdaotao.dart';
 import 'package:app_tin_tuc_cao_thang/chonkhoa/cntt.dart';
+import 'package:app_tin_tuc_cao_thang/chonkhoa/cokhi.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -97,7 +98,7 @@ class _ChonKhoaState extends State<ChonKhoa> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => PhongDaoTao()));
+                                          builder: (context) => CoKhi()));
                                 } else {
                                   if (data.docs[index]['name'] ==
                                       'Khoa cơ khí Động lực') {
