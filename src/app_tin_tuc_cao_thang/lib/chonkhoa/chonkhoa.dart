@@ -50,7 +50,9 @@ class _ChonKhoaState extends State<ChonKhoa> {
             ),
           ),
           Container(
-            child: Text('4233454333333333354'),
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+               child: 
+          Center(child: new Text('Khoa - Bộ môn', style: TextStyle(color: Colors.red,)))
           ),
           Expanded(
             child: Center(
