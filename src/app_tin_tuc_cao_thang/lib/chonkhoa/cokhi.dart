@@ -59,21 +59,21 @@ class _CoKhiState extends State<CoKhi> {
           controller: _controller,
           children: <Widget>[
             Image.asset(
-              'images/TuyenSinh.jpg',
+              'images/slider1.png',
               height: 150,
               fit: BoxFit.fill,
             ),
             Image.asset(
-              'images/LogoChinh.png',
+              'images/slider2.jpg',
               height: 150,
             ),
             Image.asset(
-              'images/TuyenSinh.jpg',
+              'images/slider3.jpg',
               height: 150,
               fit: BoxFit.fill,
             ),
             Image.asset(
-              'images/LogoChinh.png',
+              'images/slider4.jpg',
               height: 150,
             ),
           ],
