@@ -86,8 +86,25 @@ class _ChonKhoaState extends State<ChonKhoa> {
                         itemBuilder: (context, index) {
                           return InkWell(
                               child: Container(
-                                alignment: Alignment.center,
-                                child: Text(data.docs[index]['name']),
+                                child: Column(children: [
+                                     Container(   
+                                       alignment: Alignment.topCenter,
+                                       child: Text(data.docs[index]['name'],style: TextStyle(fontWeight: FontWeight.bold))
+                                       ,),
+                                        Container(   
+                                       alignment: Alignment.centerLeft,
+                                       child: Text(data.docs[index]['description'])
+                                       ,),
+                                        Container(   
+                                       alignment: Alignment.centerLeft,
+                                       child: Text(data.docs[index]['email'])
+                                       ,),
+                                        Container(   
+                                       alignment: Alignment.centerLeft,
+                                       child: Text(data.docs[index]['web'])
+                                       ,),
+                                ],),
+                             
                                 decoration: BoxDecoration(
                                     // color: Colors.amber,
                                     color: Colors.white,
