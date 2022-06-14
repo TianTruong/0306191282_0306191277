@@ -1,18 +1,18 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class CNTT extends StatefulWidget {
-  const CNTT({Key? key}) : super(key: key);
+class CoKhi extends StatefulWidget {
+  const CoKhi({Key? key}) : super(key: key);
 
   @override
-  State<CNTT> createState() => _CNTTState();
+  State<CoKhi> createState() => _CoKhiState();
 }
 
-class _CNTTState extends State<CNTT> {
-  final Stream<QuerySnapshot> cntt =
-      FirebaseFirestore.instance.collection('cntt').snapshots();
-
+class _CoKhiState extends State<CoKhi> {
+  final Stream<QuerySnapshot> cokhi =
+      FirebaseFirestore.instance.collection('cokhi').snapshots();
+  final PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,14 +50,52 @@ class _CNTTState extends State<CNTT> {
           Container(
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                child: 
-          Center(child: new Text('Khoa Công nghệ thông tin', style: TextStyle(color: Colors.red,)))
+          Center(child: new Text('Khoa Cơ khí', style: TextStyle(color: Colors.red,)))
           ),
+          Container(
+      height: 200,
+      child: Stack(alignment: AlignmentDirectional.bottomCenter, children: [
+        PageView(
+          controller: _controller,
+          children: <Widget>[
+            Image.asset(
+              'images/TuyenSinh.jpg',
+              height: 150,
+              fit: BoxFit.fill,
+            ),
+            Image.asset(
+              'images/LogoChinh.png',
+              height: 150,
+            ),
+            Image.asset(
+              'images/TuyenSinh.jpg',
+              height: 150,
+              fit: BoxFit.fill,
+            ),
+            Image.asset(
+              'images/LogoChinh.png',
+              height: 150,
+            ),
+          ],
+        ),
+        SmoothPageIndicator(
+          controller: _controller,
+          count: 4,
+          effect: JumpingDotEffect(
+            activeDotColor: Colors.grey,
+            dotColor: Colors.grey.shade300,
+            dotHeight: 10,
+            dotWidth: 10,
+          ),
+        ),
+      ]),
+    ),
           Expanded(
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: cntt,
+                  stream: cokhi,
                   builder: (
                     BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot,
@@ -74,7 +112,7 @@ class _CNTTState extends State<CNTT> {
                     return GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 400,
+                                maxCrossAxisExtent: 250,
                                 childAspectRatio: 3 / 2,
                                 crossAxisSpacing: 20,
                                 mainAxisSpacing: 20),
@@ -87,13 +125,9 @@ class _CNTTState extends State<CNTT> {
                                       Container( 
                                         padding: EdgeInsets.all(5.0),
                                         alignment:Alignment.topLeft,
-                                         child:Text(data.docs[index]['title']),
+                                         child:Text(data.docs[index]['title'],style: TextStyle(fontWeight: FontWeight.bold),),
                                       ),
-                                      Container( 
-                                        padding: EdgeInsets.all(5.0),
-                                        alignment:Alignment.topLeft,
-                                         child:Text(data.docs[index]['description']),
-                                      ),
+                                     
                                        Container( 
                                         padding: EdgeInsets.all(5.0),
                                    
@@ -107,7 +141,7 @@ class _CNTTState extends State<CNTT> {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(15)),
                               ),
-                            );
+                             );
                         });
                   },
                 ),
@@ -117,11 +151,11 @@ class _CNTTState extends State<CNTT> {
            Container(
       child: Column(
         children: const [
-          Text('Điện thoại: 028.38212360 (33)',
+          Text('Điện thoại: 028.38212360 (26)',
               style: TextStyle(fontSize: 16, color: Colors.black)),
-          Text('Email: nvdzung@caothang.edu.vn',
+          Text('Email: cokhi@caothang.edu.vn',
               style: TextStyle(fontSize: 16, color: Colors.black)),
-          Text('Website: cntt.caothang.edu.vn',
+          Text('Website: ck.caothang.edu.vn',
               style: TextStyle(fontSize: 16, color: Colors.black)),
         ],
       ),
