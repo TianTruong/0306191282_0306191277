@@ -2,9 +2,6 @@
 
 import 'package:app_tin_tuc_cao_thang/home/news.dart';
 import 'package:app_tin_tuc_cao_thang/home/notification.dart';
-import 'package:app_tin_tuc_cao_thang/home/phongban/phongCTCT-HSSV.dart';
-import 'package:app_tin_tuc_cao_thang/home/phongban/phongHCQT.dart';
-import 'package:app_tin_tuc_cao_thang/home/phongban/phongDaoTao.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

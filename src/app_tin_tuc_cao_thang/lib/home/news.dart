@@ -1,6 +1,6 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
-import 'package:app_tin_tuc_cao_thang/chonkhoa/chonkhoa.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/danhsachkhoa.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/danhsachphong.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/tintuc.dart';
 import 'package:flutter/material.dart';
