@@ -4,14 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class CoKhi extends StatefulWidget {
-  const CoKhi({Key? key}) : super(key: key);
+class GDDC extends StatefulWidget {
+  const GDDC({Key? key}) : super(key: key);
 
   @override
-  State<CoKhi> createState() => _CoKhiState();
+  State<GDDC> createState() => _GDDCState();
 }
 
-class _CoKhiState extends State<CoKhi> {
+class _GDDCState extends State<GDDC> {
   final Stream<QuerySnapshot> bomonkinhte =
       FirebaseFirestore.instance.collection('bomonkinhte').snapshots();
   final PageController _controller = PageController();
@@ -52,7 +52,7 @@ class _CoKhiState extends State<CoKhi> {
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
-                  child: Text('Bộ môn Kinh tế',
+                  child: Text('Khoa Giáo dục đại cương',
                       style: TextStyle(
                         color: Colors.red,
                       )))),
@@ -114,7 +114,7 @@ class _CoKhiState extends State<CoKhi> {
                     return GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 250,
+                                maxCrossAxisExtent: 400,
                                 childAspectRatio: 3 / 2,
                                 crossAxisSpacing: 20,
                                 mainAxisSpacing: 20),
@@ -130,7 +130,7 @@ class _CoKhiState extends State<CoKhi> {
                                     child: Text(
                                       data.docs[index]['title'],
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold, fontSize: 18),
                                     ),
                                   ),
                                     Container(
@@ -139,18 +139,27 @@ class _CoKhiState extends State<CoKhi> {
                                   child: Text(
                                       data.docs[index]['description1'],
                                       style: TextStyle(
-                                          fontSize: 10),
+                                          fontSize: 13),
                                     ),
                                   ),
-                                  Container(
+                                    Container(
                                     padding: EdgeInsets.all(5.0),
                                       alignment: Alignment.topLeft,
-                                    child: Image.network(
-                                      data.docs[index]['image'],
-                                      cacheHeight: 50,
-                                      cacheWidth: 265,
+                                  child: Text(
+                                      data.docs[index]['description2'],
+                                      style: TextStyle(
+                                          fontSize: 13),
                                     ),
                                   ),
+                                 Container(
+                                    padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                  child: Text(
+                                      data.docs[index]['description3'],
+                                      style: TextStyle(
+                                          fontSize: 13),
+                                    ),
+                                  )
                                 ],
                               ),
                               decoration: BoxDecoration(
