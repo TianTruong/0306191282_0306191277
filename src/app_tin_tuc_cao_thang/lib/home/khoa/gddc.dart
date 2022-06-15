@@ -64,25 +64,21 @@ class _GDDCState extends State<GDDC> {
                 controller: _controller,
                 children: <Widget>[
                   Image.asset(
-                    'images/slider5.jpg',
+                    'images/slider8.jpg',
                     height: 150,
                     fit: BoxFit.fill,
                   ),
                   Image.asset(
-                    'images/slider6.png',
+                    'images/slider9.jpg',
                     height: 150,
                   ),
-                  Image.asset(
-                    'images/slider7.png',
-                    height: 150,
-                    fit: BoxFit.fill,
-                  ),
+                
             
                 ],
               ),
               SmoothPageIndicator(
                 controller: _controller,
-                count: 3,
+                count: 2,
                 effect: JumpingDotEffect(
                   activeDotColor: Colors.grey,
                   dotColor: Colors.grey.shade300,
@@ -92,6 +88,13 @@ class _GDDCState extends State<GDDC> {
               ),
             ]),
           ),
+              Container(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: Center(
+                  child: Text('Các thông tin Khoa Giáo dục đại cương',
+                      style: TextStyle(
+                        color: Colors.red,
+                      )))),
           Expanded(
             child: Center(
               child: Padding(
