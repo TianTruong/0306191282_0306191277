@@ -4,7 +4,9 @@ import 'package:app_tin_tuc_cao_thang/home/phongban/phongCTCT-HSSV.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/phongHCQT.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/cntt.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/cokhi.dart';
+import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChonKhoa extends StatefulWidget {
@@ -17,6 +19,8 @@ class ChonKhoa extends StatefulWidget {
 class _ChonKhoaState extends State<ChonKhoa> {
   final Stream<QuerySnapshot> khoa =
       FirebaseFirestore.instance.collection('Khoa').snapshots();
+
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +46,32 @@ class _ChonKhoaState extends State<ChonKhoa> {
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.search, size: 45)),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.circle, size: 45)),
+                        ClipOval(
+                            child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Information()));
+                          },
+                          child: Builder(builder: (context) {
+                            // user.reload;
+                            print(user.photoURL);
+                            return user.photoURL != null
+                                ? Image.network(
+                                    user.photoURL.toString(),
+                                    fit: BoxFit.fill,
+                                    cacheHeight: 45,
+                                    cacheWidth: 45,
+                                  )
+                                : Image.asset(
+                                    'images/intro.jpg',
+                                    fit: BoxFit.fill,
+                                    cacheHeight: 45,
+                                    cacheWidth: 45,
+                                  );
+                          }),
+                        )),
                       ],
                     ),
                   ),
@@ -100,9 +127,9 @@ class _ChonKhoaState extends State<ChonKhoa> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(data.docs[index]['description']),
-                                          Text(data.docs[index]['email']),
-                                          Text(data.docs[index]['web']),
+                                          Text('Điện thoại: ${data.docs[index]['description']}'),
+                                          Text('Email: ${data.docs[index]['email']}'),
+                                          Text('Website: ${data.docs[index]['web']}'),
                                         ],
                                       ),
                                     ),

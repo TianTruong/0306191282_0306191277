@@ -51,7 +51,7 @@ class _SignInState extends State<SignIn> {
 
                 if (snapshot.hasData) {
                   if (FirebaseAuth.instance.currentUser!.displayName == null) {
-                    return UserName();
+                    return SetInfor();
                   }
                   return HomePage();
                 }

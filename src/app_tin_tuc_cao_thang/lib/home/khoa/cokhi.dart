@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -15,6 +17,8 @@ class _CoKhiState extends State<CoKhi> {
   final Stream<QuerySnapshot> cokhi =
       FirebaseFirestore.instance.collection('cokhi').snapshots();
   final PageController _controller = PageController();
+  final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +43,32 @@ class _CoKhiState extends State<CoKhi> {
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.search, size: 45)),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.circle, size: 45)),
+                        ClipOval(
+                            child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Information()));
+                          },
+                          child: Builder(builder: (context) {
+                            // user.reload;
+                            print(user.photoURL);
+                            return user.photoURL != null
+                                ? Image.network(
+                                    user.photoURL.toString(),
+                                    fit: BoxFit.fill,
+                                    cacheHeight: 45,
+                                    cacheWidth: 45,
+                                  )
+                                : Image.asset(
+                                    'images/intro.jpg',
+                                    fit: BoxFit.fill,
+                                    cacheHeight: 45,
+                                    cacheWidth: 45,
+                                  );
+                          }),
+                        )),
                       ],
                     ),
                   ),

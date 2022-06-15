@@ -1,5 +1,7 @@
+import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 import 'package:readmore/readmore.dart';
@@ -12,6 +14,8 @@ class TinTuc extends StatefulWidget {
 }
 
 class _TinTucState extends State<TinTuc> {
+  final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +40,32 @@ class _TinTucState extends State<TinTuc> {
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.search, size: 45)),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.circle, size: 45)),
+                        ClipOval(
+                            child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Information()));
+                          },
+                          child: Builder(builder: (context) {
+                            // user.reload;
+                            print(user.photoURL);
+                            return user.photoURL != null
+                                ? Image.network(
+                                    user.photoURL.toString(),
+                                    fit: BoxFit.fill,
+                                    cacheHeight: 45,
+                                    cacheWidth: 45,
+                                  )
+                                : Image.asset(
+                                    'images/intro.jpg',
+                                    fit: BoxFit.fill,
+                                    cacheHeight: 45,
+                                    cacheWidth: 45,
+                                  );
+                          }),
+                        )),
                       ],
                     ),
                   ),
@@ -115,7 +142,10 @@ class _TinState extends State<Tin> {
                     child: ListTile(
                       title: ReadMoreText(
                         data.docs[index]['title'],
-                        style: TextStyle(color: Colors.grey[700], fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: Colors.grey[700],
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                         trimLines: 1,
                         trimMode: TrimMode.Line,
                         trimCollapsedText: '',

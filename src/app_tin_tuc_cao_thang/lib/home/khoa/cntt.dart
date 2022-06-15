@@ -1,4 +1,6 @@
+import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CNTT extends StatefulWidget {
@@ -11,6 +13,8 @@ class CNTT extends StatefulWidget {
 class _CNTTState extends State<CNTT> {
   final Stream<QuerySnapshot> cntt =
       FirebaseFirestore.instance.collection('cntt').snapshots();
+
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +40,32 @@ class _CNTTState extends State<CNTT> {
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.search, size: 45)),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.circle, size: 45)),
+                        ClipOval(
+                            child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Information()));
+                          },
+                          child: Builder(builder: (context) {
+                            // user.reload;
+                            print(user.photoURL);
+                            return user.photoURL != null
+                                ? Image.network(
+                                    user.photoURL.toString(),
+                                    fit: BoxFit.fill,
+                                    cacheHeight: 45,
+                                    cacheWidth: 45,
+                                  )
+                                : Image.asset(
+                                    'images/intro.jpg',
+                                    fit: BoxFit.fill,
+                                    cacheHeight: 45,
+                                    cacheWidth: 45,
+                                  );
+                          }),
+                        )),
                       ],
                     ),
                   ),

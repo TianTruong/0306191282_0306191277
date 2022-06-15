@@ -1,7 +1,9 @@
 import 'package:app_tin_tuc_cao_thang/home/phongban/phongCTCT-HSSV.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/phongHCQT.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/phongdaotao.dart';
+import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Departments extends StatefulWidget {
@@ -14,6 +16,8 @@ class Departments extends StatefulWidget {
 class _DepartmentsState extends State<Departments> {
   final Stream<QuerySnapshot> departments =
       FirebaseFirestore.instance.collection('departments').snapshots();
+
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +43,32 @@ class _DepartmentsState extends State<Departments> {
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.search, size: 45)),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.circle, size: 45)),
+                        ClipOval(
+                            child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Information()));
+                          },
+                          child: Builder(builder: (context) {
+                            // user.reload;
+                            print(user.photoURL);
+                            return user.photoURL != null
+                                ? Image.network(
+                                    user.photoURL.toString(),
+                                    fit: BoxFit.fill,
+                                    cacheHeight: 45,
+                                    cacheWidth: 45,
+                                  )
+                                : Image.asset(
+                                    'images/intro.jpg',
+                                    fit: BoxFit.fill,
+                                    cacheHeight: 45,
+                                    cacheWidth: 45,
+                                  );
+                          }),
+                        )),
                       ],
                     ),
                   ),
@@ -65,9 +92,9 @@ class _DepartmentsState extends State<Departments> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Text('Loading');
                     }
-          
+
                     final data = snapshot.requireData;
-          
+
                     return GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -87,7 +114,8 @@ class _DepartmentsState extends State<Departments> {
                                     borderRadius: BorderRadius.circular(15)),
                               ),
                               onTap: () {
-                                if (data.docs[index]['name'] == 'Phòng đào tạo') {
+                                if (data.docs[index]['name'] ==
+                                    'Phòng đào tạo') {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

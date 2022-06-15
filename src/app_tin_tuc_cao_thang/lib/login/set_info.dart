@@ -9,14 +9,24 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class UserName extends StatelessWidget {
-  UserName({Key? key}) : super(key: key);
+class SetInfor extends StatefulWidget {
+  const SetInfor({Key? key}) : super(key: key);
 
+  @override
+  State<SetInfor> createState() => _SetInforState();
+}
+
+class _SetInforState extends State<SetInfor> {
   var _nameController = TextEditingController();
   var _mssvController = TextEditingController();
   var _sexController = TextEditingController();
   bool check = false;
   late String avatar = '';
+  String sex = 'Nam';
+  var items = [
+    'Nam',
+    'Nữ',
+  ];
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   final user = FirebaseAuth.instance.currentUser!;
@@ -32,7 +42,7 @@ class UserName extends StatelessWidget {
           users.add({
             'name': _nameController.text,
             'mssv': _mssvController.text,
-            'sex': _sexController.text,
+            'sex': sex,
             'avatar': avatar,
             'status': 'Available',
             'uid': user.uid
@@ -58,6 +68,10 @@ class UserName extends StatelessWidget {
     avatar = downloadURL;
 
     print(downloadURL);
+
+    setState(() {
+      
+    });
   }
 
   @override
@@ -105,7 +119,7 @@ class UserName extends StatelessWidget {
                       cacheWidth: 150,
                     )
                   : Image.asset(
-                      'images/logo.png',
+                      'images/intro.jpg',
                       fit: BoxFit.cover,
                       cacheHeight: 150,
                       cacheWidth: 150,
@@ -150,20 +164,29 @@ class UserName extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 50),
-            child: TextFormField(
-              controller: _sexController,
-              cursorColor: const Color(0xFF08C187),
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(color: Colors.black, width: 5),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide:
-                          const BorderSide(color: Color(0xFF08C187), width: 3)),
-                  hintText: 'Giới tính ...'),
-              keyboardType: TextInputType.text,
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(width: 1, color: Colors.grey),
+                  color: Colors.white, borderRadius: BorderRadius.circular(15)),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: DropdownButton(
+                  value: sex,
+                  icon: const Icon(Icons.arrow_drop_down),
+                  items: items.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  isExpanded: true,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      sex = newValue!;
+                    });
+                  },
+                ),
+              ),
             ),
           ),
           ElevatedButton(
