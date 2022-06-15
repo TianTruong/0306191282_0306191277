@@ -135,7 +135,7 @@ class _CKDLState extends State<CKDL> {
                                     child: Text(
                                       data.docs[index]['title'],
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold, fontSize: 18),
+                                          fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 255, 255, 255),backgroundColor: Colors.blue),
                                     ),
                                   ),
                                     Container(
@@ -144,7 +144,7 @@ class _CKDLState extends State<CKDL> {
                                   child: Text(
                                       data.docs[index]['noti1'],
                                       style: TextStyle(
-                                          fontSize: 13),
+                                          fontSize: 13, color: Colors.red,),
                                     ),
                                   ),
                                     Container(
@@ -153,7 +153,7 @@ class _CKDLState extends State<CKDL> {
                                   child: Text(
                                       data.docs[index]['noti2'],
                                       style: TextStyle(
-                                          fontSize: 13),
+                                          fontSize: 13, color: Colors.red,),
                                     ),
                                   ),
                                  Container(
@@ -162,7 +162,7 @@ class _CKDLState extends State<CKDL> {
                                   child: Text(
                                       data.docs[index]['noti3'],
                                       style: TextStyle(
-                                          fontSize: 13),
+                                          fontSize: 13 ,color: Colors.red,),
                                     ),
                                   ),  Container(
                                     padding: EdgeInsets.all(5.0),
@@ -170,7 +170,7 @@ class _CKDLState extends State<CKDL> {
                                   child: Text(
                                       data.docs[index]['noti4'],
                                       style: TextStyle(
-                                          fontSize: 13),
+                                          fontSize: 13,    color: Color.fromARGB(255, 1, 255, 99),),
                                     ),
                                   ),
                                     Container(
@@ -179,7 +179,9 @@ class _CKDLState extends State<CKDL> {
                                   child: Text(
                                       data.docs[index]['noti5'],
                                       style: TextStyle(
-                                          fontSize: 13),
+                                          fontSize: 13,  
+                              color: Color.fromARGB(255, 1, 255, 99),
+                      ),
                                     ),
                                   )
                                 ],
