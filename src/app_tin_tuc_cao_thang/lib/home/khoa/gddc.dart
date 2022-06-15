@@ -133,7 +133,7 @@ class _GDDCState extends State<GDDC> {
                                     child: Text(
                                       data.docs[index]['title'],
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold, fontSize: 18),
+                                          fontWeight: FontWeight.bold, fontSize: 18,color: Color.fromARGB(255, 255, 255, 255),backgroundColor: Color.fromARGB(255, 243, 159, 33)),
                                     ),
                                   ),
                                     Container(
