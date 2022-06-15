@@ -1,3 +1,4 @@
+import 'package:app_tin_tuc_cao_thang/home/settings/contact.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -123,7 +124,12 @@ class _SettingsState extends State<Settings> {
                   child: Material(
                     child: ListTile(
                       title: const Text('Liên hệ'),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Contact()));
+                      },
                     ),
                   ),
                 ),
