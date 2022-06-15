@@ -201,11 +201,11 @@ class _CKDLState extends State<CKDL> {
           Container(
             child: Column(
               children: const [
-                Text(' Điện thoại: 028.38212360 (24)',
+                Text('   Điện thoại: 028.38212360 (22 & 25)',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Email: kinhte@caothang.edu.vn',
+                Text('Email: nguyenngocthanh@caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Website: kinhte.caothang.edu.vn',
+                Text('Website: ckdl.caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
               ],
             ),
