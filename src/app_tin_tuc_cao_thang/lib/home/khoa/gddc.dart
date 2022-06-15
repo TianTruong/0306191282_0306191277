@@ -4,14 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class BoMonKinhTe extends StatefulWidget {
-  const BoMonKinhTe({Key? key}) : super(key: key);
+class CoKhi extends StatefulWidget {
+  const CoKhi({Key? key}) : super(key: key);
 
   @override
-  State<BoMonKinhTe> createState() => _BoMonKinhTeState();
+  State<CoKhi> createState() => _CoKhiState();
 }
 
-class _BoMonKinhTeState extends State<BoMonKinhTe> {
+class _CoKhiState extends State<CoKhi> {
   final Stream<QuerySnapshot> bomonkinhte =
       FirebaseFirestore.instance.collection('bomonkinhte').snapshots();
   final PageController _controller = PageController();
