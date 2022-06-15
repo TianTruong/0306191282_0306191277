@@ -114,7 +114,7 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
                     return GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 250,
+                                maxCrossAxisExtent: 400,
                                 childAspectRatio: 3 / 2,
                                 crossAxisSpacing: 20,
                                 mainAxisSpacing: 20),
@@ -147,8 +147,26 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
                                       alignment: Alignment.topLeft,
                                     child: Image.network(
                                       data.docs[index]['image'],
-                                      cacheHeight: 50,
+                                      cacheHeight: 130,
                                       cacheWidth: 265,
+                                    ),
+                                  ),
+                                      Container(
+                                    padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                  child: Text(
+                                      data.docs[index]['description2'],
+                                      style: TextStyle(
+                                          fontSize: 10),
+                                    ),
+                                  ),
+                                      Container(
+                                    padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                  child: Text(
+                                      data.docs[index]['description3'],
+                                      style: TextStyle(
+                                          fontSize: 10),
                                     ),
                                   ),
                                 ],
