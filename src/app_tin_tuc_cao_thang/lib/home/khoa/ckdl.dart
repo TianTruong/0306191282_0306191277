@@ -52,7 +52,7 @@ class _CKDLState extends State<CKDL> {
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
-                  child: Text('Khoa Cơ khí Điện - Lạnh',
+                  child: Text('Khoa Cơ khí Động lực',
                       style: TextStyle(
                         color: Colors.red,
                       )))),

@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
-import 'package:app_tin_tuc_cao_thang/home/phongban/phongCTCT-HSSV.dart';
-import 'package:app_tin_tuc_cao_thang/home/phongban/phongHCQT.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/gddc.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/cntt.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/cokhi.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/bomonkinhte.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/ckdl.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/ddt.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/nhietlanh.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -121,7 +124,7 @@ class _ChonKhoaState extends State<ChonKhoa> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => PhongHCQT()));
+                                            builder: (context) => CKDL()));
                                   } else {
                                     if (data.docs[index]['name'] ==
                                         'Khoa Điện - Điện tử') {
@@ -129,7 +132,7 @@ class _ChonKhoaState extends State<ChonKhoa> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  PhongCTCT_HSSV()));
+                                                  DDT()));
                                     } else {
                                       if (data.docs[index]['name'] ==
                                           'Khoa Công nghệ thông tin') {
@@ -144,7 +147,7 @@ class _ChonKhoaState extends State<ChonKhoa> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      PhongCTCT_HSSV()));
+                                                      NhietLanh()));
                                         } else {
                                           if (data.docs[index]['name'] ==
                                               'Khoa giáo dục đại cương') {
@@ -152,7 +155,7 @@ class _ChonKhoaState extends State<ChonKhoa> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        PhongCTCT_HSSV()));
+                                                        GDDC()));
                                           } else {
                                             if (data.docs[index]['name'] ==
                                                 'Bộ môn Kinh tế') {
@@ -160,7 +163,7 @@ class _ChonKhoaState extends State<ChonKhoa> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          PhongCTCT_HSSV()));
+                                                          BoMonKinhTe()));
                                             }
                                           }
                                         }
