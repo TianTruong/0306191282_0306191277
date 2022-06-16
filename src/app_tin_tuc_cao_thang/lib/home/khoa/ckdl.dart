@@ -4,16 +4,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class BoMonKinhTe extends StatefulWidget {
-  const BoMonKinhTe({Key? key}) : super(key: key);
+class CKDL extends StatefulWidget {
+  const CKDL({Key? key}) : super(key: key);
 
   @override
-  State<BoMonKinhTe> createState() => _BoMonKinhTeState();
+  State<CKDL> createState() => _CKDLState();
 }
 
-class _BoMonKinhTeState extends State<BoMonKinhTe> {
-  final Stream<QuerySnapshot> bomonkinhte =
-      FirebaseFirestore.instance.collection('bomonkinhte').snapshots();
+class _CKDLState extends State<CKDL> {
+  final Stream<QuerySnapshot> ckdl =
+      FirebaseFirestore.instance.collection('ckdl').snapshots();
   final PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
-                  child: Text('Bộ môn Kinh tế',
+                  child: Text('Khoa Cơ khí Động lực',
                       style: TextStyle(
                         color: Colors.red,
                       )))),
@@ -64,25 +64,29 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
                 controller: _controller,
                 children: <Widget>[
                   Image.asset(
-                    'images/slider5.jpg',
+                    'images/slider8.jpg',
                     height: 150,
                     fit: BoxFit.fill,
                   ),
                   Image.asset(
-                    'images/slider6.png',
+                    'images/slider9.jpg',
                     height: 150,
                   ),
-                  Image.asset(
+                 Image.asset(
                     'images/slider7.png',
                     height: 150,
                     fit: BoxFit.fill,
+                  ),
+                  Image.asset(
+                    'images/slider4.jpg',
+                    height: 150,
                   ),
             
                 ],
               ),
               SmoothPageIndicator(
                 controller: _controller,
-                count: 3,
+                count: 4,
                 effect: JumpingDotEffect(
                   activeDotColor: Colors.grey,
                   dotColor: Colors.grey.shade300,
@@ -92,12 +96,13 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
               ),
             ]),
           ),
+            
           Expanded(
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: bomonkinhte,
+                  stream: ckdl,
                   builder: (
                     BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot,
@@ -130,45 +135,55 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
                                     child: Text(
                                       data.docs[index]['title'],
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold, fontSize: 18, color: Color.fromARGB(255, 255, 255, 255),backgroundColor: Colors.blue),
                                     ),
                                   ),
                                     Container(
                                     padding: EdgeInsets.all(5.0),
                                       alignment: Alignment.topLeft,
                                   child: Text(
-                                      data.docs[index]['description1'],
+                                      data.docs[index]['noti1'],
                                       style: TextStyle(
-                                          fontSize: 10),
+                                          fontSize: 13, color: Colors.red,),
                                     ),
                                   ),
-                                  Container(
-                                    padding: EdgeInsets.all(5.0),
-                                      alignment: Alignment.topLeft,
-                                    child: Image.network(
-                                      data.docs[index]['image'],
-                                      cacheHeight: 130,
-                                      cacheWidth: 265,
-                                    ),
-                                  ),
-                                      Container(
+                                    Container(
                                     padding: EdgeInsets.all(5.0),
                                       alignment: Alignment.topLeft,
                                   child: Text(
-                                      data.docs[index]['description2'],
+                                      data.docs[index]['noti2'],
                                       style: TextStyle(
-                                          fontSize: 10),
+                                          fontSize: 13, color: Colors.red,),
                                     ),
                                   ),
-                                      Container(
+                                 Container(
                                     padding: EdgeInsets.all(5.0),
                                       alignment: Alignment.topLeft,
                                   child: Text(
-                                      data.docs[index]['description3'],
+                                      data.docs[index]['noti3'],
                                       style: TextStyle(
-                                          fontSize: 10),
+                                          fontSize: 13 ,color: Colors.red,),
+                                    ),
+                                  ),  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                  child: Text(
+                                      data.docs[index]['noti4'],
+                                      style: TextStyle(
+                                          fontSize: 13,    color: Color.fromARGB(255, 1, 255, 99),),
                                     ),
                                   ),
+                                    Container(
+                                    padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                  child: Text(
+                                      data.docs[index]['noti5'],
+                                      style: TextStyle(
+                                          fontSize: 13,  
+                              color: Color.fromARGB(255, 1, 255, 99),
+                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                               decoration: BoxDecoration(
@@ -186,11 +201,11 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
           Container(
             child: Column(
               children: const [
-                Text(' Điện thoại: 028.38212360 (24)',
+                Text('   Điện thoại: 028.38212360 (22 & 25)',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Email: kinhte@caothang.edu.vn',
+                Text('Email: nguyenngocthanh@caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Website: kinhte.caothang.edu.vn',
+                Text('Website: ckdl.caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
               ],
             ),

@@ -4,14 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class BoMonKinhTe extends StatefulWidget {
-  const BoMonKinhTe({Key? key}) : super(key: key);
+class GDDC extends StatefulWidget {
+  const GDDC({Key? key}) : super(key: key);
 
   @override
-  State<BoMonKinhTe> createState() => _BoMonKinhTeState();
+  State<GDDC> createState() => _GDDCState();
 }
 
-class _BoMonKinhTeState extends State<BoMonKinhTe> {
+class _GDDCState extends State<GDDC> {
   final Stream<QuerySnapshot> bomonkinhte =
       FirebaseFirestore.instance.collection('bomonkinhte').snapshots();
   final PageController _controller = PageController();
@@ -52,7 +52,7 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
-                  child: Text('Bộ môn Kinh tế',
+                  child: Text('Khoa Giáo dục đại cương',
                       style: TextStyle(
                         color: Colors.red,
                       )))),
@@ -64,25 +64,21 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
                 controller: _controller,
                 children: <Widget>[
                   Image.asset(
-                    'images/slider5.jpg',
+                    'images/slider8.jpg',
                     height: 150,
                     fit: BoxFit.fill,
                   ),
                   Image.asset(
-                    'images/slider6.png',
+                    'images/slider9.jpg',
                     height: 150,
                   ),
-                  Image.asset(
-                    'images/slider7.png',
-                    height: 150,
-                    fit: BoxFit.fill,
-                  ),
+                
             
                 ],
               ),
               SmoothPageIndicator(
                 controller: _controller,
-                count: 3,
+                count: 2,
                 effect: JumpingDotEffect(
                   activeDotColor: Colors.grey,
                   dotColor: Colors.grey.shade300,
@@ -92,6 +88,13 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
               ),
             ]),
           ),
+              Container(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: Center(
+                  child: Text('Các thông tin Khoa Giáo dục đại cương',
+                      style: TextStyle(
+                        color: Colors.red,
+                      )))),
           Expanded(
             child: Center(
               child: Padding(
@@ -130,7 +133,7 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
                                     child: Text(
                                       data.docs[index]['title'],
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold, fontSize: 18,color: Color.fromARGB(255, 255, 255, 255),backgroundColor: Color.fromARGB(255, 243, 159, 33)),
                                     ),
                                   ),
                                     Container(
@@ -139,36 +142,27 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
                                   child: Text(
                                       data.docs[index]['description1'],
                                       style: TextStyle(
-                                          fontSize: 10),
+                                          fontSize: 13),
                                     ),
                                   ),
-                                  Container(
-                                    padding: EdgeInsets.all(5.0),
-                                      alignment: Alignment.topLeft,
-                                    child: Image.network(
-                                      data.docs[index]['image'],
-                                      cacheHeight: 130,
-                                      cacheWidth: 265,
-                                    ),
-                                  ),
-                                      Container(
+                                    Container(
                                     padding: EdgeInsets.all(5.0),
                                       alignment: Alignment.topLeft,
                                   child: Text(
                                       data.docs[index]['description2'],
                                       style: TextStyle(
-                                          fontSize: 10),
+                                          fontSize: 13),
                                     ),
                                   ),
-                                      Container(
+                                 Container(
                                     padding: EdgeInsets.all(5.0),
                                       alignment: Alignment.topLeft,
                                   child: Text(
                                       data.docs[index]['description3'],
                                       style: TextStyle(
-                                          fontSize: 10),
+                                          fontSize: 13),
                                     ),
-                                  ),
+                                  )
                                 ],
                               ),
                               decoration: BoxDecoration(
@@ -186,11 +180,11 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
           Container(
             child: Column(
               children: const [
-                Text(' Điện thoại: 028.38212360 (24)',
+                Text(' Điện thoại: 028.38212360 (19)',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Email: kinhte@caothang.edu.vn',
+                Text('Email: phamdinhhuan@caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Website: kinhte.caothang.edu.vn',
+                Text('Website: gddc.caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
               ],
             ),
