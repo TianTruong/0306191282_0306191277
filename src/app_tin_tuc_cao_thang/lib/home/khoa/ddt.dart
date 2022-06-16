@@ -4,16 +4,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class NhietLanh extends StatefulWidget {
-  const NhietLanh({Key? key}) : super(key: key);
+class DDT extends StatefulWidget {
+  const DDT({Key? key}) : super(key: key);
 
   @override
-  State<NhietLanh> createState() => _NhietLanhState();
+  State<DDT> createState() => _DDTState();
 }
 
-class _NhietLanhState extends State<NhietLanh> {
-  final Stream<QuerySnapshot> nhietlanh=
-      FirebaseFirestore.instance.collection('nhietlanh').snapshots();
+class _DDTState extends State<DDT> {
+  final Stream<QuerySnapshot> ddt=
+      FirebaseFirestore.instance.collection('ddt').snapshots();
   final PageController _controller = PageController();
   int i=0;
   @override
@@ -53,7 +53,7 @@ class _NhietLanhState extends State<NhietLanh> {
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
-                  child: Text('Khoa Công Nghệ Nhiệt - Lạnh',
+                  child: Text('Khoa Điện - Điện Tử',
                       style: TextStyle(
                         color: Colors.red,
                       )))),
@@ -74,20 +74,17 @@ class _NhietLanhState extends State<NhietLanh> {
                     height: 150,
                   ),
                  Image.asset(
-                    'images/slider7.png',
+                    'images/slider10.jpg',
                     height: 150,
                     fit: BoxFit.fill,
                   ),
-                  Image.asset(
-                    'images/slider4.jpg',
-                    height: 150,
-                  ),
+               
             
                 ],
               ),
               SmoothPageIndicator(
                 controller: _controller,
-                count: 4,
+                count: 3,
                 effect: JumpingDotEffect(
                   activeDotColor: Colors.grey,
                   dotColor: Colors.grey.shade300,
@@ -103,7 +100,7 @@ class _NhietLanhState extends State<NhietLanh> {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: nhietlanh,
+                  stream: ddt,
                   builder: (
                     BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot,
@@ -143,11 +140,11 @@ class _NhietLanhState extends State<NhietLanh> {
           Container(
             child: Column(
               children: const [
-                Text('   Điện thoại: 028.38212360 (22 & 25)',
+                Text(' Điện thoại: 028.38212360 (21 & 22)',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Email: nguyenngocthanh@caothang.edu.vn',
+                Text('Email: pvthanh@caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Website: NhietLanh.caothang.edu.vn',
+                Text('Website: ddt.caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
               ],
             ),
