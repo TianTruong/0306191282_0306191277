@@ -47,10 +47,12 @@ class _CNTTState extends State<CNTT> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-               child: 
-          Center(child: new Text('Khoa Công nghệ thông tin', style: TextStyle(color: Colors.red,)))
-          ),
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: Center(
+                  child: Text('Khoa Công nghệ thông tin',
+                      style: TextStyle(
+                        color: Colors.red,
+                      )))),
           Expanded(
             child: Center(
               child: Padding(
@@ -67,9 +69,9 @@ class _CNTTState extends State<CNTT> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Text('Loading');
                     }
-          
+
                     final data = snapshot.requireData;
-          
+
                     return GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -80,51 +82,58 @@ class _CNTTState extends State<CNTT> {
                         itemCount: data.size,
                         itemBuilder: (context, index) {
                           return InkWell(
-                              child: Container(
-                               child: Column(
-                                 children: [
-                                      Container( 
-                                        padding: EdgeInsets.all(5.0),
-                                        alignment:Alignment.topLeft,
-                                         child:Text(data.docs[index]['title'],style: TextStyle(fontWeight: FontWeight.bold),),
-                                      ),
-                                      Container( 
-                                        padding: EdgeInsets.all(5.0),
-                                        alignment:Alignment.topLeft,
-                                         child:Text(data.docs[index]['description']),
-                                      ),
-                                       Container( 
-                                        padding: EdgeInsets.all(5.0),
-                                   
-                                         child: Image.network(data.docs[index]['image'], cacheHeight: 120,
-                    cacheWidth: 270,),
-                                      ),
-                                     ],),
-                               
-                                decoration: BoxDecoration(
-                                    // color: Colors.amber,
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15)),
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['title'],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child:
+                                        Text(data.docs[index]['description']),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    child: Image.network(
+                                      data.docs[index]['image'],
+                                      cacheHeight: 120,
+                                      cacheWidth: 270,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            );
+                              decoration: BoxDecoration(
+                                  // color: Colors.amber,
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15)),
+                            ),
+                          );
                         });
                   },
                 ),
               ),
             ),
           ),
-           Container(
-      child: Column(
-        children: const [
-          Text('Điện thoại: 028.38212360 (33)',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-          Text('Email: nvdzung@caothang.edu.vn',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-          Text('Website: cntt.caothang.edu.vn',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-        ],
-      ),
-    ),
+          Container(
+            child: Column(
+              children: const [
+                Text('Điện thoại: 028.38212360 (33)',
+                    style: TextStyle(fontSize: 16, color: Colors.black)),
+                Text('Email: nvdzung@caothang.edu.vn',
+                    style: TextStyle(fontSize: 16, color: Colors.black)),
+                Text('Website: cntt.caothang.edu.vn',
+                    style: TextStyle(fontSize: 16, color: Colors.black)),
+              ],
+            ),
+          ),
         ],
       ),
     );

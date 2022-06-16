@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, deprecated_member_use, avoid_print, sized_box_for_whitespace, prefer_final_fields
 
 import 'dart:async';
 import 'dart:ui';
@@ -136,7 +136,7 @@ class _SignInState extends State<SignIn> {
                                     style: TextStyle(fontSize: 15),
                                   ),
                                 ),
-                                onPressed: Sign_In),
+                                onPressed: CheckSignIn),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -180,17 +180,44 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Future Sign_In() async {
-    // showDialog(
-    //     context: context,
-    //     barrierDismissible: false,
-    //     builder: (context) => const Center(child: CircularProgressIndicator()));
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _gmailController.text.trim(),
-          password: _passController.text.trim());
-    } on FirebaseAuthException catch (e) {
-      print(e);
+
+  Future CheckSignIn() async {
+    if (_gmailController.text == '' ||
+        _passController.text == '' ||
+        _gmailController.text.isEmpty ||
+        _passController.text.isEmpty) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                content: Text('Please enter some text'),
+                actions: [
+                  FlatButton(
+                      child: const Text('OK'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }),
+                ],
+              ));
+    } else {
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: _gmailController.text.trim(),
+            password: _passController.text.trim());
+      } on FirebaseAuthException catch (e) {
+        print(e);
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  content: Text(e.toString().trim()),
+                  actions: [
+                    FlatButton(
+                        child: const Text('OK'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        }),
+                  ],
+                ));
+      }
     }
   }
 }

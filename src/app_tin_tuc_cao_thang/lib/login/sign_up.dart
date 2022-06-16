@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, deprecated_member_use, avoid_print, prefer_final_fields, sized_box_for_whitespace
+
 import 'dart:ui';
 
 import 'package:app_tin_tuc_cao_thang/login/set_info.dart';
@@ -142,7 +144,7 @@ class _SignUpState extends State<SignUp> {
                                 style: TextStyle(fontSize: 15),
                               ),
                             ),
-                            onPressed: Sign_Up),
+                            onPressed: CheckSignUp),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -167,18 +169,60 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Future Sign_Up() async {
-    // showDialog(
-    //     context: context,
-    //     barrierDismissible: false,
-    //     builder: (context) => const Center(child: CircularProgressIndicator()));
-
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _gmailController.text.trim(),
-          password: _passController.text.trim());
-    } on FirebaseAuthException catch (e) {
-      print(e);
+  Future CheckSignUp() async {
+    if (_gmailController.text == '' ||
+        _passController.text == '' ||
+        _confirmController.text == '' ||
+        _gmailController.text.isEmpty ||
+        _passController.text.isEmpty ||
+        _confirmController.text.isEmpty) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                content: Text('Please enter some text'),
+                actions: [
+                  FlatButton(
+                      child: const Text('OK'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }),
+                ],
+              ));
+    } else {
+      if (_passController.text != _confirmController.text) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  content: Text('xác nhận mật khẩu không đúng'),
+                  actions: [
+                    FlatButton(
+                        child: const Text('OK'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        }),
+                  ],
+                ));
+      } else {
+        try {
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              email: _gmailController.text.trim(),
+              password: _passController.text.trim());
+        } on FirebaseAuthException catch (e) {
+          print(e);
+          showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                    content: Text(e.toString().trim()),
+                    actions: [
+                      FlatButton(
+                          child: const Text('OK'),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          }),
+                    ],
+                  ));
+        }
+      }
     }
   }
 }
