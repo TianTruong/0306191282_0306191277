@@ -206,46 +206,50 @@ class _TinTucState extends State<TinTuc> {
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(5.0),
-                          child: Card(
-                              // color: Colors.grey.shade200,
-                              child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  title: Text(
-                                      'Title: ${data.docs[index]['title']}'),
-                                  // subtitle: Padding(
-                                  //   padding: const EdgeInsets.only(top: 5, bottom: 5),
-                                  //   child: Text('${data.docs[index]['status']}',
-                                  //       style: const TextStyle(fontSize: 16)),
-                                  // ),
-                                  onTap: () {
-                                    print(data.docs[index].id);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ChiTietBaiViet(
-                                                  idPhong: widget.idPhong,
-                                                  idBaiViet:
-                                                      data.docs[index].id,
-                                                  title: data.docs[index]
-                                                      ['title'],
-                                                )));
-                                  },
-                                ),
-                                // Container(
-                                //   decoration: BoxDecoration(
-                                //       border: Border(
-                                //           bottom: BorderSide(
-                                //               color: Colors.grey.shade500,
-                                //               width: 1))),
-                                //   child: const Center(heightFactor: 1.5),
-                                // ),
-                              ],
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                          )),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    title: Text(
+                                        'Title: ${data.docs[index]['title']}'),
+                                    // subtitle: Padding(
+                                    //   padding: const EdgeInsets.only(top: 5, bottom: 5),
+                                    //   child: Text('${data.docs[index]['status']}',
+                                    //       style: const TextStyle(fontSize: 16)),
+                                    // ),
+                                    onTap: () {
+                                      print(data.docs[index].id);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ChiTietBaiViet(
+                                                    idPhong: widget.idPhong,
+                                                    idBaiViet:
+                                                        data.docs[index].id,
+                                                    title: data.docs[index]
+                                                        ['title'],
+                                                  )));
+                                    },
+                                  ),
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //       border: Border(
+                                  //           bottom: BorderSide(
+                                  //               color: Colors.grey.shade500,
+                                  //               width: 1))),
+                                  //   child: const Center(heightFactor: 1.5),
+                                  // ),
+                                ],
+                              ),
+                            ),
+                          ),
                         );
                       });
                 },

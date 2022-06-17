@@ -4,6 +4,7 @@ import 'package:app_tin_tuc_cao_thang/home/khoa/danhsachkhoa.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/danhsachphong.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/tintuc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -33,6 +34,7 @@ class _NewsState extends State<News> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: Colors.grey.shade200,
       body: ListView(
         children: [
@@ -92,17 +94,14 @@ class _NewsState extends State<News> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                BuildButton(),
+                _buildDR(),
                 Slider(),
-                // _buildDR(),
+                _buildDR(),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10, top: 10),
-                  child: BuildButton(),
-                ),
-                // _buildDR(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 10.0),
+                  padding: const EdgeInsets.only(top: 5, bottom: 10.0),
                   child: Text(
-                    'Tin mới cập nhật',
+                    'Tin giới thiệu',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -122,150 +121,135 @@ class BuildButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        // color: Colors.blue.shade200,
-        height: 100,
+        height: 120,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          // scrollDirection: Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
               padding: const EdgeInsets.all(5.0),
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            blurRadius: 7,
-                            offset: const Offset(0, 5))
-                      ]),
-                  width: 80,
-                  height: 80,
-                  child: FlatButton(
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.home),
-                            Text('Tin tức',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 12)),
-                          ],
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TinTuc(),
-                            ));
-                      })),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                blurRadius: 7,
+                                offset: const Offset(0, 5))
+                          ]),
+                      width: 65,
+                      height: 65,
+                      child: FlatButton(
+                          child: Center(
+                            child: Icon(Icons.newspaper),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TinTuc(),
+                                ));
+                          })),
+                  Text('Tin tức',
+                      style: TextStyle(color: Colors.black, fontSize: 13)),
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(5.0),
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            blurRadius: 7,
-                            offset: const Offset(0, 5))
-                      ]),
-                  width: 80,
-                  height: 80,
-                  child: FlatButton(
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.home),
-                            Text('Khoa, bộ',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 12)),
-                            Text('môn',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 12)),
-                          ],
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ChonKhoa(),
-                            ));
-                      })),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                blurRadius: 7,
+                                offset: const Offset(0, 5))
+                          ]),
+                      width: 65,
+                      height: 65,
+                      child: FlatButton(
+                          child: Center(
+                            child: Icon(Icons.book_outlined),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ChonKhoa(),
+                                ));
+                          })),
+                  Text('Khoa, bộ môn',
+                      style: TextStyle(color: Colors.black, fontSize: 13)),
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(5.0),
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            blurRadius: 7,
-                            offset: const Offset(0, 5))
-                      ]),
-                  width: 80,
-                  height: 80,
-                  child: FlatButton(
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.home),
-                            Text('Phòng',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 12)),
-                            Text('ban',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 12)),
-                          ],
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Departments(),
-                            ));
-                      })),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                blurRadius: 7,
+                                offset: const Offset(0, 5))
+                          ]),
+                      width: 65,
+                      height: 65,
+                      child: FlatButton(
+                          child: Center(
+                            child: Icon(Icons.home_outlined),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Departments(),
+                                ));
+                          })),
+                  Text('Phòng ban',
+                      style: TextStyle(color: Colors.black, fontSize: 13)),
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(5.0),
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            blurRadius: 7,
-                            offset: const Offset(0, 5))
-                      ]),
-                  width: 80,
-                  height: 80,
-                  child: FlatButton(
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.home),
-                            Text('Đoàn',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 12)),
-                            Text('Hội',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 12)),
-                          ],
-                        ),
-                      ),
-                      onPressed: () {})),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                blurRadius: 7,
+                                offset: const Offset(0, 5))
+                          ]),
+                      width: 65,
+                      height: 65,
+                      child: FlatButton(
+                          child: Center(
+                            child: Icon(Icons.flag_outlined),
+                          ),
+                          onPressed: () {})),
+                  Text('Đoàn, Hội',
+                      style: TextStyle(color: Colors.black, fontSize: 13)),
+                ],
+              ),
             ),
           ],
         ));
@@ -294,10 +278,16 @@ class Slider extends StatelessWidget {
         PageView(
           controller: _controller,
           children: <Widget>[
-            Image.asset(
-              'images/TuyenSinh.jpg',
-              height: 150,
-              fit: BoxFit.fill,
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Image.asset(
+                'images/TuyenSinh.jpg',
+                height: 150,
+                fit: BoxFit.fill,
+              ),
             ),
             Image.asset(
               'images/LogoChinh.png',
@@ -334,67 +324,74 @@ class ListPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
+        .collection('posts')
+        .orderBy('time', descending: true)
+        .snapshots();
+
     return Container(
       // decoration: BoxDecoration(
       //   border: Border.all(color: Colors.blue, width: 3),
       //   borderRadius: BorderRadius.circular(10),
       // ),
       height: 250,
-      child: ListView(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: ListTile(
-              title: Text('Tiêu đề bài viết'),
-              subtitle: Text('Nội dung bài viết'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('Tiêu đề bài viết'),
-              subtitle: Text('Nội dung bài viết'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('Tiêu đề bài viết'),
-              subtitle: Text('Nội dung bài viết'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('Tiêu đề bài viết'),
-              subtitle: Text('Nội dung bài viết'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('Tiêu đề bài viết'),
-              subtitle: Text('Nội dung bài viết'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('Tiêu đề bài viết'),
-              subtitle: Text('Nội dung bài viết'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('Tiêu đề bài viết'),
-              subtitle: Text('Nội dung bài viết'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('Tiêu đề bài viết'),
-              subtitle: Text('Nội dung bài viết'),
-            ),
-          ),
-        ],
+      child: StreamBuilder<QuerySnapshot>(
+        stream: posts,
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<QuerySnapshot> snapshot,
+        ) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong.');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Text('Loading');
+          }
+
+          final data = snapshot.requireData;
+
+          return ListView.builder(
+              itemCount: data.size,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ListTile(
+                      title: Text(
+                        data.docs[index]['title'],
+                        style: TextStyle(
+                            // color: Colors.grey[700],
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      // ReadMoreText(
+                      //   data.docs[index]['title'],
+                      //   style: TextStyle(
+                      //       color: Colors.grey[700],
+                      //       fontSize: 18,
+                      //       fontWeight: FontWeight.bold),
+                      //   trimLines: 1,
+                      //   trimMode: TrimMode.Line,
+                      //   trimCollapsedText: '',
+                      //   // trimExpandedText: 'Show less',
+                      //   // moreStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      // ),
+
+                      onTap: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => ChiTietBaiViet()));
+                      },
+                    ),
+                  ),
+                );
+              });
+        },
       ),
     );
   }

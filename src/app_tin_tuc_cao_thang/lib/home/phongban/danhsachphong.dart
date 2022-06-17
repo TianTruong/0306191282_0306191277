@@ -14,8 +14,10 @@ class Departments extends StatefulWidget {
 }
 
 class _DepartmentsState extends State<Departments> {
-  final Stream<QuerySnapshot> departments =
-      FirebaseFirestore.instance.collection('departments').snapshots();
+  final Stream<QuerySnapshot> departments = FirebaseFirestore.instance
+      .collection('departments')
+      .orderBy('number', descending: false)
+      .snapshots();
 
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -76,6 +78,17 @@ class _DepartmentsState extends State<Departments> {
               ),
             ),
           ),
+          const Padding(
+            padding: EdgeInsets.only(top: 15.0),
+            child: SizedBox(
+              child: Center(
+                  child: Text('Phòng ban',
+                      style: TextStyle(
+                          color: Colors.redAccent,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24))),
+            ),
+          ),
           Expanded(
             child: Center(
               child: Padding(
@@ -95,46 +108,67 @@ class _DepartmentsState extends State<Departments> {
 
                     final data = snapshot.requireData;
 
-                    return GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 200,
-                                childAspectRatio: 3 / 2,
-                                crossAxisSpacing: 20,
-                                mainAxisSpacing: 20),
+                    return ListView.builder(
                         itemCount: data.size,
                         itemBuilder: (context, index) {
-                          return InkWell(
-                              child: Container(
-                                alignment: Alignment.center,
-                                child: Text(data.docs[index]['name']),
-                                decoration: BoxDecoration(
-                                    // color: Colors.amber,
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15)),
-                              ),
-                              onTap: () {
-                                if (data.docs[index]['name'] ==
-                                    'Phòng đào tạo') {
-                                  print(data.docs[index].reference.id);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PhongDaoTao(
-                                              idPhong: data
-                                                  .docs[index].reference.id)));
-                                } else {
-                                  if (data.docs[index]['name'] ==
-                                      'Phòng Hành chính - Quản trị') {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => PhongHCQT(
-                                                idPhong: data.docs[index]
-                                                    .reference.id)));
-                                  } else {
-                                    if (data.docs[index]['name'] ==
-                                        'Phòng CTCT - HSSV') {
+                          return Padding(
+                            padding: const EdgeInsets.fromLTRB(5,5,5,10),
+                            child: InkWell(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            blurRadius: 7,
+                                            offset: const Offset(0, 5))
+                                      ]),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: ListTile(
+                                      title: Text(data.docs[index]['name'],
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      subtitle: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                'Điện thoại: ${data.docs[index]['phone']}'),
+                                            Text(
+                                                'Email: ${data.docs[index]['email']}'),
+                                            Text(
+                                                'Website: ${data.docs[index]['website']}'),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                onTap: () {
+                                  switch (
+                                      int.parse(data.docs[index]['number'])) {
+                                    case 1:
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => PhongDaoTao(
+                                                  idPhong: data.docs[index]
+                                                      .reference.id)));
+
+                                      break;
+                                    case 2:
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) => CKDL()));
+
+                                      break;
+                                    case 3:
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -142,10 +176,21 @@ class _DepartmentsState extends State<Departments> {
                                                   PhongCTCT_HSSV(
                                                       idPhong: data.docs[index]
                                                           .reference.id)));
-                                    }
+
+                                      break;
+                                    case 4:
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PhongCTCT_HSSV(
+                                                      idPhong: data.docs[index]
+                                                          .reference.id)));
+
+                                      break;
                                   }
-                                }
-                              });
+                                }),
+                          );
                         });
                   },
                 ),

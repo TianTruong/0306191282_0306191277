@@ -83,7 +83,7 @@ class _TinTucState extends State<TinTuc> {
                   child: Text(
                     'Tin tức',
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.redAccent),
                   ),
@@ -113,10 +113,6 @@ class _TinState extends State<Tin> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 2),
-        borderRadius: BorderRadius.circular(5),
-      ),
       height: 600,
       child: StreamBuilder<QuerySnapshot>(
         stream: posts,
@@ -138,7 +134,11 @@ class _TinState extends State<Tin> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Card(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: ListTile(
                       title: ReadMoreText(
                         data.docs[index]['title'],
@@ -152,15 +152,15 @@ class _TinState extends State<Tin> {
                         // trimExpandedText: 'Show less',
                         // moreStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      subtitle: ReadMoreText(
-                        data.docs[index]['content'],
-                        style: TextStyle(color: Colors.grey[700], fontSize: 16),
-                        trimLines: 1,
-                        trimMode: TrimMode.Line,
-                        trimCollapsedText: '',
-                        // trimExpandedText: 'Show less',
-                        // moreStyle: TextStyle(fontSize: 18),
-                      ),
+                      // subtitle: ReadMoreText(
+                      //   data.docs[index]['content'],
+                      //   style: TextStyle(color: Colors.grey[700], fontSize: 16),
+                      //   trimLines: 1,
+                      //   trimMode: TrimMode.Line,
+                      //   trimCollapsedText: '',
+                      //   // trimExpandedText: 'Show less',
+                      //   // moreStyle: TextStyle(fontSize: 18),
+                      // ),
                       onTap: () {
                         // Navigator.push(
                         //     context,
