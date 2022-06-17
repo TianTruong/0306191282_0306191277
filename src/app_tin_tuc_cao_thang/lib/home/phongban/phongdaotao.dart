@@ -1,11 +1,13 @@
 // ignore_for_file: avoid_unnecessary_containers, deprecated_member_use, prefer_const_constructors, non_constant_identifier_names, sized_box_for_whitespace
 
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PhongDaoTao extends StatefulWidget {
-  const PhongDaoTao({Key? key}) : super(key: key);
+  const PhongDaoTao({Key? key, required this.id}) : super(key: key);
+  final String id;
 
   @override
   State<PhongDaoTao> createState() => _PhongDaoTaoState();
@@ -98,7 +100,7 @@ class _PhongDaoTaoState extends State<PhongDaoTao> {
                 _buildDR(),
                 NutBam(),
                 SizedBox(height: 15),
-                TinMoiCapNhat(),
+                TinMoiCapNhat(id: widget.id),
                 _buildDR(),
                 LienHe()
               ],
@@ -171,11 +173,24 @@ class NutBam extends StatelessWidget {
   }
 }
 
-class TinMoiCapNhat extends StatelessWidget {
-  const TinMoiCapNhat({Key? key}) : super(key: key);
+class TinMoiCapNhat extends StatefulWidget {
+  const TinMoiCapNhat({Key? key, required this.id}) : super(key: key);
+  final String id;
 
   @override
+  State<TinMoiCapNhat> createState() => _TinMoiCapNhatState();
+}
+
+class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
+  @override
   Widget build(BuildContext context) {
+    final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
+        .collection('departments')
+        .doc(widget.id)
+        .collection('posts')
+        .orderBy('time', descending: true)
+        .snapshots();
+
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
@@ -198,57 +213,56 @@ class TinMoiCapNhat extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView(
-                children: const [
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                ],
+              child: StreamBuilder<QuerySnapshot>(
+                stream: posts,
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot,
+                ) {
+                  if (snapshot.hasError) {
+                    return const Text('Something went wrong.');
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Text('Loading');
+                  }
+
+                  final data = snapshot.requireData;
+
+                  return ListView.builder(
+                      itemCount: data.size,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Card(
+                              // color: Colors.grey.shade200,
+                              child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: Text(
+                                      'Title: ${data.docs[index]['title']}',
+                                      style: const TextStyle(fontSize: 20)),
+                                  // subtitle: Padding(
+                                  //   padding: const EdgeInsets.only(top: 5, bottom: 5),
+                                  //   child: Text('${data.docs[index]['status']}',
+                                  //       style: const TextStyle(fontSize: 16)),
+                                  // ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              color: Colors.grey.shade500,
+                                              width: 1))),
+                                  child: const Center(heightFactor: 1.5),
+                                ),
+                              ],
+                            ),
+                          )),
+                        );
+                      });
+                },
               ),
             ),
           ],

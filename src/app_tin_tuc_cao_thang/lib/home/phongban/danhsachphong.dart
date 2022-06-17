@@ -116,10 +116,14 @@ class _DepartmentsState extends State<Departments> {
                               onTap: () {
                                 if (data.docs[index]['name'] ==
                                     'Phòng đào tạo') {
+                                  print(data.docs[index].reference.id);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => PhongDaoTao()));
+                                          builder: (context) => PhongDaoTao(
+                                                id: data
+                                                    .docs[index].reference.id,
+                                              )));
                                 } else {
                                   if (data.docs[index]['name'] ==
                                       'Phòng Hành chính - Quản trị') {

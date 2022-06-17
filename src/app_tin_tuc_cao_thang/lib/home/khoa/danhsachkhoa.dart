@@ -20,8 +20,10 @@ class ChonKhoa extends StatefulWidget {
 }
 
 class _ChonKhoaState extends State<ChonKhoa> {
-  final Stream<QuerySnapshot> khoa =
-      FirebaseFirestore.instance.collection('Khoa').snapshots();
+  final Stream<QuerySnapshot> faculty = FirebaseFirestore.instance
+      .collection('faculty')
+      .orderBy('number', descending: false)
+      .snapshots();
 
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -96,7 +98,7 @@ class _ChonKhoaState extends State<ChonKhoa> {
           Expanded(
             child: Center(
               child: StreamBuilder<QuerySnapshot>(
-                stream: khoa,
+                stream: faculty,
                 builder: (
                   BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot,
@@ -130,9 +132,12 @@ class _ChonKhoaState extends State<ChonKhoa> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text('Điện thoại: ${data.docs[index]['description']}'),
-                                          Text('Email: ${data.docs[index]['email']}'),
-                                          Text('Website: ${data.docs[index]['web']}'),
+                                          Text(
+                                              'Điện thoại: ${data.docs[index]['phone']}'),
+                                          Text(
+                                              'Email: ${data.docs[index]['email']}'),
+                                          Text(
+                                              'Website: ${data.docs[index]['website']}'),
                                         ],
                                       ),
                                     ),
@@ -140,63 +145,57 @@ class _ChonKhoaState extends State<ChonKhoa> {
                                 ),
                               ),
                               onTap: () {
-                                if (data.docs[index]['name'] == 'Khoa Cơ Khí') {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => CoKhi()));
-                                } else {
-                                  if (data.docs[index]['name'] ==
-                                      'Khoa cơ khí Động lực') {
+                                switch (int.parse(data.docs[index]['number'])) {
+                                  case 1:
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => CoKhi()));
+
+                                    break;
+                                  case 2:
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => CKDL()));
-                                  } else {
-                                    if (data.docs[index]['name'] ==
-                                        'Khoa Điện - Điện tử') {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DDT()));
-                                    } else {
-                                      if (data.docs[index]['name'] ==
-                                          'Khoa Công nghệ thông tin') {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => CNTT()));
-                                      } else {
-                                        if (data.docs[index]['name'] ==
-                                            'Khoa Công nghệ Nhiệt - Lạnh') {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      NhietLanh()));
-                                        } else {
-                                          if (data.docs[index]['name'] ==
-                                              'Khoa giáo dục đại cương') {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        GDDC()));
-                                          } else {
-                                            if (data.docs[index]['name'] ==
-                                                'Bộ môn Kinh tế') {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          BoMonKinhTe()));
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
+
+                                    break;
+                                  case 3:
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DDT()));
+
+                                    break;
+                                  case 4:
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => NhietLanh()));
+
+                                    break;
+                                  case 5:
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => CNTT()));
+
+                                    break;
+                                  case 6:
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => GDDC()));
+
+                                    break;
+                                  case 7:
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                BoMonKinhTe()));
+
+                                    break;
                                 }
                               }),
                         );
