@@ -49,7 +49,7 @@ class _SignUpState extends State<SignUp> {
                 }
 
                 if (snapshot.hasData) {
-                  return UserName();
+                  return SetInfor();
                 }
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,

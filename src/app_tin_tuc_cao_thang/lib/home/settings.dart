@@ -1,3 +1,5 @@
+import 'package:app_tin_tuc_cao_thang/home/settings/contact.dart';
+import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +12,6 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   final user = FirebaseAuth.instance.currentUser!;
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,37 +28,68 @@ class _SettingsState extends State<Settings> {
     // }
 
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Image.asset(
+          'images/logo.png',
+          cacheHeight: 40,
+          cacheWidth: 180,
+        ),
+        actions: [
+          Row(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade400,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  width: 40,
+                  height: 40,
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => TinTuc(),
+                        //     ));
+                      })),
+              SizedBox(
+                width: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: ClipOval(
+                    child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Information()));
+                  },
+                  child: user.photoURL != null
+                      ? Image.network(
+                          user.photoURL.toString(),
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        )
+                      : Image.asset(
+                          'images/intro.jpg',
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        ),
+                )),
+              ),
+            ],
+          ),
+        ],
+      ),
       backgroundColor: Colors.grey.shade200,
       body: ListView(
         children: [
-          Container(
-            color: Colors.blueAccent,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'images/logo.png',
-                    cacheHeight: 60,
-                    cacheWidth: 270,
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.search, size: 45)),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.circle, size: 45)),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: Column(
@@ -68,7 +100,12 @@ class _SettingsState extends State<Settings> {
                   child: Material(
                     child: ListTile(
                       title: const Text('Thông tin cá nhân'),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Information()));
+                      },
                     ),
                   ),
                 ),
@@ -95,7 +132,10 @@ class _SettingsState extends State<Settings> {
                   child: Material(
                     child: ListTile(
                       title: const Text('Liên hệ'),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Contact()));
+                      },
                     ),
                   ),
                 ),
@@ -105,7 +145,24 @@ class _SettingsState extends State<Settings> {
                     child: ListTile(
                       title: const Text('Đăng xuất'),
                       onTap: () {
-                        FirebaseAuth.instance.signOut();
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  content: Text('Bạn muốn đăng xuất?'),
+                                  actions: [
+                                    FlatButton(
+                                        child: const Text('Yes'),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          FirebaseAuth.instance.signOut();
+                                        }),
+                                    FlatButton(
+                                        child: const Text('No'),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        }),
+                                  ],
+                                ));
                       },
                     ),
                   ),

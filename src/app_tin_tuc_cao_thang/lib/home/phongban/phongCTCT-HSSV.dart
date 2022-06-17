@@ -1,16 +1,22 @@
 // ignore_for_file: avoid_unnecessary_containers, camel_case_types, prefer_const_constructors, sized_box_for_whitespace
 
+import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
+import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PhongCTCT_HSSV extends StatefulWidget {
-  const PhongCTCT_HSSV({Key? key}) : super(key: key);
+  const PhongCTCT_HSSV({Key? key, required this.idPhong}) : super(key: key);
+  final String idPhong;
 
   @override
   State<PhongCTCT_HSSV> createState() => _PhongCTCT_HSSVState();
 }
 
 class _PhongCTCT_HSSVState extends State<PhongCTCT_HSSV> {
-  
+  final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     _buildDR() {
@@ -26,37 +32,68 @@ class _PhongCTCT_HSSVState extends State<PhongCTCT_HSSV> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading : false,
+        title: Image.asset(
+          'images/logo.png',
+          cacheHeight: 40,
+          cacheWidth: 180,
+        ),
+        actions: [
+          Row(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade400,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  width: 40,
+                  height: 40,
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => TinTuc(),
+                        //     ));
+                      })),
+              SizedBox(
+                width: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: ClipOval(
+                    child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Information()));
+                  },
+                  child: user.photoURL != null
+                      ? Image.network(
+                          user.photoURL.toString(),
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        )
+                      : Image.asset(
+                          'images/intro.jpg',
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        ),
+                )),
+              ),
+            ],
+          ),
+        ],
+      ),
       backgroundColor: Colors.grey.shade200,
       body: ListView(
         children: [
-          Container(
-            color: Colors.blueAccent,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'images/logo.png',
-                    cacheHeight: 60,
-                    cacheWidth: 270,
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.search, size: 45)),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.circle, size: 45)),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -72,9 +109,7 @@ class _PhongCTCT_HSSVState extends State<PhongCTCT_HSSV> {
                 _buildDR(),
                 SoTaySinhVien(),
                 SizedBox(height: 15),
-                TinMoiCapNhat(),
-                SizedBox(height: 15),
-                TinNoiBat(),
+                TinTuc(idPhong: widget.idPhong),
                 _buildDR(),
                 LienHe()
               ],
@@ -119,22 +154,30 @@ class SoTaySinhVien extends StatelessWidget {
   }
 }
 
-class TinMoiCapNhat extends StatefulWidget {
-  const TinMoiCapNhat({Key? key}) : super(key: key);
+class TinTuc extends StatefulWidget {
+  const TinTuc({Key? key, required this.idPhong}) : super(key: key);
+  final String idPhong;
 
   @override
-  State<TinMoiCapNhat> createState() => _TinMoiCapNhatState();
+  State<TinTuc> createState() => _TinTucState();
 }
 
-class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
+class _TinTucState extends State<TinTuc> {
   @override
   Widget build(BuildContext context) {
+    Stream<QuerySnapshot> posts = FirebaseFirestore.instance
+        .collection('departments')
+        .doc(widget.idPhong)
+        .collection('posts')
+        .orderBy('time', descending: true)
+        .snapshots();
+
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 2),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      height: 250,
+      // decoration: BoxDecoration(
+      //   border: Border.all(color: Colors.grey, width: 2),
+      //   borderRadius: BorderRadius.circular(5),
+      // ),
+      height: 500,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Column(
@@ -143,7 +186,7 @@ class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
             const Padding(
               padding: EdgeInsets.only(bottom: 10.0),
               child: Text(
-                'Tin mới cập nhật',
+                'Tin tức',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -151,149 +194,73 @@ class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
               ),
             ),
             Expanded(
-              child: ListView(
-                children: const [
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+              child: StreamBuilder<QuerySnapshot>(
+                stream: posts,
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot,
+                ) {
+                  if (snapshot.hasError) {
+                    return const Text('Something went wrong.');
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Text('Loading');
+                  }
 
-class TinNoiBat extends StatefulWidget {
-  const TinNoiBat({Key? key}) : super(key: key);
+                  final data = snapshot.requireData;
 
-  @override
-  State<TinNoiBat> createState() => _TinNoiBatState();
-}
-
-class _TinNoiBatState extends State<TinNoiBat> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 2),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      height: 250,
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 10.0),
-              child: Text(
-                'Thông tin hoạt động',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.redAccent),
-              ),
-            ),
-            Expanded(
-              child: ListView(
-                children: const [
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                ],
+                  return ListView.builder(
+                      itemCount: data.size,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    title: Text(
+                                        'Title: ${data.docs[index]['title']}'),
+                                    // subtitle: Padding(
+                                    //   padding: const EdgeInsets.only(top: 5, bottom: 5),
+                                    //   child: Text('${data.docs[index]['status']}',
+                                    //       style: const TextStyle(fontSize: 16)),
+                                    // ),
+                                    onTap: () {
+                                      print(data.docs[index].id);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ChiTietBaiViet(
+                                                    idPhong: widget.idPhong,
+                                                    idBaiViet:
+                                                        data.docs[index].id,
+                                                    title: data.docs[index]
+                                                        ['title'],
+                                                  )));
+                                    },
+                                  ),
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //       border: Border(
+                                  //           bottom: BorderSide(
+                                  //               color: Colors.grey.shade500,
+                                  //               width: 1))),
+                                  //   child: const Center(heightFactor: 1.5),
+                                  // ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      });
+                },
               ),
             ),
           ],

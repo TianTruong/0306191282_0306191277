@@ -1,21 +1,23 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class CNTT extends StatefulWidget {
-  const CNTT({Key? key}) : super(key: key);
+class GDDC extends StatefulWidget {
+  const GDDC({Key? key}) : super(key: key);
 
   @override
-  State<CNTT> createState() => _CNTTState();
+  State<GDDC> createState() => _GDDCState();
 }
 
-class _CNTTState extends State<CNTT> {
-  final Stream<QuerySnapshot> cntt =
-      FirebaseFirestore.instance.collection('cntt').snapshots();
-
+class _GDDCState extends State<GDDC> {
+  final Stream<QuerySnapshot> bomonkinhte =
+      FirebaseFirestore.instance.collection('bomonkinhte').snapshots();
+  final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +86,44 @@ class _CNTTState extends State<CNTT> {
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
-                  child: Text('Khoa Công nghệ thông tin',
+                  child: Text('Khoa Giáo dục đại cương',
+                      style: TextStyle(
+                        color: Colors.red,
+                      )))),
+          SizedBox(
+            height: 200,
+            child:
+                Stack(alignment: AlignmentDirectional.bottomCenter, children: [
+              PageView(
+                controller: _controller,
+                children: <Widget>[
+                  Image.asset(
+                    'images/slider8.jpg',
+                    height: 150,
+                    fit: BoxFit.fill,
+                  ),
+                  Image.asset(
+                    'images/slider9.jpg',
+                    height: 150,
+                  ),
+                ],
+              ),
+              SmoothPageIndicator(
+                controller: _controller,
+                count: 2,
+                effect: JumpingDotEffect(
+                  activeDotColor: Colors.grey,
+                  dotColor: Colors.grey.shade300,
+                  dotHeight: 10,
+                  dotWidth: 10,
+                ),
+              ),
+            ]),
+          ),
+          Container(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: Center(
+                  child: Text('Các thông tin Khoa Giáo dục đại cương',
                       style: TextStyle(
                         color: Colors.red,
                       )))),
@@ -93,7 +132,7 @@ class _CNTTState extends State<CNTT> {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: cntt,
+                  stream: bomonkinhte,
                   builder: (
                     BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot,
@@ -126,23 +165,38 @@ class _CNTTState extends State<CNTT> {
                                     child: Text(
                                       data.docs[index]['title'],
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255),
+                                          backgroundColor: Color.fromARGB(
+                                              255, 243, 159, 33)),
                                     ),
                                   ),
                                   Container(
                                     padding: EdgeInsets.all(5.0),
                                     alignment: Alignment.topLeft,
-                                    child:
-                                        Text(data.docs[index]['description']),
+                                    child: Text(
+                                      data.docs[index]['description1'],
+                                      style: TextStyle(fontSize: 13),
+                                    ),
                                   ),
                                   Container(
                                     padding: EdgeInsets.all(5.0),
-                                    child: Image.network(
-                                      data.docs[index]['image'],
-                                      cacheHeight: 120,
-                                      cacheWidth: 270,
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['description2'],
+                                      style: TextStyle(fontSize: 13),
                                     ),
                                   ),
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['description3'],
+                                      style: TextStyle(fontSize: 13),
+                                    ),
+                                  )
                                 ],
                               ),
                               decoration: BoxDecoration(
@@ -160,11 +214,11 @@ class _CNTTState extends State<CNTT> {
           Container(
             child: Column(
               children: const [
-                Text('Điện thoại: 028.38212360 (33)',
+                Text(' Điện thoại: 028.38212360 (19)',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Email: nvdzung@caothang.edu.vn',
+                Text('Email: phamdinhhuan@caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Website: cntt.caothang.edu.vn',
+                Text('Website: gddc.caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
               ],
             ),

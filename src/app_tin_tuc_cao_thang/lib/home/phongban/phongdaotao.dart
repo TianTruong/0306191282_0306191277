@@ -1,15 +1,22 @@
 // ignore_for_file: avoid_unnecessary_containers, deprecated_member_use, prefer_const_constructors, non_constant_identifier_names, sized_box_for_whitespace
 
+import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
+import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PhongDaoTao extends StatefulWidget {
-  const PhongDaoTao({Key? key}) : super(key: key);
+  const PhongDaoTao({Key? key, required this.idPhong}) : super(key: key);
+  final String idPhong;
 
   @override
   State<PhongDaoTao> createState() => _PhongDaoTaoState();
 }
 
 class _PhongDaoTaoState extends State<PhongDaoTao> {
+  final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     _buildDR() {
@@ -25,53 +32,84 @@ class _PhongDaoTaoState extends State<PhongDaoTao> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading : false,
+        title: Image.asset(
+          'images/logo.png',
+          cacheHeight: 40,
+          cacheWidth: 180,
+        ),
+        actions: [
+          Row(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade400,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  width: 40,
+                  height: 40,
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => TinTuc(),
+                        //     ));
+                      })),
+              SizedBox(
+                width: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: ClipOval(
+                    child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Information()));
+                  },
+                  child: user.photoURL != null
+                      ? Image.network(
+                          user.photoURL.toString(),
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        )
+                      : Image.asset(
+                          'images/intro.jpg',
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        ),
+                )),
+              ),
+            ],
+          ),
+        ],
+      ),
       backgroundColor: Colors.grey.shade200,
       body: ListView(
         children: [
-          Container(
-            color: Colors.blueAccent,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'images/logo.png',
-                    cacheHeight: 60,
-                    cacheWidth: 270,
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.search, size: 45)),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.circle, size: 45)),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
-                Container(
-                  height: 200,
-                  child: Image.asset(
-                    'images/TuyenSinh.jpg',
-                    height: 200,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                _buildDR(),
+                // Container(
+                //   height: 200,
+                //   child: Image.asset(
+                //     'images/TuyenSinh.jpg',
+                //     height: 200,
+                //     fit: BoxFit.fill,
+                //   ),
+                // ),
+                // _buildDR(),
                 NutBam(),
                 SizedBox(height: 15),
-                TinMoiCapNhat(),
+                TinTuc(idPhong: widget.idPhong),
                 _buildDR(),
                 LienHe()
               ],
@@ -89,10 +127,14 @@ class NutBam extends StatelessWidget {
   _NutNho(String label) {
     return Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.blue, width: 2),
-          borderRadius: BorderRadius.circular(20),
-        ),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  blurRadius: 7,
+                  offset: const Offset(0, 5))
+            ]),
         width: 75,
         height: 100,
         child: FlatButton(
@@ -104,10 +146,14 @@ class NutBam extends StatelessWidget {
   _NutLon(String label) {
     return Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.blue, width: 2),
-          borderRadius: BorderRadius.circular(20),
-        ),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  blurRadius: 7,
+                  offset: const Offset(0, 5))
+            ]),
         width: 160,
         height: 120,
         child: FlatButton(
@@ -144,17 +190,30 @@ class NutBam extends StatelessWidget {
   }
 }
 
-class TinMoiCapNhat extends StatelessWidget {
-  const TinMoiCapNhat({Key? key}) : super(key: key);
+class TinTuc extends StatefulWidget {
+  const TinTuc({Key? key, required this.idPhong}) : super(key: key);
+  final String idPhong;
 
   @override
+  State<TinTuc> createState() => _TinTucState();
+}
+
+class _TinTucState extends State<TinTuc> {
+  @override
   Widget build(BuildContext context) {
+    final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
+        .collection('departments')
+        .doc(widget.idPhong)
+        .collection('posts')
+        .orderBy('time', descending: true)
+        .snapshots();
+
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 2),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      height: 250,
+      // decoration: BoxDecoration(
+      //   border: Border.all(color: Colors.grey, width: 2),
+      //   borderRadius: BorderRadius.circular(5),
+      // ),
+      height: 400,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Column(
@@ -163,65 +222,83 @@ class TinMoiCapNhat extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.only(bottom: 10.0),
               child: Text(
-                'Tin mới cập nhật',
+                'Tin tức',
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.redAccent),
               ),
             ),
             Expanded(
-              child: ListView(
-                children: const [
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                ],
+              child: StreamBuilder<QuerySnapshot>(
+                stream: posts,
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot,
+                ) {
+                  if (snapshot.hasError) {
+                    return const Text('Something went wrong.');
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Text('Loading');
+                  }
+
+                  final data = snapshot.requireData;
+
+                  return ListView.builder(
+                      itemCount: data.size,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    title: Text(
+                                      'Title: ${data.docs[index]['title']}',
+                                      // style: const TextStyle(fontSize: 20)
+                                    ),
+                                    // subtitle: Padding(
+                                    //   padding: const EdgeInsets.only(top: 5, bottom: 5),
+                                    //   child: Text('${data.docs[index]['status']}',
+                                    //       style: const TextStyle(fontSize: 16)),
+                                    // ),
+                                    onTap: () {
+                                      print(data.docs[index].id);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ChiTietBaiViet(
+                                                    idPhong: widget.idPhong,
+                                                    idBaiViet:
+                                                        data.docs[index].id,
+                                                    title: data.docs[index]
+                                                        ['title'],
+                                                  )));
+                                    },
+                                  ),
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //       border: Border(
+                                  //           bottom: BorderSide(
+                                  //               color: Colors.grey.shade500,
+                                  //               width: 1))),
+                                  //   child: const Center(heightFactor: 1.5),
+                                  // ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      });
+                },
               ),
             ),
           ],

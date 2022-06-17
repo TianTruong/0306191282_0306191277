@@ -1,51 +1,93 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
+import 'package:app_tin_tuc_cao_thang/home/tintuc/binhluan.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChiTietBaiViet extends StatefulWidget {
-  const ChiTietBaiViet({Key? key}) : super(key: key);
+  const ChiTietBaiViet({Key? key, required this.idPhong, required this.idBaiViet, required this.title})
+      : super(key: key);
+  final String idPhong, idBaiViet, title;
 
   @override
   State<ChiTietBaiViet> createState() => _ChiTietBaiVietState();
 }
 
 class _ChiTietBaiVietState extends State<ChiTietBaiViet> {
+  final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading : false,
+        title: Image.asset(
+          'images/logo.png',
+          cacheHeight: 40,
+          cacheWidth: 180,
+        ),
+        actions: [
+          Row(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade400,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  width: 40,
+                  height: 40,
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => TinTuc(),
+                        //     ));
+                      })),
+              SizedBox(
+                width: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: ClipOval(
+                    child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Information()));
+                  },
+                  child: user.photoURL != null
+                      ? Image.network(
+                          user.photoURL.toString(),
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        )
+                      : Image.asset(
+                          'images/intro.jpg',
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        ),
+                )),
+              ),
+            ],
+          ),
+        ],
+      ),
       backgroundColor: Colors.grey.shade200,
       body: ListView(
         children: [
-          Container(
-            color: Colors.blueAccent,
-            child: Padding(
+          Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'images/logo.png',
-                    cacheHeight: 60,
-                    cacheWidth: 270,
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.search, size: 45)),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.circle, size: 45)),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(padding: const EdgeInsets.all(10.0), child: BaiViet()),
-          Padding(padding: const EdgeInsets.all(10.0), child: NutBinhLuan()),
+              child: BaiViet(
+                title: widget.title,
+              )),
+          Padding(padding: const EdgeInsets.all(10.0), child: NutBinhLuan(idPhong: widget.idPhong, idBaiViet: widget.idBaiViet,)),
         ],
       ),
     );
@@ -53,7 +95,8 @@ class _ChiTietBaiVietState extends State<ChiTietBaiViet> {
 }
 
 class BaiViet extends StatefulWidget {
-  const BaiViet({Key? key}) : super(key: key);
+  const BaiViet({Key? key, required this.title}) : super(key: key);
+  final String title;
 
   @override
   State<BaiViet> createState() => _BaiVietState();
@@ -74,7 +117,7 @@ class _BaiVietState extends State<BaiViet> {
             padding: const EdgeInsets.all(5.0),
             child: Center(
               child: Text(
-                'Tiêu đề bài viết',
+                widget.title,
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -105,7 +148,9 @@ class _BaiVietState extends State<BaiViet> {
 }
 
 class NutBinhLuan extends StatefulWidget {
-  const NutBinhLuan({Key? key}) : super(key: key);
+  const NutBinhLuan({Key? key,required this.idPhong, required this.idBaiViet}) : super(key: key);
+  final String idPhong;
+  final String idBaiViet;
 
   @override
   State<NutBinhLuan> createState() => _NutBinhLuanState();
@@ -121,7 +166,9 @@ class _NutBinhLuanState extends State<NutBinhLuan> {
         // ),
         child: ElevatedButton(
       child: Text('Bình luận'),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>BinhLuan(idPhong: widget.idPhong, idBaiViet: widget.idBaiViet)));
+      },
     ));
   }
 }
