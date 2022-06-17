@@ -121,16 +121,17 @@ class _DepartmentsState extends State<Departments> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => PhongDaoTao(
-                                                id: data
-                                                    .docs[index].reference.id,
-                                              )));
+                                              id: data
+                                                  .docs[index].reference.id)));
                                 } else {
                                   if (data.docs[index]['name'] ==
                                       'Phòng Hành chính - Quản trị') {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => PhongHCQT()));
+                                            builder: (context) => PhongHCQT(
+                                                id: data.docs[index].reference
+                                                    .id)));
                                   } else {
                                     if (data.docs[index]['name'] ==
                                         'Phòng CTCT - HSSV') {
