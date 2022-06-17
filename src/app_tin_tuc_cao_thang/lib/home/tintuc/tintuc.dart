@@ -116,7 +116,7 @@ class Tin extends StatefulWidget {
 
 class _TinState extends State<Tin> {
   final Stream<QuerySnapshot> posts =
-      FirebaseFirestore.instance.collection('posts').snapshots();
+      FirebaseFirestore.instance.collection('posts').orderBy('time',descending: true).snapshots();
 
   @override
   Widget build(BuildContext context) {

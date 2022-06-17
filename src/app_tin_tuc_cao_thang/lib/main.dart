@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        fontFamily: 'AidaSerifObliqueMedium',
+        // fontFamily: 'AidaSerifObliqueMedium',
         primarySwatch: Colors.blue,
       ),
       home: const SignIn(),

@@ -25,7 +25,7 @@ class _DepartmentsState extends State<Departments> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -94,7 +94,8 @@ class _DepartmentsState extends State<Departments> {
                       style: TextStyle(
                           color: Colors.redAccent,
                           fontWeight: FontWeight.bold,
-                          fontSize: 24))),
+                          fontSize: 24,
+                          fontFamily: 'AidaSerifObliqueMedium'))),
             ),
           ),
           Expanded(
@@ -120,7 +121,7 @@ class _DepartmentsState extends State<Departments> {
                         itemCount: data.size,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: const EdgeInsets.fromLTRB(5,5,5,10),
+                            padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
                             child: InkWell(
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -145,12 +146,24 @@ class _DepartmentsState extends State<Departments> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                                'Điện thoại: ${data.docs[index]['phone']}'),
-                                            Text(
-                                                'Email: ${data.docs[index]['email']}'),
-                                            Text(
-                                                'Website: ${data.docs[index]['website']}'),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Text(
+                                                  'Điện thoại: ${data.docs[index]['phone']}'),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Text(
+                                                  'Email: ${data.docs[index]['email']}'),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Text(
+                                                  'Website: ${data.docs[index]['website']}'),
+                                            ),
                                           ],
                                         ),
                                       ),

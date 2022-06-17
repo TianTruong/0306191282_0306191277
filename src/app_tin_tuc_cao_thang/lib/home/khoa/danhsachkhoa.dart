@@ -100,7 +100,8 @@ class _ChonKhoaState extends State<ChonKhoa> {
                       style: TextStyle(
                           color: Colors.red,
                           fontWeight: FontWeight.bold,
-                          fontSize: 24))),
+                          fontSize: 24,
+                          fontFamily: 'AidaSerifObliqueMedium'))),
             ),
           ),
           Expanded(
