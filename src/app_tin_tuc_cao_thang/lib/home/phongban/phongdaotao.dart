@@ -1,13 +1,14 @@
 // ignore_for_file: avoid_unnecessary_containers, deprecated_member_use, prefer_const_constructors, non_constant_identifier_names, sized_box_for_whitespace
 
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
+import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PhongDaoTao extends StatefulWidget {
-  const PhongDaoTao({Key? key, required this.id}) : super(key: key);
-  final String id;
+  const PhongDaoTao({Key? key, required this.idPhong}) : super(key: key);
+  final String idPhong;
 
   @override
   State<PhongDaoTao> createState() => _PhongDaoTaoState();
@@ -100,7 +101,7 @@ class _PhongDaoTaoState extends State<PhongDaoTao> {
                 _buildDR(),
                 NutBam(),
                 SizedBox(height: 15),
-                TinMoiCapNhat(id: widget.id),
+                TinMoiCapNhat(idPhong: widget.idPhong),
                 _buildDR(),
                 LienHe()
               ],
@@ -174,8 +175,8 @@ class NutBam extends StatelessWidget {
 }
 
 class TinMoiCapNhat extends StatefulWidget {
-  const TinMoiCapNhat({Key? key, required this.id}) : super(key: key);
-  final String id;
+  const TinMoiCapNhat({Key? key, required this.idPhong}) : super(key: key);
+  final String idPhong;
 
   @override
   State<TinMoiCapNhat> createState() => _TinMoiCapNhatState();
@@ -186,7 +187,7 @@ class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
         .collection('departments')
-        .doc(widget.id)
+        .doc(widget.idPhong)
         .collection('posts')
         .orderBy('time', descending: true)
         .snapshots();
@@ -248,6 +249,19 @@ class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
                                   //   child: Text('${data.docs[index]['status']}',
                                   //       style: const TextStyle(fontSize: 16)),
                                   // ),
+                                  onTap: () {
+                                    print(data.docs[index].id);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChiTietBaiViet(
+                                                  idPhong: widget.idPhong,
+                                                  idBaiViet: data.docs[index].id,
+                                                  title: data.docs[index]
+                                                      ['title'],
+                                                )));
+                                  },
                                 ),
                                 Container(
                                   decoration: BoxDecoration(

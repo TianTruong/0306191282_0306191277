@@ -121,7 +121,7 @@ class _DepartmentsState extends State<Departments> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => PhongDaoTao(
-                                              id: data
+                                              idPhong: data
                                                   .docs[index].reference.id)));
                                 } else {
                                   if (data.docs[index]['name'] ==

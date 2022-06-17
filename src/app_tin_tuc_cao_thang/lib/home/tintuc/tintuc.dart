@@ -162,10 +162,10 @@ class _TinState extends State<Tin> {
                         // moreStyle: TextStyle(fontSize: 18),
                       ),
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ChiTietBaiViet()));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => ChiTietBaiViet()));
                       },
                     ),
                   ),

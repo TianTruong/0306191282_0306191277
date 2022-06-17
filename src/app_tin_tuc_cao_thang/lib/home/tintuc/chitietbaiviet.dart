@@ -1,11 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
+import 'package:app_tin_tuc_cao_thang/home/tintuc/binhluan.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChiTietBaiViet extends StatefulWidget {
-  const ChiTietBaiViet({Key? key}) : super(key: key);
+  const ChiTietBaiViet({Key? key,required this.idPhong, required this.idBaiViet, required this.title})
+      : super(key: key);
+  final String idPhong, idBaiViet, title;
 
   @override
   State<ChiTietBaiViet> createState() => _ChiTietBaiVietState();
@@ -71,8 +74,12 @@ class _ChiTietBaiVietState extends State<ChiTietBaiViet> {
               ),
             ),
           ),
-          Padding(padding: const EdgeInsets.all(10.0), child: BaiViet()),
-          Padding(padding: const EdgeInsets.all(10.0), child: NutBinhLuan()),
+          Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: BaiViet(
+                title: widget.title,
+              )),
+          Padding(padding: const EdgeInsets.all(10.0), child: NutBinhLuan(idPhong: widget.idPhong, idBaiViet: widget.idBaiViet,)),
         ],
       ),
     );
@@ -80,7 +87,8 @@ class _ChiTietBaiVietState extends State<ChiTietBaiViet> {
 }
 
 class BaiViet extends StatefulWidget {
-  const BaiViet({Key? key}) : super(key: key);
+  const BaiViet({Key? key, required this.title}) : super(key: key);
+  final String title;
 
   @override
   State<BaiViet> createState() => _BaiVietState();
@@ -101,7 +109,7 @@ class _BaiVietState extends State<BaiViet> {
             padding: const EdgeInsets.all(5.0),
             child: Center(
               child: Text(
-                'Tiêu đề bài viết',
+                widget.title,
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -132,7 +140,9 @@ class _BaiVietState extends State<BaiViet> {
 }
 
 class NutBinhLuan extends StatefulWidget {
-  const NutBinhLuan({Key? key}) : super(key: key);
+  const NutBinhLuan({Key? key,required this.idPhong, required this.idBaiViet}) : super(key: key);
+  final String idPhong;
+  final String idBaiViet;
 
   @override
   State<NutBinhLuan> createState() => _NutBinhLuanState();
@@ -148,7 +158,9 @@ class _NutBinhLuanState extends State<NutBinhLuan> {
         // ),
         child: ElevatedButton(
       child: Text('Bình luận'),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>BinhLuan(idPhong: widget.idPhong, idBaiViet: widget.idBaiViet)));
+      },
     ));
   }
 }
