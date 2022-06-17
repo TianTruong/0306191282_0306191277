@@ -20,111 +20,74 @@ class _BinhLuanState extends State<BinhLuan> {
   @override
   void initState() {
     super.initState();
-    // checBinhLuan();
   }
-
-  // void checBinhLuan() async {
-  //   await comment
-  //       .doc(widget.idPhong)
-  //       .collection('posts')
-  //       .doc(widget.idBaiViet)
-  //       .collection('comments')
-  //       .where('id', isEqualTo: {widget.idBaiViet: null})
-  //       .limit(1)
-  //       .get()
-  //       .then(
-  //         (QuerySnapshot querySnapshot) async {
-  //           // print(currentUserId);
-  //           // print(widget.friendUid);
-  //           // print(widget.friendName);
-  //           if (querySnapshot.docs.isNotEmpty) {
-  //             setState(() {
-  //               commentDocId = querySnapshot.docs.single.id;
-  //             });
-
-  //             print(commentDocId);
-  //           } else {
-  //             await comment
-  //                 .doc(widget.idPhong)
-  //                 .collection('posts')
-  //                 .doc(widget.idBaiViet)
-  //                 .collection('comments')
-  //                 .add({
-  //                   'id': {widget.idBaiViet: null},
-  //                   // 'names': {
-  //                   //   currentUserId:
-  //                   //       FirebaseAuth.instance.currentUser?.displayName,
-  //                   //   widget.friendUid: widget.friendName
-  //                   // }
-  //                 })
-  //                 .then((value) => {commentDocId = value.id})
-  //                 .whenComplete(() => print(commentDocId));
-  //             setState(() {});
-  //           }
-  //         },
-  //       )
-  //       .catchError((error) {});
-  // }
-
   final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading : false,
+        title: Image.asset(
+          'images/logo.png',
+          cacheHeight: 40,
+          cacheWidth: 180,
+        ),
+        actions: [
+          Row(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade400,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  width: 40,
+                  height: 40,
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => TinTuc(),
+                        //     ));
+                      })),
+              SizedBox(
+                width: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: ClipOval(
+                    child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Information()));
+                  },
+                  child: user.photoURL != null
+                      ? Image.network(
+                          user.photoURL.toString(),
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        )
+                      : Image.asset(
+                          'images/intro.jpg',
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        ),
+                )),
+              ),
+            ],
+          ),
+        ],
+      ),
       backgroundColor: Colors.grey.shade200,
       body: ListView(
         children: [
-          Container(
-            color: Colors.blueAccent,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'images/logo.png',
-                    cacheHeight: 60,
-                    cacheWidth: 270,
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.search, size: 45)),
-                        ClipOval(
-                            child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Information()));
-                          },
-                          child: Builder(builder: (context) {
-                            // user.reload;
-                            print(user.photoURL);
-                            return user.photoURL != null
-                                ? Image.network(
-                                    user.photoURL.toString(),
-                                    fit: BoxFit.fill,
-                                    cacheHeight: 45,
-                                    cacheWidth: 45,
-                                  )
-                                : Image.asset(
-                                    'images/intro.jpg',
-                                    fit: BoxFit.fill,
-                                    cacheHeight: 45,
-                                    cacheWidth: 45,
-                                  );
-                          }),
-                        )),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(

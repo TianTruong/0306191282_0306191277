@@ -38,7 +38,11 @@ class Information extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
-        title: const Text('Cloud Firestore Demo'),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(users.displayName!,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+        // title: const Text('Cloud Firestore Demo'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),

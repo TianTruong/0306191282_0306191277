@@ -105,9 +105,11 @@ flutter:
     - family: Vanisha
       fonts:
         - asset: font/Vanisha.ttf
-    - family: Airstream
+    - family: AidaSerifObliqueMedium
       fonts:
-        - asset: font/Airstream.ttf
+        - asset: font/AidaSerifObliqueMedium.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+

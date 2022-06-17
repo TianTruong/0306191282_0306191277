@@ -34,61 +34,68 @@ class _NewsState extends State<News> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Image.asset(
+          'images/logo.png',
+          cacheHeight: 40,
+          cacheWidth: 180,
+        ),
+        actions: [
+          Row(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade400,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  width: 40,
+                  height: 40,
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => TinTuc(),
+                        //     ));
+                      })),
+              SizedBox(
+                width: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: ClipOval(
+                    child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Information()));
+                  },
+                  child: user.photoURL != null
+                      ? Image.network(
+                          user.photoURL.toString(),
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        )
+                      : Image.asset(
+                          'images/intro.jpg',
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        ),
+                )),
+              ),
+            ],
+          ),
+        ],
+      ),
       backgroundColor: Colors.grey.shade200,
       body: ListView(
         children: [
-          Container(
-            color: Colors.blueAccent,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'images/logo.png',
-                    cacheHeight: 60,
-                    cacheWidth: 270,
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.search, size: 45)),
-                        ClipOval(
-                            child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Information()));
-                          },
-                          child: Builder(builder: (context) {
-                            // user.reload;
-                            print(user.photoURL);
-                            return user.photoURL != null
-                                ? Image.network(
-                                    user.photoURL.toString(),
-                                    fit: BoxFit.fill,
-                                    cacheHeight: 45,
-                                    cacheWidth: 45,
-                                  )
-                                : Image.asset(
-                                    'images/intro.jpg',
-                                    fit: BoxFit.fill,
-                                    cacheHeight: 45,
-                                    cacheWidth: 45,
-                                  );
-                          }),
-                        )),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -144,7 +151,7 @@ class BuildButton extends StatelessWidget {
                       height: 65,
                       child: FlatButton(
                           child: Center(
-                            child: Icon(Icons.newspaper),
+                            child: Icon(Icons.newspaper, color: Colors.lightBlue[700]),
                           ),
                           onPressed: () {
                             Navigator.push(
@@ -154,7 +161,7 @@ class BuildButton extends StatelessWidget {
                                 ));
                           })),
                   Text('Tin tức',
-                      style: TextStyle(color: Colors.black, fontSize: 13)),
+                      style: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.w400)),
                 ],
               ),
             ),
@@ -177,7 +184,7 @@ class BuildButton extends StatelessWidget {
                       height: 65,
                       child: FlatButton(
                           child: Center(
-                            child: Icon(Icons.book_outlined),
+                            child: Icon(Icons.book_outlined, color: Colors.lightBlue[700]),
                           ),
                           onPressed: () {
                             Navigator.push(
@@ -210,7 +217,7 @@ class BuildButton extends StatelessWidget {
                       height: 65,
                       child: FlatButton(
                           child: Center(
-                            child: Icon(Icons.home_outlined),
+                            child: Icon(Icons.home_outlined, color: Colors.lightBlue[700]),
                           ),
                           onPressed: () {
                             Navigator.push(
@@ -243,7 +250,7 @@ class BuildButton extends StatelessWidget {
                       height: 65,
                       child: FlatButton(
                           child: Center(
-                            child: Icon(Icons.flag_outlined),
+                            child: Icon(Icons.flag_outlined, color: Colors.lightBlue[700]),
                           ),
                           onPressed: () {})),
                   Text('Đoàn, Hội',
