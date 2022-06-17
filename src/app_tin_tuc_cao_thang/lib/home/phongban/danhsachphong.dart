@@ -139,7 +139,9 @@ class _DepartmentsState extends State<Departments> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  PhongCTCT_HSSV()));
+                                                  PhongCTCT_HSSV(
+                                                      id: data.docs[index]
+                                                          .reference.id)));
                                     }
                                   }
                                 }

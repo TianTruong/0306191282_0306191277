@@ -1,11 +1,13 @@
 // ignore_for_file: avoid_unnecessary_containers, camel_case_types, prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PhongCTCT_HSSV extends StatefulWidget {
-  const PhongCTCT_HSSV({Key? key}) : super(key: key);
+  const PhongCTCT_HSSV({Key? key, required this.id}) : super(key: key);
+  final String id;
 
   @override
   State<PhongCTCT_HSSV> createState() => _PhongCTCT_HSSVState();
@@ -98,9 +100,11 @@ class _PhongCTCT_HSSVState extends State<PhongCTCT_HSSV> {
                 _buildDR(),
                 SoTaySinhVien(),
                 SizedBox(height: 15),
-                TinMoiCapNhat(),
+                TinMoiCapNhat(id: widget.id),
                 SizedBox(height: 15),
-                TinNoiBat(),
+                TinNoiBat(
+                  id: widget.id,
+                ),
                 _buildDR(),
                 LienHe()
               ],
@@ -146,7 +150,8 @@ class SoTaySinhVien extends StatelessWidget {
 }
 
 class TinMoiCapNhat extends StatefulWidget {
-  const TinMoiCapNhat({Key? key}) : super(key: key);
+  const TinMoiCapNhat({Key? key, required this.id}) : super(key: key);
+  final String id;
 
   @override
   State<TinMoiCapNhat> createState() => _TinMoiCapNhatState();
@@ -155,6 +160,12 @@ class TinMoiCapNhat extends StatefulWidget {
 class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
   @override
   Widget build(BuildContext context) {
+    Stream<QuerySnapshot> posts = FirebaseFirestore.instance
+        .collection('departments')
+        .doc(widget.id)
+        .collection('posts')
+        .orderBy('time', descending: true)
+        .snapshots();
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
@@ -177,57 +188,55 @@ class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
               ),
             ),
             Expanded(
-              child: ListView(
-                children: const [
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                ],
+              child: StreamBuilder<QuerySnapshot>(
+                stream: posts,
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot,
+                ) {
+                  if (snapshot.hasError) {
+                    return const Text('Something went wrong.');
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Text('Loading');
+                  }
+
+                  final data = snapshot.requireData;
+
+                  return ListView.builder(
+                      itemCount: data.size,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Card(
+                              // color: Colors.grey.shade200,
+                              child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: Text(
+                                      'Title: ${data.docs[index]['title']}'),
+                                  // subtitle: Padding(
+                                  //   padding: const EdgeInsets.only(top: 5, bottom: 5),
+                                  //   child: Text('${data.docs[index]['status']}',
+                                  //       style: const TextStyle(fontSize: 16)),
+                                  // ),
+                                ),
+                                // Container(
+                                //   decoration: BoxDecoration(
+                                //       border: Border(
+                                //           bottom: BorderSide(
+                                //               color: Colors.grey.shade500,
+                                //               width: 1))),
+                                //   child: const Center(heightFactor: 1.5),
+                                // ),
+                              ],
+                            ),
+                          )),
+                        );
+                      });
+                },
               ),
             ),
           ],
@@ -238,7 +247,8 @@ class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
 }
 
 class TinNoiBat extends StatefulWidget {
-  const TinNoiBat({Key? key}) : super(key: key);
+  const TinNoiBat({Key? key, required this.id}) : super(key: key);
+  final String id;
 
   @override
   State<TinNoiBat> createState() => _TinNoiBatState();
@@ -247,6 +257,12 @@ class TinNoiBat extends StatefulWidget {
 class _TinNoiBatState extends State<TinNoiBat> {
   @override
   Widget build(BuildContext context) {
+    Stream<QuerySnapshot> posts = FirebaseFirestore.instance
+        .collection('departments')
+        .doc(widget.id)
+        .collection('posts')
+        .orderBy('time', descending: true)
+        .snapshots();
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
@@ -269,57 +285,55 @@ class _TinNoiBatState extends State<TinNoiBat> {
               ),
             ),
             Expanded(
-              child: ListView(
-                children: const [
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Tiêu đề bài viết'),
-                      subtitle: Text('Nội dung bài viết'),
-                    ),
-                  ),
-                ],
+              child: StreamBuilder<QuerySnapshot>(
+                stream: posts,
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot,
+                ) {
+                  if (snapshot.hasError) {
+                    return const Text('Something went wrong.');
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Text('Loading');
+                  }
+
+                  final data = snapshot.requireData;
+
+                  return ListView.builder(
+                      itemCount: data.size,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Card(
+                              // color: Colors.grey.shade200,
+                              child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: Text(
+                                      'Title: ${data.docs[index]['title']}'),
+                                  // subtitle: Padding(
+                                  //   padding: const EdgeInsets.only(top: 5, bottom: 5),
+                                  //   child: Text('${data.docs[index]['status']}',
+                                  //       style: const TextStyle(fontSize: 16)),
+                                  // ),
+                                ),
+                                // Container(
+                                //   decoration: BoxDecoration(
+                                //       border: Border(
+                                //           bottom: BorderSide(
+                                //               color: Colors.grey.shade500,
+                                //               width: 1))),
+                                //   child: const Center(heightFactor: 1.5),
+                                // ),
+                              ],
+                            ),
+                          )),
+                        );
+                      });
+                },
               ),
             ),
           ],
