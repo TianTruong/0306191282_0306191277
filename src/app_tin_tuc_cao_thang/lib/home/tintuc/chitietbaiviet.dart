@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChiTietBaiViet extends StatefulWidget {
-  const ChiTietBaiViet({Key? key,required this.idPhong, required this.idBaiViet, required this.title})
+  const ChiTietBaiViet({Key? key, required this.idPhong, required this.idBaiViet, required this.title})
       : super(key: key);
   final String idPhong, idBaiViet, title;
 

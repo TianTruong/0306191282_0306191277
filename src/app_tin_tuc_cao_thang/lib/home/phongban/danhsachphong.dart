@@ -130,8 +130,8 @@ class _DepartmentsState extends State<Departments> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => PhongHCQT(
-                                                id: data.docs[index].reference
-                                                    .id)));
+                                                idPhong: data.docs[index]
+                                                    .reference.id)));
                                   } else {
                                     if (data.docs[index]['name'] ==
                                         'Phòng CTCT - HSSV') {
@@ -140,7 +140,7 @@ class _DepartmentsState extends State<Departments> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   PhongCTCT_HSSV(
-                                                      id: data.docs[index]
+                                                      idPhong: data.docs[index]
                                                           .reference.id)));
                                     }
                                   }

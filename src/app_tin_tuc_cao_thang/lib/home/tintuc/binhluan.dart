@@ -210,7 +210,7 @@ class _TinState extends State<Tin> {
                   padding: const EdgeInsets.all(5.0),
                   child: Card(
                     child: ListTile(
-                      title: Text(data.docs[index]['comment']),
+                      title: Text(data.docs[index]['userSend']),
                       subtitle: Text(data.docs[index]['comment']),
                       onTap: () {
                         // Navigator.push(
@@ -251,7 +251,7 @@ class _VietBinhLuanState extends State<VietBinhLuan> {
         .collection('comments')
         .add({
       'time': FieldValue.serverTimestamp(),
-      'userSend': user.uid,
+      'userSend': user.displayName,
       'comment': cmt,
       'image': '',
     }).then((value) {});

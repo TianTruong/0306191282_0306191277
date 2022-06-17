@@ -1,13 +1,14 @@
 // ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, file_names, non_constant_identifier_names
 
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
+import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PhongHCQT extends StatefulWidget {
-  const PhongHCQT({Key? key, required this.id}) : super(key: key);
-  final String id;
+  const PhongHCQT({Key? key, required this.idPhong}) : super(key: key);
+  final String idPhong;
 
   @override
   State<PhongHCQT> createState() => _PhongHCQTState();
@@ -98,9 +99,7 @@ class _PhongHCQTState extends State<PhongHCQT> {
                   ),
                 ),
                 _DuongKeNgang(),
-                TinMoiCapNhat(id: widget.id),
-                const SizedBox(height: 15),
-                TinNoiBat(id: widget.id),
+                TinTuc(idPhong: widget.idPhong),
                 _DuongKeNgang(),
                 const LienHe()
               ],
@@ -112,29 +111,29 @@ class _PhongHCQTState extends State<PhongHCQT> {
   }
 }
 
-class TinMoiCapNhat extends StatefulWidget {
-  const TinMoiCapNhat({Key? key, required this.id}) : super(key: key);
-  final String id;
+class TinTuc extends StatefulWidget {
+  const TinTuc({Key? key, required this.idPhong}) : super(key: key);
+  final String idPhong;
   @override
-  State<TinMoiCapNhat> createState() => _TinMoiCapNhatState();
+  State<TinTuc> createState() => _TinTucState();
 }
 
-class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
+class _TinTucState extends State<TinTuc> {
   @override
   Widget build(BuildContext context) {
     Stream<QuerySnapshot> posts = FirebaseFirestore.instance
         .collection('departments')
-        .doc(widget.id)
+        .doc(widget.idPhong)
         .collection('posts')
         .orderBy('time', descending: true)
         .snapshots();
 
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 2),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      height: 250,
+      // decoration: BoxDecoration(
+      //   border: Border.all(color: Colors.grey, width: 2),
+      //   borderRadius: BorderRadius.circular(5),
+      // ),
+      height: 500,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Column(
@@ -143,9 +142,9 @@ class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
             const Padding(
               padding: EdgeInsets.only(bottom: 10.0),
               child: Text(
-                'Tin mới cập nhật',
+                'Tin tức',
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.redAccent),
               ),
@@ -185,104 +184,20 @@ class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
                                   //   child: Text('${data.docs[index]['status']}',
                                   //       style: const TextStyle(fontSize: 16)),
                                   // ),
-                                ),
-                                // Container(
-                                //   decoration: BoxDecoration(
-                                //       border: Border(
-                                //           bottom: BorderSide(
-                                //               color: Colors.grey.shade500,
-                                //               width: 1))),
-                                //   child: const Center(heightFactor: 1.5),
-                                // ),
-                              ],
-                            ),
-                          )),
-                        );
-                      });
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TinNoiBat extends StatefulWidget {
-  const TinNoiBat({Key? key, required this.id}) : super(key: key);
-  final String id;
-
-  @override
-  State<TinNoiBat> createState() => _TinNoiBatState();
-}
-
-class _TinNoiBatState extends State<TinNoiBat> {
-  @override
-  Widget build(BuildContext context) {
-    Stream<QuerySnapshot> posts = FirebaseFirestore.instance
-        .collection('departments')
-        .doc(widget.id)
-        .collection('posts')
-        .orderBy('time', descending: true)
-        .snapshots();
-
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 2),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      height: 250,
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 10.0),
-              child: Text(
-                'Tin nổi bật',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.redAccent),
-              ),
-            ),
-            Expanded(
-              child: StreamBuilder<QuerySnapshot>(
-                stream: posts,
-                builder: (
-                  BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot,
-                ) {
-                  if (snapshot.hasError) {
-                    return const Text('Something went wrong.');
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text('Loading');
-                  }
-
-                  final data = snapshot.requireData;
-
-                  return ListView.builder(
-                      itemCount: data.size,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Card(
-                              // color: Colors.grey.shade200,
-                              child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  title: Text(
-                                      'Title: ${data.docs[index]['title']}'),
-                                  // subtitle: Padding(
-                                  //   padding: const EdgeInsets.only(top: 5, bottom: 5),
-                                  //   child: Text('${data.docs[index]['status']}',
-                                  //       style: const TextStyle(fontSize: 16)),
-                                  // ),
+                                  onTap: () {
+                                    print(data.docs[index].id);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChiTietBaiViet(
+                                                  idPhong: widget.idPhong,
+                                                  idBaiViet:
+                                                      data.docs[index].id,
+                                                  title: data.docs[index]
+                                                      ['title'],
+                                                )));
+                                  },
                                 ),
                                 // Container(
                                 //   decoration: BoxDecoration(

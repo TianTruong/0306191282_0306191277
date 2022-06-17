@@ -90,18 +90,18 @@ class _PhongDaoTaoState extends State<PhongDaoTao> {
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
-                Container(
-                  height: 200,
-                  child: Image.asset(
-                    'images/TuyenSinh.jpg',
-                    height: 200,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                _buildDR(),
+                // Container(
+                //   height: 200,
+                //   child: Image.asset(
+                //     'images/TuyenSinh.jpg',
+                //     height: 200,
+                //     fit: BoxFit.fill,
+                //   ),
+                // ),
+                // _buildDR(),
                 NutBam(),
                 SizedBox(height: 15),
-                TinMoiCapNhat(idPhong: widget.idPhong),
+                TinTuc(idPhong: widget.idPhong),
                 _buildDR(),
                 LienHe()
               ],
@@ -174,15 +174,15 @@ class NutBam extends StatelessWidget {
   }
 }
 
-class TinMoiCapNhat extends StatefulWidget {
-  const TinMoiCapNhat({Key? key, required this.idPhong}) : super(key: key);
+class TinTuc extends StatefulWidget {
+  const TinTuc({Key? key, required this.idPhong}) : super(key: key);
   final String idPhong;
 
   @override
-  State<TinMoiCapNhat> createState() => _TinMoiCapNhatState();
+  State<TinTuc> createState() => _TinTucState();
 }
 
-class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
+class _TinTucState extends State<TinTuc> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
@@ -193,11 +193,11 @@ class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
         .snapshots();
 
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 2),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      height: 250,
+      // decoration: BoxDecoration(
+      //   border: Border.all(color: Colors.grey, width: 2),
+      //   borderRadius: BorderRadius.circular(5),
+      // ),
+      height: 400,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Column(
@@ -206,9 +206,9 @@ class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
             const Padding(
               padding: EdgeInsets.only(bottom: 10.0),
               child: Text(
-                'Tin mới cập nhật',
+                'Tin tức',
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.redAccent),
               ),
@@ -263,14 +263,14 @@ class _TinMoiCapNhatState extends State<TinMoiCapNhat> {
                                                 )));
                                   },
                                 ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      border: Border(
-                                          bottom: BorderSide(
-                                              color: Colors.grey.shade500,
-                                              width: 1))),
-                                  child: const Center(heightFactor: 1.5),
-                                ),
+                                // Container(
+                                //   decoration: BoxDecoration(
+                                //       border: Border(
+                                //           bottom: BorderSide(
+                                //               color: Colors.grey.shade500,
+                                //               width: 1))),
+                                //   child: const Center(heightFactor: 1.5),
+                                // ),
                               ],
                             ),
                           )),

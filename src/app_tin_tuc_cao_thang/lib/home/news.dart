@@ -92,12 +92,15 @@ class _NewsState extends State<News> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                BuildButton(),
-                _buildDR(),
                 Slider(),
-                _buildDR(),
+                // _buildDR(),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                  padding: const EdgeInsets.only(bottom: 10, top: 10),
+                  child: BuildButton(),
+                ),
+                // _buildDR(),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, bottom: 10.0),
                   child: Text(
                     'Tin mới cập nhật',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -116,45 +119,40 @@ class _NewsState extends State<News> {
 class BuildButton extends StatelessWidget {
   const BuildButton({Key? key}) : super(key: key);
 
-  _containerBTN(String label, Color col, IconData icon) {
-    return Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          // border: Border.all(color: Colors.blue, width: 3),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        width: 90,
-        height: 80,
-        child: FlatButton(
-            child: Center(
-              child: Text(label,
-                  style: TextStyle(color: Colors.black, fontSize: 12)),
-            ),
-            onPressed: () {}));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _containerBTN('Giới thiệu', Colors.blue, Icons.home),
-              Container(
+        // color: Colors.blue.shade200,
+        height: 100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // scrollDirection: Axis.horizontal,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    // border: Border.all(color: Colors.blue, width: 3),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  width: 90,
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 80,
                   height: 80,
                   child: FlatButton(
                       child: Center(
-                        child: Text('Tin tức',
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 12)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.home),
+                            Text('Tin tức',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 12)),
+                          ],
+                        ),
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -163,19 +161,35 @@ class BuildButton extends StatelessWidget {
                               builder: (context) => TinTuc(),
                             ));
                       })),
-              Container(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    // border: Border.all(color: Colors.blue, width: 3),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  width: 90,
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 80,
                   height: 80,
                   child: FlatButton(
                       child: Center(
-                        child: Text('Khoa, bộ môn',
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 12)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.home),
+                            Text('Khoa, bộ',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 12)),
+                            Text('môn',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 12)),
+                          ],
+                        ),
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -184,26 +198,35 @@ class BuildButton extends StatelessWidget {
                               builder: (context) => ChonKhoa(),
                             ));
                       })),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              // _containerBTN('Phòng ban', Colors.blue, Icons.home),
-              Container(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    // border: Border.all(color: Colors.blue, width: 3),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  width: 90,
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 80,
                   height: 80,
                   child: FlatButton(
                       child: Center(
-                        child: Text('Phòng ban',
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 12)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.home),
+                            Text('Phòng',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 12)),
+                            Text('ban',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 12)),
+                          ],
+                        ),
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -212,13 +235,40 @@ class BuildButton extends StatelessWidget {
                               builder: (context) => Departments(),
                             ));
                       })),
-              _containerBTN('Tuyển sinh', Colors.blue, Icons.home),
-              _containerBTN('Đoàn, hội', Colors.blue, Icons.home),
-            ],
-          ),
-        ],
-      ),
-    );
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 80,
+                  height: 80,
+                  child: FlatButton(
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.home),
+                            Text('Đoàn',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 12)),
+                            Text('Hội',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 12)),
+                          ],
+                        ),
+                      ),
+                      onPressed: () {})),
+            ),
+          ],
+        ));
   }
 }
 
@@ -231,6 +281,15 @@ class Slider extends StatelessWidget {
 
     return Container(
       height: 200,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                blurRadius: 7,
+                offset: const Offset(0, 5))
+          ]),
       child: Stack(alignment: AlignmentDirectional.bottomCenter, children: [
         PageView(
           controller: _controller,
@@ -282,8 +341,12 @@ class ListPost extends StatelessWidget {
       // ),
       height: 250,
       child: ListView(
-        children: const [
-          Card(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: ListTile(
               title: Text('Tiêu đề bài viết'),
               subtitle: Text('Nội dung bài viết'),
