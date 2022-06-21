@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -219,9 +221,32 @@ class _VietBinhLuanState extends State<VietBinhLuan> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // Nhập nội dung tin nhắn
+          Expanded(
+            child: TextField(
+              cursorColor: Colors.blueAccent,
+              keyboardType: TextInputType.text,
+              controller: _textController,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.all(5),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide:
+                        const BorderSide(color: Colors.blueAccent, width: 3)),
+
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide:
+                      const BorderSide(color: Colors.blueAccent, width: 3),
+                ),
+                hintText: 'Nhập nội dung ...',
+                // labelText: 'Name'
+              ),
+            ),
+          ),
           // Nút chọn hình ảnh
           IconButton(
-              color: const Color(0xFF08C187),
+              color: Colors.blueAccent,
               icon: const Icon(
                 Icons.image,
                 size: 35,
@@ -258,38 +283,32 @@ class _VietBinhLuanState extends State<VietBinhLuan> {
                               )
                             ])))
                   }),
-          // Nhập nội dung tin nhắn
-          Expanded(
-            child: TextField(
-              cursorColor: const Color(0xFF08C187),
-              keyboardType: TextInputType.text,
-              controller: _textController,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(5),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide:
-                        const BorderSide(color: Color(0xFF08C187), width: 3)),
-
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide:
-                      const BorderSide(color: Color(0xFF08C187), width: 3),
-                ),
-                hintText: 'Nhập nội dung ...',
-                // labelText: 'Name'
-              ),
-            ),
-          ),
           // Nút gửi tin nhắn
           IconButton(
-              color: const Color(0xFF08C187),
+              color: Colors.blueAccent,
               icon: const Icon(
                 Icons.send_sharp,
                 size: 35,
               ),
-              onPressed: () =>
-                  {sendCmt(_textController.text), _textController.clear()})
+              onPressed: () => {
+                    if (_textController.text.length < 5)
+                      {
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  content: const Text('Nhập ít nhất 5 ký tự'),
+                                  actions: [
+                                    FlatButton(
+                                        child: const Text('OK'),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        }),
+                                  ],
+                                ))
+                      }
+                    else
+                      {sendCmt(_textController.text), _textController.clear()}
+                  })
         ],
       ),
     );
