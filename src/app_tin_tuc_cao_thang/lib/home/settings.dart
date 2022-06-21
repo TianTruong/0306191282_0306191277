@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:app_tin_tuc_cao_thang/home/settings/contact.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,18 +17,6 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    // _buildDR() {
-    //   return Padding(
-    //     padding: const EdgeInsets.only(top: 10, bottom: 10),
-    //     child: Container(
-    //       decoration: BoxDecoration(
-    //           border: Border(
-    //               bottom: BorderSide(color: Colors.grey.shade500, width: 1))),
-    //       child: const Center(heightFactor: 1.5),
-    //     ),
-    //   );
-    // }
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -46,7 +36,7 @@ class _SettingsState extends State<Settings> {
                   width: 40,
                   height: 40,
                   child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.search,
                         color: Colors.black,
                       ),
@@ -57,7 +47,7 @@ class _SettingsState extends State<Settings> {
                         //       builder: (context) => TinTuc(),
                         //     ));
                       })),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Padding(
@@ -88,120 +78,144 @@ class _SettingsState extends State<Settings> {
         ],
       ),
       backgroundColor: Colors.grey.shade200,
-      body: ListView(
+      body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Expanded(
+            child: ListView(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          blurRadius: 7,
-                          offset: const Offset(0, 5))
-                    ]),
-                    padding: EdgeInsets.all(3.0),
-                    child: ListTile(
-                      title: const Text('Thông tin cá nhân'),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Information()));
-                      },
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          blurRadius: 7,
-                          offset: const Offset(0, 5))
-                    ]),
-                    padding: EdgeInsets.all(3.0),
-                    child: ListTile(
-                      title: const Text('Tài khoản và mật khẩu'),
-                      onTap: () {},
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          blurRadius: 7,
-                          offset: const Offset(0, 5))
-                    ]),
-                    padding: EdgeInsets.all(3.0),
-                    child: ListTile(
-                      title: const Text('Chế độ tối'),
-                      onTap: () {},
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          blurRadius: 7,
-                          offset: const Offset(0, 5))
-                    ]),
-                    padding: EdgeInsets.all(3.0),
-                    child: ListTile(
-                      title: const Text('Liên hệ'),
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Contact()));
-                      },
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          blurRadius: 7,
-                          offset: const Offset(0, 5))
-                    ]),
-                    child: ListTile(
-                      title: const Text('Đăng xuất'),
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                                  content: Text('Bạn muốn đăng xuất?'),
-                                  actions: [
-                                    FlatButton(
-                                        child: const Text('Yes'),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                          FirebaseAuth.instance.signOut();
-                                        }),
-                                    FlatButton(
-                                        child: const Text('No'),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        }),
-                                  ],
-                                ));
-                      },
-                    ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          decoration:
+                              BoxDecoration(color: Colors.white, boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                blurRadius: 7,
+                                offset: const Offset(0, 5))
+                          ]),
+                          padding: const EdgeInsets.all(3.0),
+                          child: ListTile(
+                            title: const Text('Thông tin cá nhân'),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const Information()));
+                            },
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          decoration:
+                              BoxDecoration(color: Colors.white, boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                blurRadius: 7,
+                                offset: const Offset(0, 5))
+                          ]),
+                          padding: const EdgeInsets.all(3.0),
+                          child: ListTile(
+                            title: const Text('Tài khoản và mật khẩu'),
+                            onTap: () {},
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          decoration:
+                              BoxDecoration(color: Colors.white, boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                blurRadius: 7,
+                                offset: const Offset(0, 5))
+                          ]),
+                          padding: const EdgeInsets.all(3.0),
+                          child: ListTile(
+                            title: const Text('Chế độ tối'),
+                            onTap: () {},
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          decoration:
+                              BoxDecoration(color: Colors.white, boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                blurRadius: 7,
+                                offset: const Offset(0, 5))
+                          ]),
+                          padding: const EdgeInsets.all(3.0),
+                          child: ListTile(
+                            title: const Text('Liên hệ'),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Contact()));
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 7,
+                        offset: const Offset(0, 5))
+                  ]),
+              height: 50,
+              width: double.infinity,
+              child: TextButton(
+                child: const Text(
+                  'Đăng xuất',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal),
+                ),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            content: const Text('Bạn muốn đăng xuất?'),
+                            actions: [
+                              FlatButton(
+                                  child: const Text('Yes'),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    FirebaseAuth.instance.signOut();
+                                  }),
+                              FlatButton(
+                                  child: const Text('No'),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  }),
+                            ],
+                          ));
+                },
+              ),
             ),
           ),
         ],

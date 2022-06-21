@@ -373,25 +373,19 @@ class ListPost extends StatefulWidget {
 }
 
 class _ListPostState extends State<ListPost> {
+  final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
+      .collection('posts')
+      .where('type', isEqualTo: 'intro')
+      .orderBy('time', descending: true)
+      .snapshots();
+
   int number = 3;
+  double cao = 250;
 
   @override
   Widget build(BuildContext context) {
-    // final CollectionReference loai = FirebaseFirestore.instance
-    //     .collection('posts');
-
-    final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
-        .collection('posts')
-        .where('type', isEqualTo: 'intro')
-        .orderBy('time', descending: true)
-        .snapshots();
-
     return Container(
-      // decoration: BoxDecoration(
-      //   border: Border.all(color: Colors.blue, width: 3),
-      //   borderRadius: BorderRadius.circular(10),
-      // ),
-      height: 250,
+      height: cao,
       child: StreamBuilder<QuerySnapshot>(
         stream: posts,
         builder: (
@@ -421,6 +415,7 @@ class _ListPostState extends State<ListPost> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
+                          height: 60,
                           child: ListTile(
                             title: Text(
                               data.docs[index]['title'],
@@ -429,19 +424,6 @@ class _ListPostState extends State<ListPost> {
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                             ),
-                            // ReadMoreText(
-                            //   data.docs[index]['title'],
-                            //   style: TextStyle(
-                            //       color: Colors.grey[700],
-                            //       fontSize: 18,
-                            //       fontWeight: FontWeight.bold),
-                            //   trimLines: 1,
-                            //   trimMode: TrimMode.Line,
-                            //   trimCollapsedText: '',
-                            //   // trimExpandedText: 'Show less',
-                            //   // moreStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                            // ),
-
                             onTap: () {
                               Navigator.push(
                                   context,
@@ -456,21 +438,42 @@ class _ListPostState extends State<ListPost> {
                       );
                     }),
               ),
-              number < data.size
-                  ? TextButton(
-                      onPressed: () {
-                        setState(() {
-                          number = number + 1;
-                        });
-                      },
-                      child: Text('Xem thêm'))
-                  : TextButton(
-                      onPressed: () {
-                        setState(() {
-                          number = 3;
-                        });
-                      },
-                      child: Text('Rút gọn'))
+              number == 3
+                  ? Container(
+                      height: 40,
+                      child: TextButton(
+                          onPressed: () {
+                            setState(() {
+                              number = number + 1;
+                              cao = cao + 70;
+                            });
+                          },
+                          child: Text('Xem thêm')),
+                    )
+                  : Container(
+                      height: 40,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  number = 3;
+                                  cao = 250;
+                                });
+                              },
+                              child: Text('Rút gọn')),
+                          TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  number = number + 1;
+                                  cao = cao + 70;
+                                });
+                              },
+                              child: Text('Xem thêm'))
+                        ],
+                      ),
+                    )
             ],
           );
         },
