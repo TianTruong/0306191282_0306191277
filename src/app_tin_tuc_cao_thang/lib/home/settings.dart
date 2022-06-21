@@ -202,13 +202,13 @@ class _SettingsState extends State<Settings> {
                             content: const Text('Bạn muốn đăng xuất?'),
                             actions: [
                               FlatButton(
-                                  child: const Text('Yes'),
+                                  child: const Text('Có'),
                                   onPressed: () {
                                     Navigator.pop(context);
                                     FirebaseAuth.instance.signOut();
                                   }),
                               FlatButton(
-                                  child: const Text('No'),
+                                  child: const Text('Không'),
                                   onPressed: () {
                                     Navigator.pop(context);
                                   }),

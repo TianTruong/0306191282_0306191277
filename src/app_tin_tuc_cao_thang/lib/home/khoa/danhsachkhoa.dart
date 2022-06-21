@@ -106,110 +106,134 @@ class _ChonKhoaState extends State<ChonKhoa> {
           ),
           Expanded(
             child: Center(
-              child: StreamBuilder<QuerySnapshot>(
-                stream: faculty,
-                builder: (
-                  BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot,
-                ) {
-                  if (snapshot.hasError) {
-                    return const Text('Something went wrong.');
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text('Loading');
-                  }
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: faculty,
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot,
+                  ) {
+                    if (snapshot.hasError) {
+                      return const Text('Something went wrong.');
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Text('Loading');
+                    }
 
-                  final data = snapshot.requireData;
+                    final data = snapshot.requireData;
 
-                  return ListView.builder(
-                      itemCount: data.size,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: InkWell(
-                              child: Card(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: ListTile(
-                                    title: Text(data.docs[index]['name'],
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                    subtitle: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 10.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                              'Điện thoại: ${data.docs[index]['phone']}'),
-                                          Text(
-                                              'Email: ${data.docs[index]['email']}'),
-                                          Text(
-                                              'Website: ${data.docs[index]['website']}'),
-                                        ],
-                                      ),
+                    return ListView.builder(
+                        itemCount: data.size,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: InkWell(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey.withOpacity(0.5),
+                                              blurRadius: 7,
+                                              offset: const Offset(0, 5))
+                                        ]),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: ListTile(
+                                      title: Text(data.docs[index]['name'],
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      subtitle: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.only(top: 5),
+                                                child: Text(
+                                                    'Điện thoại: ${data.docs[index]['phone']}'),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.only(top: 5),
+                                                child: Text(
+                                                    'Email: ${data.docs[index]['email']}'),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.only(top: 5),
+                                                child: Text(
+                                                    'Website: ${data.docs[index]['website']}'),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              onTap: () {
-                                switch (int.parse(data.docs[index]['number'])) {
-                                  case 1:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => CoKhi()));
+                                onTap: () {
+                                  switch (int.parse(data.docs[index]['number'])) {
+                                    case 1:
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => CoKhi()));
 
-                                    break;
-                                  case 2:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => CKDL()));
+                                      break;
+                                    case 2:
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => CKDL()));
 
-                                    break;
-                                  case 3:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => DDT()));
+                                      break;
+                                    case 3:
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => DDT()));
 
-                                    break;
-                                  case 4:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => NhietLanh()));
+                                      break;
+                                    case 4:
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => NhietLanh()));
 
-                                    break;
-                                  case 5:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => CNTT()));
+                                      break;
+                                    case 5:
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => CNTT()));
 
-                                    break;
-                                  case 6:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => GDDC()));
+                                      break;
+                                    case 6:
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => GDDC()));
 
-                                    break;
-                                  case 7:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                BoMonKinhTe()));
+                                      break;
+                                    case 7:
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  BoMonKinhTe()));
 
-                                    break;
-                                }
-                              }),
-                        );
-                      });
-                },
+                                      break;
+                                  }
+                                }),
+                          );
+                        });
+                  },
+                ),
               ),
             ),
           ),
