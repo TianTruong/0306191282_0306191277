@@ -7,8 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PhongDaoTao extends StatefulWidget {
-  const PhongDaoTao({Key? key, required this.idPhong}) : super(key: key);
-  final String idPhong;
+  const PhongDaoTao({Key? key}) : super(key: key);
 
   @override
   State<PhongDaoTao> createState() => _PhongDaoTaoState();
@@ -33,7 +32,7 @@ class _PhongDaoTaoState extends State<PhongDaoTao> {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -109,7 +108,7 @@ class _PhongDaoTaoState extends State<PhongDaoTao> {
                 // _buildDR(),
                 NutBam(),
                 SizedBox(height: 15),
-                TinTuc(idPhong: widget.idPhong),
+                TinTuc(),
                 _buildDR(),
                 LienHe()
               ],
@@ -191,8 +190,7 @@ class NutBam extends StatelessWidget {
 }
 
 class TinTuc extends StatefulWidget {
-  const TinTuc({Key? key, required this.idPhong}) : super(key: key);
-  final String idPhong;
+  const TinTuc({Key? key}) : super(key: key);
 
   @override
   State<TinTuc> createState() => _TinTucState();
@@ -201,10 +199,16 @@ class TinTuc extends StatefulWidget {
 class _TinTucState extends State<TinTuc> {
   @override
   Widget build(BuildContext context) {
+    // final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
+    //     .collection('departments')
+    //     .doc(widget.idPhong)
+    //     .collection('posts')
+    //     .orderBy('time', descending: true)
+    //     .snapshots();
+
     final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
-        .collection('departments')
-        .doc(widget.idPhong)
         .collection('posts')
+        .where('type', isEqualTo: 'Đào tạo')
         .orderBy('time', descending: true)
         .snapshots();
 
@@ -276,12 +280,12 @@ class _TinTucState extends State<TinTuc> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   ChiTietBaiViet(
-                                                    idPhong: widget.idPhong,
-                                                    idBaiViet:
-                                                        data.docs[index].id,
-                                                    title: data.docs[index]
-                                                        ['title'],
-                                                  )));
+                                                      idBaiViet:
+                                                          data.docs[index].id,
+                                                      title: data.docs[index]
+                                                          ['title'],
+                                                      like: data.docs[index]
+                                                          ['like'])));
                                     },
                                   ),
                                   // Container(

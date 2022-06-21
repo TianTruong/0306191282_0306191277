@@ -95,9 +95,16 @@ class _SettingsState extends State<Settings> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  padding: EdgeInsets.all(3.0),
-                  child: Material(
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 7,
+                          offset: const Offset(0, 5))
+                    ]),
+                    padding: EdgeInsets.all(3.0),
                     child: ListTile(
                       title: const Text('Thông tin cá nhân'),
                       onTap: () {
@@ -109,27 +116,48 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(3.0),
-                  child: Material(
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 7,
+                          offset: const Offset(0, 5))
+                    ]),
+                    padding: EdgeInsets.all(3.0),
                     child: ListTile(
                       title: const Text('Tài khoản và mật khẩu'),
                       onTap: () {},
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(3.0),
-                  child: Material(
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 7,
+                          offset: const Offset(0, 5))
+                    ]),
+                    padding: EdgeInsets.all(3.0),
                     child: ListTile(
                       title: const Text('Chế độ tối'),
                       onTap: () {},
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(3.0),
-                  child: Material(
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 7,
+                          offset: const Offset(0, 5))
+                    ]),
+                    padding: EdgeInsets.all(3.0),
                     child: ListTile(
                       title: const Text('Liên hệ'),
                       onTap: () {
@@ -139,9 +167,15 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(3.0),
-                  child: Material(
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 7,
+                          offset: const Offset(0, 5))
+                    ]),
                     child: ListTile(
                       title: const Text('Đăng xuất'),
                       onTap: () {

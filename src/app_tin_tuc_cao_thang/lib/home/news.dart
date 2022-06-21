@@ -3,6 +3,7 @@
 import 'package:app_tin_tuc_cao_thang/home/khoa/danhsachkhoa.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/danhsachphong.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
+import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/tintuc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -132,6 +133,7 @@ class BuildButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            // Tin tức
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(
@@ -169,6 +171,8 @@ class BuildButton extends StatelessWidget {
                 ],
               ),
             ),
+
+            // Khoa, bộ môn
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(
@@ -203,6 +207,8 @@ class BuildButton extends StatelessWidget {
                 ],
               ),
             ),
+
+            // Phòng ban
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(
@@ -237,6 +243,8 @@ class BuildButton extends StatelessWidget {
                 ],
               ),
             ),
+
+            // Đoàn, hội
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(
@@ -270,18 +278,23 @@ class BuildButton extends StatelessWidget {
   }
 }
 
-class Slider extends StatelessWidget {
+class Slider extends StatefulWidget {
   Slider({Key? key}) : super(key: key);
 
+  @override
+  State<Slider> createState() => _SliderState();
+}
+
+class _SliderState extends State<Slider> {
   final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
       .collection('posts')
       .orderBy('like', descending: true)
       .snapshots();
 
+  int indexPost = 0;
+
   @override
   Widget build(BuildContext context) {
-    final PageController _controller = PageController();
-
     return Center(
       child: Container(
         decoration: BoxDecoration(
@@ -309,28 +322,41 @@ class Slider extends StatelessWidget {
 
             final data = snapshot.requireData;
 
-            return CarouselSlider.builder(
-              // carouselController: _controller,
-              itemCount: data.size,
-              itemBuilder: (context, index, readIndex) {
-                // final image_path = data.docs[index].avt;
-                return Text(data.docs[index]['title']);
-              },
-              options: CarouselOptions(
-                initialPage: 0,
-                // height: 250,
-                autoPlay: true,
-                viewportFraction: 1,
-                enableInfiniteScroll: false,
-                enlargeCenterPage: true,
-                enlargeStrategy: CenterPageEnlargeStrategy.height,
-                autoPlayInterval: const Duration(seconds: 3),
-                // onPageChanged: (index, reason) {
-                //   setState(() {
-                //     activeIndex = index;
-                //   });
-                // },
+            return InkWell(
+              child: CarouselSlider.builder(
+                // carouselController: _controller,
+                itemCount: 5,
+                itemBuilder: (context, index, readIndex) {
+                  // final image_path = data.docs[index].avt;
+                  return Text(data.docs[index]['title']);
+                },
+                options: CarouselOptions(
+                  initialPage: 0,
+                  // height: 250,
+                  autoPlay: true,
+                  viewportFraction: 1,
+                  enableInfiniteScroll: false,
+                  enlargeCenterPage: true,
+                  enlargeStrategy: CenterPageEnlargeStrategy.height,
+                  autoPlayInterval: const Duration(seconds: 3),
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      indexPost = index;
+                      // print(index);
+                      // print(i);
+                    });
+                  },
+                ),
               ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChiTietBaiViet(
+                            idBaiViet: data.docs[indexPost].id,
+                            title: data.docs[indexPost]['title'],
+                            like: data.docs[indexPost]['like'])));
+              },
             );
           },
         ),
@@ -351,8 +377,12 @@ class _ListPostState extends State<ListPost> {
 
   @override
   Widget build(BuildContext context) {
+    // final CollectionReference loai = FirebaseFirestore.instance
+    //     .collection('posts');
+
     final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
         .collection('posts')
+        .where('type', isEqualTo: 'intro')
         .orderBy('time', descending: true)
         .snapshots();
 
@@ -369,6 +399,7 @@ class _ListPostState extends State<ListPost> {
           AsyncSnapshot<QuerySnapshot> snapshot,
         ) {
           if (snapshot.hasError) {
+            print(snapshot.error);
             return const Text('Something went wrong.');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -412,10 +443,13 @@ class _ListPostState extends State<ListPost> {
                             // ),
 
                             onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => ChiTietBaiViet()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChiTietBaiViet(
+                                          idBaiViet: data.docs[index].id,
+                                          title: data.docs[index]['title'],
+                                          like: data.docs[index]['like'])));
                             },
                           ),
                         ),

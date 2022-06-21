@@ -7,8 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PhongCTCT_HSSV extends StatefulWidget {
-  const PhongCTCT_HSSV({Key? key, required this.idPhong}) : super(key: key);
-  final String idPhong;
+  const PhongCTCT_HSSV({Key? key}) : super(key: key);
 
   @override
   State<PhongCTCT_HSSV> createState() => _PhongCTCT_HSSVState();
@@ -33,7 +32,7 @@ class _PhongCTCT_HSSVState extends State<PhongCTCT_HSSV> {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -109,7 +108,7 @@ class _PhongCTCT_HSSVState extends State<PhongCTCT_HSSV> {
                 _buildDR(),
                 SoTaySinhVien(),
                 SizedBox(height: 15),
-                TinTuc(idPhong: widget.idPhong),
+                TinTuc(),
                 _buildDR(),
                 LienHe()
               ],
@@ -155,8 +154,7 @@ class SoTaySinhVien extends StatelessWidget {
 }
 
 class TinTuc extends StatefulWidget {
-  const TinTuc({Key? key, required this.idPhong}) : super(key: key);
-  final String idPhong;
+  const TinTuc({Key? key}) : super(key: key);
 
   @override
   State<TinTuc> createState() => _TinTucState();
@@ -166,9 +164,8 @@ class _TinTucState extends State<TinTuc> {
   @override
   Widget build(BuildContext context) {
     Stream<QuerySnapshot> posts = FirebaseFirestore.instance
-        .collection('departments')
-        .doc(widget.idPhong)
         .collection('posts')
+        .where('type', isEqualTo: 'CTCT - HSSV')
         .orderBy('time', descending: true)
         .snapshots();
 
@@ -238,12 +235,12 @@ class _TinTucState extends State<TinTuc> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   ChiTietBaiViet(
-                                                    idPhong: widget.idPhong,
-                                                    idBaiViet:
-                                                        data.docs[index].id,
-                                                    title: data.docs[index]
-                                                        ['title'],
-                                                  )));
+                                                      idBaiViet:
+                                                          data.docs[index].id,
+                                                      title: data.docs[index]
+                                                          ['title'],
+                                                      like: data.docs[index]
+                                                          ['like'])));
                                     },
                                   ),
                                   // Container(
