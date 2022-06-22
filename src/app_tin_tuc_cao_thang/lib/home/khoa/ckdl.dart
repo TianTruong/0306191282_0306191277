@@ -15,7 +15,7 @@ class CKDL extends StatefulWidget {
 
 class _CKDLState extends State<CKDL> {
   final Stream<QuerySnapshot> ckdl =
-      FirebaseFirestore.instance.collection('ckdl').snapshots();
+      FirebaseFirestore.instance.collection('ckdl').orderBy('time', descending: true).snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
   @override

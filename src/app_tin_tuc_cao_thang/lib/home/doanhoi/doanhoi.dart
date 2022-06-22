@@ -15,7 +15,7 @@ class DoanHoi extends StatefulWidget {
 
 class _DoanHoiState extends State<DoanHoi> {
   final Stream<QuerySnapshot> doanhoi =
-      FirebaseFirestore.instance.collection('doanhoi').snapshots();
+      FirebaseFirestore.instance.collection('doanhoi').orderBy('time', descending: true).snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
 

@@ -15,7 +15,7 @@ class CoKhi extends StatefulWidget {
 
 class _CoKhiState extends State<CoKhi> {
   final Stream<QuerySnapshot> cokhi =
-      FirebaseFirestore.instance.collection('cokhi').snapshots();
+      FirebaseFirestore.instance.collection('cokhi').orderBy('time', descending: true).snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
 

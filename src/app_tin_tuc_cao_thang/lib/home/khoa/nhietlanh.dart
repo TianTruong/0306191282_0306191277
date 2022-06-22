@@ -15,7 +15,7 @@ class NhietLanh extends StatefulWidget {
 
 class _NhietLanhState extends State<NhietLanh> {
   final Stream<QuerySnapshot> nhietlanh =
-      FirebaseFirestore.instance.collection('nhietlanh').snapshots();
+      FirebaseFirestore.instance.collection('nhietlanh').orderBy('time', descending: true).snapshots();
   final PageController _controller = PageController();
   int i = 0;
   final user = FirebaseAuth.instance.currentUser!;
