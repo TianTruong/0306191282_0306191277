@@ -1,24 +1,21 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
-import 'package:app_tin_tuc_cao_thang/home/doanhoi/bieumau.dart';
-import 'package:app_tin_tuc_cao_thang/home/doanhoi/muahexanh.dart';
-import 'package:app_tin_tuc_cao_thang/home/doanhoi/anhhoatdong.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class DoanHoi extends StatefulWidget {
-  const DoanHoi({Key? key}) : super(key: key);
+class AnhHoatDong extends StatefulWidget {
+  const AnhHoatDong({Key? key}) : super(key: key);
 
   @override
-  State<DoanHoi> createState() => _DoanHoiState();
+  State<AnhHoatDong> createState() => _AnhHoatDongState();
 }
 
-class _DoanHoiState extends State<DoanHoi> {
-  final Stream<QuerySnapshot> doanhoi =
-      FirebaseFirestore.instance.collection('doanhoi').orderBy('number', descending: true).snapshots();
+class _AnhHoatDongState extends State<AnhHoatDong> {
+  final Stream<QuerySnapshot> anhhoatdong =
+      FirebaseFirestore.instance.collection('anhhoatdongdoanhoi').orderBy('time', descending: true).snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -90,17 +87,51 @@ class _DoanHoiState extends State<DoanHoi> {
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
-                  child: Text('Đoàn Hội ',
+                  child: Text('Hình ảnh hoạt',
                       style: TextStyle(
                         color: Colors.red,
                       )))),
-
+          SizedBox(
+            height: 200,
+            child:
+                Stack(alignment: AlignmentDirectional.bottomCenter, children: [
+              PageView(
+                controller: _controller,
+                children: <Widget>[
+                  Image.asset(
+                    'images/slider11.jpg',
+                    height: 150,
+                    fit: BoxFit.fill,
+                  ),
+                  Image.asset(
+                    'images/slider12.jpg',
+                    height: 150,
+                  ),
+                  Image.asset(
+                    'images/slider13.jpg',
+                    height: 150,
+                    fit: BoxFit.fill,
+                  ),
+                ],
+              ),
+              SmoothPageIndicator(
+                controller: _controller,
+                count: 3,
+                effect: JumpingDotEffect(
+                  activeDotColor: Colors.grey,
+                  dotColor: Colors.grey.shade300,
+                  dotHeight: 10,
+                  dotWidth: 10,
+                ),
+              ),
+            ]),
+          ),
           Expanded(
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: doanhoi,
+                  stream: anhhoatdong,
                   builder: (
                     BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot,
@@ -117,7 +148,7 @@ class _DoanHoiState extends State<DoanHoi> {
                     return GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 250,
+                                maxCrossAxisExtent: 400,
                                 childAspectRatio: 3 / 2,
                                 crossAxisSpacing: 20,
                                 mainAxisSpacing: 20),
@@ -140,8 +171,8 @@ class _DoanHoiState extends State<DoanHoi> {
                                     padding: EdgeInsets.all(5.0),
                                     child: Image.network(
                                       data.docs[index]['image'],
-                                      cacheHeight: 120,
-                                      cacheWidth: 270,
+                                      cacheHeight: 200,
+                                      cacheWidth: 300,
                                     ),
                                   ),
                                 ],
@@ -150,41 +181,7 @@ class _DoanHoiState extends State<DoanHoi> {
                                   // color: Colors.amber,
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15)),
-                           
                             ),
-                           onTap: () {
-                                switch (int.parse(data.docs[index]['number'])) {
-                                  case 1:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => AnhHoatDong()));
-
-                                    break;
-                                  case 2:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => BieuMau()));
-
-                                    break;
-                                  case 3:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => MuaHeXanh()));
-
-                                    break;
-                                  case 4:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Information()));
-
-                                    break;
-                             
-                                }
-                                }
                           );
                         });
                   },
