@@ -15,7 +15,7 @@ class DDT extends StatefulWidget {
 
 class _DDTState extends State<DDT> {
   final Stream<QuerySnapshot> ddt=
-      FirebaseFirestore.instance.collection('ddt').snapshots();
+      FirebaseFirestore.instance.collection('ddt').orderBy('time', descending: true).snapshots();
   final PageController _controller = PageController();
   int i=0;
   final user = FirebaseAuth.instance.currentUser!;

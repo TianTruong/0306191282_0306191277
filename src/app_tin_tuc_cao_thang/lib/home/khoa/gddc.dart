@@ -15,7 +15,7 @@ class GDDC extends StatefulWidget {
 
 class _GDDCState extends State<GDDC> {
   final Stream<QuerySnapshot> bomonkinhte =
-      FirebaseFirestore.instance.collection('bomonkinhte').snapshots();
+      FirebaseFirestore.instance.collection('bomonkinhte').orderBy('time', descending: true).snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
   @override

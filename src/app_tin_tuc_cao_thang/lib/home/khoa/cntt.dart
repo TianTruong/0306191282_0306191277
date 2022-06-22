@@ -12,7 +12,7 @@ class CNTT extends StatefulWidget {
 
 class _CNTTState extends State<CNTT> {
   final Stream<QuerySnapshot> cntt =
-      FirebaseFirestore.instance.collection('cntt').snapshots();
+      FirebaseFirestore.instance.collection('cntt').orderBy('time', descending: true).snapshots();
 
   final user = FirebaseAuth.instance.currentUser!;
 

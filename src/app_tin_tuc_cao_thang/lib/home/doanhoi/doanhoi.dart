@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
+import 'package:app_tin_tuc_cao_thang/home/doanhoi/bieumau.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -162,7 +163,7 @@ class _DoanHoiState extends State<DoanHoi> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => Information()));
+                                            builder: (context) => BieuMau()));
 
                                     break;
                                   case 3:

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,82 +14,133 @@ class BieuMau extends StatefulWidget {
 }
 
 class _BieuMauState extends State<BieuMau> {
-  int number = 3;
-
+  final Stream<QuerySnapshot> bieumau=
+      FirebaseFirestore.instance.collection('bieumau').orderBy('time', descending: true).snapshots();
+  final PageController _controller = PageController();
+  int i = 0;
+  int number=3;
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> bieumau = FirebaseFirestore.instance
-        .collection('bieumau')
-        .orderBy('time', descending: true)
-        .snapshots();
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading : false,
+        title: Image.asset(
+          'images/logo.png',
+          cacheHeight: 40,
+          cacheWidth: 180,
+        ),
+        actions: [
+          Row(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade400,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  width: 40,
+                  height: 40,
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => TinTuc(),
+                        //     ));
+                      })),
+              SizedBox(
+                width: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: ClipOval(
+                    child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Information()));
+                  },
+                  child: user.photoURL != null
+                      ? Image.network(
+                          user.photoURL.toString(),
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        )
+                      : Image.asset(
+                          'images/intro.jpg',
+                          fit: BoxFit.fill,
+                          cacheHeight: 40,
+                          cacheWidth: 40,
+                        ),
+                )),
+              ),
+            ],
+          ),
+        ],
+      ),
+      backgroundColor: Colors.grey.shade200,
+      body: Column(
+        children: [
+          Container(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: Center(
+                  child: Text('Đoàn hội',
+                      style: TextStyle(
+                        color: Colors.red,
+                      )))),
+     
+          Expanded(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: bieumau,
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot,
+                  ) {
+                    if (snapshot.hasError) {
+                      return const Text('Something went wrong.');
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Text('Loading');
+                    }
 
-    return Container(
-      // decoration: BoxDecoration(
-      //   border: Border.all(color: Colors.blue, width: 3),
-      //   borderRadius: BorderRadius.circular(10),
-      // ),
-      height: 250,
-      child: StreamBuilder<QuerySnapshot>(
-        stream: posts,
-        builder: (
-          BuildContext context,
-          AsyncSnapshot<QuerySnapshot> snapshot,
-        ) {
-          if (snapshot.hasError) {
-            return const Text('Something went wrong.');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
+                    final data = snapshot.requireData;
 
-          final data = snapshot.requireData;
-
-          return Column(
+                    return  Column(
             children: [
               Expanded(
                 child: ListView.builder(
-                    itemCount: number,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListTile(
-                            title: Text(
-                              data.docs[index]['title'],
-                              style: TextStyle(
-                                  // color: Colors.grey[700],
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
+                        itemCount: data.size,
+                        itemBuilder: (context, index) {
+                          return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                           mainAxisAlignment: MainAxisAlignment.start,
+                            children:[
+                              Container(   
+                                 padding: EdgeInsets.fromLTRB(3, 5, 3, 5), 
+                                child:Text(data.docs[index]['title'],
+                                  style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                         
+                                          ),
+                                ),
+                              Container(  
+                                padding: EdgeInsets.fromLTRB(3, 5, 3, 5), 
+                              child: Text(data.docs[index]['des']), 
                             ),
-                            // ReadMoreText(
-                            //   data.docs[index]['title'],
-                            //   style: TextStyle(
-                            //       color: Colors.grey[700],
-                            //       fontSize: 18,
-                            //       fontWeight: FontWeight.bold),
-                            //   trimLines: 1,
-                            //   trimMode: TrimMode.Line,
-                            //   trimCollapsedText: '',
-                            //   // trimExpandedText: 'Show less',
-                            //   // moreStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                            // ),
-
-                            onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => ChiTietBaiViet()));
-                            },
-                          ),
+                            ]  
+                            
+                          );
+                        }
                         ),
-                      );
-                    }),
               ),
-              number < data.size
+                 number < data.size
                   ? TextButton(
                       onPressed: () {
                         setState(() {
@@ -102,9 +155,15 @@ class _BieuMauState extends State<BieuMau> {
                         });
                       },
                       child: Text('Rút gọn'))
-            ],
-          );
-        },
+                   ]
+                );
+                  },
+                ),
+              ),
+            ),
+          ),
+      
+        ],
       ),
     );
   }
