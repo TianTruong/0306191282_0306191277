@@ -6,19 +6,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class AnhHoatDong extends StatefulWidget {
-  const AnhHoatDong({Key? key}) : super(key: key);
+class KHPT extends StatefulWidget {
+  const KHPT({Key? key}) : super(key: key);
 
   @override
-  State<AnhHoatDong> createState() => _AnhHoatDongState();
+  State<KHPT> createState() => _KHPTState();
 }
 
-class _AnhHoatDongState extends State<AnhHoatDong> {
-  final Stream<QuerySnapshot> anhhoatdong =
-      FirebaseFirestore.instance.collection('anhhoatdongdoanhoi').orderBy('time', descending: true).snapshots();
+class _KHPTState extends State<KHPT> {
+  final Stream<QuerySnapshot> khptdoanhoi =
+      FirebaseFirestore.instance.collection('khptdoanhoi').orderBy('time', descending: true).snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,11 +44,7 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
                         color: Colors.black,
                       ),
                       onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
+                 
                       })),
               SizedBox(
                 width: 10,
@@ -87,7 +82,7 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
-                  child: Text('Hình ảnh hoạt động',
+                  child: Text('Kế hoạch - phong trào',
                       style: TextStyle(
                         color: Colors.red,
                       )))),
@@ -99,16 +94,16 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
                 controller: _controller,
                 children: <Widget>[
                   Image.asset(
-                    'images/slider11.jpg',
+                    'images/slider5.jpg',
                     height: 150,
                     fit: BoxFit.fill,
                   ),
                   Image.asset(
-                    'images/slider12.jpg',
+                    'images/slider6.png',
                     height: 150,
                   ),
                   Image.asset(
-                    'images/slider13.jpg',
+                    'images/slider7.png',
                     height: 150,
                     fit: BoxFit.fill,
                   ),
@@ -131,7 +126,7 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: anhhoatdong,
+                  stream: khptdoanhoi,
                   builder: (
                     BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot,
@@ -164,15 +159,68 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
                                     child: Text(
                                       data.docs[index]['title'],
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                           fontSize: 18,
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255),
+                                          backgroundColor: Colors.blue),
                                     ),
                                   ),
                                   Container(
                                     padding: EdgeInsets.all(5.0),
-                                    child: Image.network(
-                                      data.docs[index]['image'],
-                                      cacheHeight: 200,
-                                      cacheWidth: 300,
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['des1'],
+                                      style: TextStyle(fontSize: 10),
+                                    ),
+                                  ),
+                           
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['des2'],
+                                      style: TextStyle(fontSize: 10),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['des3'],
+                                      style: TextStyle(fontSize: 10),
+                                    ),
+                                  ),
+                                        Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['des4'],
+                                      style: TextStyle(fontSize: 10),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['des5'],
+                                      style: TextStyle(fontSize: 10),
+                                    ),
+                                  ),
+                                          Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['des6'],
+                                      style: TextStyle(fontSize: 10),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['des7'],
+                                      style: TextStyle(fontSize: 10),
                                     ),
                                   ),
                                 ],
@@ -189,7 +237,7 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
               ),
             ),
           ),
-     
+
         ],
       ),
     );
