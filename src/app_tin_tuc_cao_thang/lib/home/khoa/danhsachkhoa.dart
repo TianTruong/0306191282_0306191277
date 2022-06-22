@@ -206,7 +206,8 @@ class _ChonKhoaState extends State<ChonKhoa> {
 
                                     break;
                                 }
-                              }),
+                              }
+                              ),
                         );
                       });
                 },
