@@ -298,14 +298,9 @@ class _SliderState extends State<Slider> {
     return Center(
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 7,
-                  offset: const Offset(0, 5))
-            ]),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
         height: 200,
         child: StreamBuilder<QuerySnapshot>(
           stream: posts,
@@ -327,12 +322,42 @@ class _SliderState extends State<Slider> {
                 // carouselController: _controller,
                 itemCount: 5,
                 itemBuilder: (context, index, readIndex) {
-                  // final image_path = data.docs[index].avt;
-                  return Text(data.docs[index]['title']);
+                  return Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          height: 200,
+                          width: double.infinity,
+                          child: data.docs[index]['image'] == ''
+                              ? Image.asset(
+                                  'images/LogoChinh.png'
+                                )
+                              : Image.network(
+                                  data.docs[index]['image'],
+                                  fit: BoxFit.fill,
+                                )),
+                      // boder chứa các widget con.
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(0.7),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20)),
+                        ),
+                        height: 65,
+                        child: Center(
+                          child: Text(data.docs[index]['title']),
+                        ),
+                      ),
+                    ],
+                  );
                 },
                 options: CarouselOptions(
                   initialPage: 0,
-                  // height: 250,
                   autoPlay: true,
                   viewportFraction: 1,
                   enableInfiniteScroll: false,
@@ -342,8 +367,6 @@ class _SliderState extends State<Slider> {
                   onPageChanged: (index, reason) {
                     setState(() {
                       indexPost = index;
-                      // print(index);
-                      // print(i);
                     });
                   },
                 ),
