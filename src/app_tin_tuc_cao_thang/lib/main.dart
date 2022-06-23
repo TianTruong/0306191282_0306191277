@@ -2,7 +2,7 @@ import 'package:app_tin_tuc_cao_thang/home/khoa/bomonkinhte.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:app_tin_tuc_cao_thang/login/sign_in.dart';
-import 'package:app_tin_tuc_cao_thang/home/doanhoi/doanhoi.dart';
+import 'package:app_tin_tuc_cao_thang/home/hocphi/hocphi.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         // fontFamily: 'AidaSerifObliqueMedium',
         primarySwatch: Colors.blue,
       ),
-      home: const DoanHoi(),
+      home: const HocPhi(),
     );
   }
 }
