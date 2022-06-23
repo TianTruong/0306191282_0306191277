@@ -272,10 +272,44 @@ class _HocPhiState extends State<HocPhi> {
                                     child: 
                                      Text(
                                       data.docs[index]['des1'],
-                                      style: TextStyle(fontSize: 13),
-                           
+                                      style: TextStyle(fontSize: 15),
                                         ) 
-                                    
+                                  ),
+                                       Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: 
+                                     Text(
+                                      data.docs[index]['des2'],
+                                      style: TextStyle(fontSize: 15),
+                                        ) 
+                                  ),
+                                       Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: 
+                                     Text(
+                                      data.docs[index]['des3'],
+                                      style: TextStyle(fontSize: 15),
+                                        ) 
+                                  ),
+                                   Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: 
+                                     Text(
+                                      data.docs[index]['des4'],
+                                      style: TextStyle(fontSize: 15),
+                                        ) 
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: 
+                                     Text(
+                                      data.docs[index]['des5'],
+                                      style: TextStyle(fontSize: 15),
+                                        ) 
                                   ),
                                 ],
                               ),
