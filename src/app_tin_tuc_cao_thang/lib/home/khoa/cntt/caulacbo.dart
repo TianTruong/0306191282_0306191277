@@ -133,14 +133,14 @@ class _CauLacBoState extends State<CauLacBo> {
                                     padding: EdgeInsets.all(5.0),
                                     alignment: Alignment.topLeft,
                                     child:
-                                        Text(data.docs[index]['description']),
+                                        Text(data.docs[index]['des']),
                                   ),
                                   Container(
                                     padding: EdgeInsets.all(5.0),
-                                    child: Image.network(
+                                    child: Image.asset(
                                       data.docs[index]['image'],
-                                      cacheHeight: 120,
-                                      cacheWidth: 270,
+                                      cacheHeight: 170,
+                                      cacheWidth: 320,
                                     ),
                                   ),
                                 ],
@@ -164,7 +164,7 @@ class _CauLacBoState extends State<CauLacBo> {
                     style: TextStyle(fontSize: 16, color: Colors.black)),
                 Text('Email: nvdzung@caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Website: CauLacBo.caothang.edu.vn',
+                Text('Website: cntt.caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
               ],
             ),
