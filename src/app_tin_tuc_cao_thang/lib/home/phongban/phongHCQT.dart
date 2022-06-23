@@ -7,8 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PhongHCQT extends StatefulWidget {
-  const PhongHCQT({Key? key, required this.idPhong}) : super(key: key);
-  final String idPhong;
+  const PhongHCQT({Key? key}) : super(key: key);
 
   @override
   State<PhongHCQT> createState() => _PhongHCQTState();
@@ -33,7 +32,7 @@ class _PhongHCQTState extends State<PhongHCQT> {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -107,7 +106,7 @@ class _PhongHCQTState extends State<PhongHCQT> {
                   ),
                 ),
                 _DuongKeNgang(),
-                TinTuc(idPhong: widget.idPhong),
+                TinTuc(),
                 _DuongKeNgang(),
                 const LienHe()
               ],
@@ -120,8 +119,7 @@ class _PhongHCQTState extends State<PhongHCQT> {
 }
 
 class TinTuc extends StatefulWidget {
-  const TinTuc({Key? key, required this.idPhong}) : super(key: key);
-  final String idPhong;
+  const TinTuc({Key? key}) : super(key: key);
   @override
   State<TinTuc> createState() => _TinTucState();
 }
@@ -129,10 +127,9 @@ class TinTuc extends StatefulWidget {
 class _TinTucState extends State<TinTuc> {
   @override
   Widget build(BuildContext context) {
-    Stream<QuerySnapshot> posts = FirebaseFirestore.instance
-        .collection('departments')
-        .doc(widget.idPhong)
+    final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
         .collection('posts')
+        .where('type', isEqualTo: 'Hành chính - Quản trị')
         .orderBy('time', descending: true)
         .snapshots();
 
@@ -202,12 +199,12 @@ class _TinTucState extends State<TinTuc> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   ChiTietBaiViet(
-                                                    idPhong: widget.idPhong,
-                                                    idBaiViet:
-                                                        data.docs[index].id,
-                                                    title: data.docs[index]
-                                                        ['title'],
-                                                  )));
+                                                      idBaiViet:
+                                                          data.docs[index].id,
+                                                      title: data.docs[index]
+                                                          ['title'],
+                                                      like: data.docs[index]
+                                                          ['like'])));
                                     },
                                   ),
                                   // Container(
