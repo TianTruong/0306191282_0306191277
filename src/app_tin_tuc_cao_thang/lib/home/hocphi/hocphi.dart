@@ -18,6 +18,8 @@ class _HocPhiState extends State<HocPhi> {
       FirebaseFirestore.instance.collection('hocphi').orderBy('number', descending: true).snapshots();
    final Stream<QuerySnapshot> hocbong =
       FirebaseFirestore.instance.collection('hocbong').orderBy('number', descending: true).snapshots();
+         final Stream<QuerySnapshot> vayvon =
+      FirebaseFirestore.instance.collection('vayvon').orderBy('number', descending: true).snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
   @override
@@ -224,9 +226,113 @@ class _HocPhiState extends State<HocPhi> {
  Expanded(
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(4,0,4,0),
+                padding: const EdgeInsets.fromLTRB(4,6,4,0),
                 child: StreamBuilder<QuerySnapshot>(
                   stream: hocbong,
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot,
+                  ) {
+                    if (snapshot.hasError) {
+                      return const Text('Something went wrong.');
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Text('Loading');
+                    }
+
+                    final data = snapshot.requireData;
+
+                    return GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 400,
+                                childAspectRatio: 3 / 2,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20),
+                        itemCount: data.size,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['title'],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                           fontSize: 18,
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255),
+                                          backgroundColor: Colors.blue),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: 
+                                     Text(
+                                      data.docs[index]['des1'],
+                                      style: TextStyle(fontSize: 15),
+                                        ) 
+                                  ),
+                                       Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: 
+                                     Text(
+                                      data.docs[index]['des2'],
+                                      style: TextStyle(fontSize: 15),
+                                        ) 
+                                  ),
+                                       Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: 
+                                     Text(
+                                      data.docs[index]['des3'],
+                                      style: TextStyle(fontSize: 15),
+                                        ) 
+                                  ),
+                                   Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: 
+                                     Text(
+                                      data.docs[index]['des4'],
+                                      style: TextStyle(fontSize: 15),
+                                        ) 
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: 
+                                     Text(
+                                      data.docs[index]['des5'],
+                                      style: TextStyle(fontSize: 15),
+                                        ) 
+                                  ),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                  // color: Colors.amber,
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15)),
+                            ),
+                          );
+                        });
+                  },
+                ),
+              ),
+            ),
+          ),
+ Expanded(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(4,6,4,0),
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: vayvon,
                   builder: (
                     BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot,
