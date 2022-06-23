@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         // fontFamily: 'AidaSerifObliqueMedium',
         primarySwatch: Colors.blue,
       ),
-      home: const SignIn(),
+      home: const CNTT(),
     );
   }
 }
