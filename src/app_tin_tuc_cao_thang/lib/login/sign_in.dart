@@ -4,11 +4,16 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:app_tin_tuc_cao_thang/home/home.dart';
+import 'package:app_tin_tuc_cao_thang/home/news.dart';
+import 'package:app_tin_tuc_cao_thang/home/settings/contact.dart';
 import 'package:app_tin_tuc_cao_thang/login/set_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:app_tin_tuc_cao_thang/login/sign_up.dart';
+import 'package:webview_flutter_plus/webview_flutter_plus.dart';
+import 'dart:math';
+
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -20,7 +25,9 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   TextEditingController _gmailController = TextEditingController();
   TextEditingController _passController = TextEditingController();
-
+    TextEditingController _capchaController = TextEditingController();
+   int count=0;
+   var capcha=generateRandomString(6);
   @override
   void dispose() {
     _gmailController.dispose();
@@ -121,6 +128,48 @@ class _SignInState extends State<SignIn> {
                                 keyboardType: TextInputType.text,
                               ),
                             ),
+                           Padding( padding: const EdgeInsets.all(5.0),
+                              child: Column(children: [
+                                Container(
+                                  child:count >= 5 ? 
+                                  new Container(
+                                    child: Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                                      child:  Text(capcha,
+                                      style: TextStyle(
+                                        fontSize: 20, 
+                                        color: Color.fromARGB(
+                                              255, 255, 255, 255),
+                                          backgroundColor: Colors.blue),),))
+                                           :
+                                           new Container(
+                                    child: Text(''),
+                                  ),
+                                ),
+                                Container(
+                                child: count>=5?new SizedBox(
+                                  width: 250,
+                                  child: new TextFormField( 
+                                controller: _capchaController,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(13),
+                                      borderSide: const BorderSide(
+                                          color: Colors.black, width: 5),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(13),
+                                        borderSide: BorderSide(
+                                            color: Color.fromARGB(
+                                                255, 61, 97, 216),
+                                            width: 3)),
+                                    hintText: 'Vui lòng điền mã captcha'),
+                                keyboardType: TextInputType.text,
+                                )
+                                ): new Text(''),
+                                ),
+                              ],)
+                              ),
                             ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   primary: Color.fromARGB(255, 61, 97, 216),
@@ -186,6 +235,8 @@ class _SignInState extends State<SignIn> {
         _passController.text == '' ||
         _gmailController.text.isEmpty ||
         _passController.text.isEmpty) {
+          count++;
+      
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -194,17 +245,47 @@ class _SignInState extends State<SignIn> {
                   FlatButton(
                       child: const Text('OK'),
                       onPressed: () {
-                        Navigator.pop(context);
-                      }),
+                        setState(() {
+                       Navigator.pop(context);
+                          });
+                      }
+                 
+                      ),
                 ],
               ));
     } else {
       try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+        if(count<5){
+           await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: _gmailController.text.trim(),
             password: _passController.text.trim());
+        }else if(capcha==_capchaController.text.trim()){
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: _gmailController.text.trim(),
+            password: _passController.text.trim());
+        }else{
+                  showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  content: Text('Captcha sai'),
+                  actions: [
+                    FlatButton(
+                        child: const Text('OK'),
+                        onPressed: () {
+                      setState(() {
+                       Navigator.pop(context);
+                          });
+             
+                        }),
+                  ],
+                ));
+        }
+     
+        
       } on FirebaseAuthException catch (e) {
         print(e);
+        count++;
+             print(count);
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -213,11 +294,18 @@ class _SignInState extends State<SignIn> {
                     FlatButton(
                         child: const Text('OK'),
                         onPressed: () {
-                          Navigator.pop(context);
+                      setState(() {
+                       Navigator.pop(context);
+                          });
                         }),
                   ],
                 ));
       }
     }
   }
+}
+
+String generateRandomString(int len) {
+  var r = Random();
+  return String.fromCharCodes(List.generate(len, (index) => r.nextInt(33) + 89));
 }
