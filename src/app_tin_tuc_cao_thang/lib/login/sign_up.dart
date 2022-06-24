@@ -90,6 +90,9 @@ class _SignUpState extends State<SignUp> {
                         padding: const EdgeInsets.all(5.0),
                         child: TextFormField(
                           controller: _passController,
+                          obscureText: true,
+                        enableSuggestions: false,
+                       autocorrect: false,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
@@ -109,6 +112,9 @@ class _SignUpState extends State<SignUp> {
                         padding: const EdgeInsets.all(5.0),
                         child: TextFormField(
                           controller: _confirmController,
+                           obscureText: true,
+                           enableSuggestions: false,
+                           autocorrect: false,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),

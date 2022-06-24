@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:app_tin_tuc_cao_thang/login/sign_up.dart';
+import 'package:app_tin_tuc_cao_thang/account/reset_pass.dart';
 import 'dart:math';
 
 class SignIn extends StatefulWidget {
@@ -99,6 +100,9 @@ class _SignInState extends State<SignIn> {
                         padding: const EdgeInsets.all(5.0),
                         child: TextFormField(
                           controller: _passController,
+                          obscureText: true,
+                          enableSuggestions: false,
+                         autocorrect: false,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
@@ -204,6 +208,30 @@ class _SignInState extends State<SignIn> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 const SignUp()));
+                                  }),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                           
+                              CupertinoButton(
+                                  child: const Text('Quên mật khẩu?',
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 61, 97, 216),
+                                          fontSize: 20,
+                                          fontStyle: FontStyle.italic)),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ResetPassword()));
                                   }),
                             ],
                           ),
