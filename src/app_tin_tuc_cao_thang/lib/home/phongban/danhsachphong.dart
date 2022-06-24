@@ -1,3 +1,4 @@
+import 'package:app_tin_tuc_cao_thang/home/hocphi/hocphi.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/phongCTCT-HSSV.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/phongHCQT.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/phongdaotao.dart';
@@ -182,10 +183,10 @@ class _DepartmentsState extends State<Departments> {
 
                                       break;
                                     case 2:
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) => CKDL()));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => HocPhi()));
 
                                       break;
                                     case 3:
