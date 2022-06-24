@@ -1,5 +1,9 @@
 // ignore_for_file: avoid_unnecessary_containers, camel_case_types, prefer_const_constructors, sized_box_for_whitespace
 
+import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
+import 'package:app_tin_tuc_cao_thang/home/phongban/PhongCTCT-HSSV/lichphonghoc.dart';
+import 'package:app_tin_tuc_cao_thang/home/phongban/PhongCTCT-HSSV/lichtiepsv.dart';
+import 'package:app_tin_tuc_cao_thang/home/phongban/PhongCTCT-HSSV/shcn.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -91,28 +95,126 @@ class _PhongCTCT_HSSVState extends State<PhongCTCT_HSSV> {
         ],
       ),
       backgroundColor: Colors.grey.shade200,
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                Container(
-                  height: 200,
-                  child: Image.asset(
-                    'images/TuyenSinh.jpg',
-                    height: 200,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                _buildDR(),
-                SoTaySinhVien(),
-                SizedBox(height: 15),
-                TinTuc(),
-                _buildDR(),
-                LienHe()
-              ],
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            NutBam(),
+            _buildDR(),
+            SoTaySinhVien(),
+            SizedBox(height: 15),
+            const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                'Tin tức',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.redAccent),
+              ),
             ),
+            TinTuc(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class NutBam extends StatelessWidget {
+  const NutBam({Key? key}) : super(key: key);
+
+  _NutNho(String label) {
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  blurRadius: 7,
+                  offset: const Offset(0, 5))
+            ]),
+        width: 75,
+        height: 100,
+        child: FlatButton(
+            child: Text(label,
+                style: TextStyle(color: Colors.black, fontSize: 12)),
+            onPressed: () {}));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 75,
+                  height: 100,
+                  child: FlatButton(
+                      child: Text('SHCN',
+                          style: TextStyle(color: Colors.black, fontSize: 12)),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => SHCN()));
+                      })),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 75,
+                  height: 100,
+                  child: FlatButton(
+                      child: Text('Lịch phòng học',
+                          style: TextStyle(color: Colors.black, fontSize: 12)),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LichPhongHoc()));
+                      })),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 75,
+                  height: 100,
+                  child: FlatButton(
+                      child: Text('Lịch tiếp SV',
+                          style: TextStyle(color: Colors.black, fontSize: 12)),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LichTiepSV()));
+                      })),
+              _NutNho('Thông báo khác'),
+            ],
           ),
         ],
       ),
@@ -169,119 +271,69 @@ class _TinTucState extends State<TinTuc> {
         .orderBy('time', descending: true)
         .snapshots();
 
-    return Container(
-      // decoration: BoxDecoration(
-      //   border: Border.all(color: Colors.grey, width: 2),
-      //   borderRadius: BorderRadius.circular(5),
-      // ),
-      height: 500,
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 10.0),
-              child: Text(
-                'Tin tức',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.redAccent),
-              ),
-            ),
-            Expanded(
-              child: StreamBuilder<QuerySnapshot>(
-                stream: posts,
-                builder: (
-                  BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot,
-                ) {
-                  if (snapshot.hasError) {
-                    return const Text('Something went wrong.');
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text('Loading');
-                  }
+    return Expanded(
+      child: StreamBuilder<QuerySnapshot>(
+        stream: posts,
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<QuerySnapshot> snapshot,
+        ) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong.');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Text('Loading');
+          }
 
-                  final data = snapshot.requireData;
+          final data = snapshot.requireData;
 
-                  return ListView.builder(
-                      itemCount: data.size,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    title: Text(
-                                        'Title: ${data.docs[index]['title']}'),
-                                    // subtitle: Padding(
-                                    //   padding: const EdgeInsets.only(top: 5, bottom: 5),
-                                    //   child: Text('${data.docs[index]['status']}',
-                                    //       style: const TextStyle(fontSize: 16)),
-                                    // ),
-                                    onTap: () {
-                                      print(data.docs[index].id);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChiTietBaiViet(
-                                                      idBaiViet:
-                                                          data.docs[index].id,
-                                                      title: data.docs[index]
-                                                          ['title'],
-                                                      like: data.docs[index]
-                                                          ['like'])));
-                                    },
-                                  ),
-                                  // Container(
-                                  //   decoration: BoxDecoration(
-                                  //       border: Border(
-                                  //           bottom: BorderSide(
-                                  //               color: Colors.grey.shade500,
-                                  //               width: 1))),
-                                  //   child: const Center(heightFactor: 1.5),
-                                  // ),
-                                ],
-                              ),
-                            ),
+          return ListView.builder(
+              itemCount: data.size,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text(data.docs[index]['title']),
+                            // subtitle: Padding(
+                            //   padding: const EdgeInsets.only(top: 5, bottom: 5),
+                            //   child: Text('${data.docs[index]['status']}',
+                            //       style: const TextStyle(fontSize: 16)),
+                            // ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => data.docs[index]
+                                                  ['link'] ==
+                                              ''
+                                          ? ChiTietBaiViet(
+                                              idBaiViet: data.docs[index].id,
+                                              title: data.docs[index]['title'],
+                                              like: data.docs[index]['like'],
+                                              content: data.docs[index]
+                                                  ['content'],
+                                              image: data.docs[index]['image'],
+                                            )
+                                          : PDFView(
+                                              url: data.docs[index]['link'])));
+                            },
                           ),
-                        );
-                      });
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class LienHe extends StatelessWidget {
-  const LienHe({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: const [
-          Text('Điện thoại: 028.38212360 (12)',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-          Text('Email: ctct.hssv@caothang.edu.vn',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-          Text('Website: ctct.caothang.edu.vn',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-        ],
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              });
+        },
       ),
     );
   }

@@ -11,8 +11,10 @@ class CauLacBo extends StatefulWidget {
 }
 
 class _CauLacBoState extends State<CauLacBo> {
-  final Stream<QuerySnapshot> caulacbo =
-      FirebaseFirestore.instance.collection('caulacbo').orderBy('time', descending: true).snapshots();
+  final Stream<QuerySnapshot> caulacbo = FirebaseFirestore.instance
+      .collection('caulacbo')
+      .orderBy('time', descending: true)
+      .snapshots();
 
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -20,7 +22,7 @@ class _CauLacBoState extends State<CauLacBo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -132,8 +134,7 @@ class _CauLacBoState extends State<CauLacBo> {
                                   Container(
                                     padding: EdgeInsets.all(5.0),
                                     alignment: Alignment.topLeft,
-                                    child:
-                                        Text(data.docs[index]['des']),
+                                    child: Text(data.docs[index]['des']),
                                   ),
                                   Container(
                                     padding: EdgeInsets.all(5.0),

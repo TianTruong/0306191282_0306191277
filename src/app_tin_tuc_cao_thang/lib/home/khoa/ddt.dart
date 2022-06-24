@@ -14,16 +14,18 @@ class DDT extends StatefulWidget {
 }
 
 class _DDTState extends State<DDT> {
-  final Stream<QuerySnapshot> ddt=
-      FirebaseFirestore.instance.collection('ddt').orderBy('time', descending: true).snapshots();
+  final Stream<QuerySnapshot> ddt = FirebaseFirestore.instance
+      .collection('ddt')
+      .orderBy('time', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
-  int i=0;
+  int i = 0;
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -107,13 +109,11 @@ class _DDTState extends State<DDT> {
                     'images/slider9.jpg',
                     height: 150,
                   ),
-                 Image.asset(
+                  Image.asset(
                     'images/slider10.jpg',
                     height: 150,
                     fit: BoxFit.fill,
                   ),
-               
-            
                 ],
               ),
               SmoothPageIndicator(
@@ -128,7 +128,6 @@ class _DDTState extends State<DDT> {
               ),
             ]),
           ),
-            
           Expanded(
             child: Center(
               child: Padding(
@@ -148,24 +147,21 @@ class _DDTState extends State<DDT> {
 
                     final data = snapshot.requireData;
 
-                   return ListView.builder(
-                 
+                    return ListView.builder(
                         itemCount: data.size,
                         itemBuilder: (context, index) {
                           return Card(
                             child: ListTile(
-                             leading:   Image.asset(
-                                      data.docs[index]['image'],
-                                      cacheHeight: 60,
-                                      cacheWidth: 40,
-                                    ),
-                            title: Text(data.docs[index]['title']),
-                            subtitle: Text(data.docs[index]['sub']),
-                          ),
+                              leading: Image.asset(
+                                data.docs[index]['image'],
+                                cacheHeight: 60,
+                                cacheWidth: 40,
+                              ),
+                              title: Text(data.docs[index]['title']),
+                              subtitle: Text(data.docs[index]['sub']),
+                            ),
                           );
-                          
                         });
-                  
                   },
                 ),
               ),

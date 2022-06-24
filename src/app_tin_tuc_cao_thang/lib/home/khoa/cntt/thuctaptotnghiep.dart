@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 class ThucTapTotNghiep extends StatefulWidget {
   const ThucTapTotNghiep({Key? key}) : super(key: key);
 
@@ -11,8 +12,10 @@ class ThucTapTotNghiep extends StatefulWidget {
 }
 
 class _ThucTapTotNghiepState extends State<ThucTapTotNghiep> {
-  final Stream<QuerySnapshot> tttn =
-      FirebaseFirestore.instance.collection('tttn').orderBy('number', descending: true).snapshots();
+  final Stream<QuerySnapshot> tttn = FirebaseFirestore.instance
+      .collection('tttn')
+      .orderBy('number', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -20,7 +23,7 @@ class _ThucTapTotNghiepState extends State<ThucTapTotNghiep> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -41,9 +44,7 @@ class _ThucTapTotNghiepState extends State<ThucTapTotNghiep> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -84,14 +85,14 @@ class _ThucTapTotNghiepState extends State<ThucTapTotNghiep> {
                       style: TextStyle(
                         color: Colors.red,
                       )))),
-                 SizedBox(
+          SizedBox(
             height: 200,
             child:
                 Stack(alignment: AlignmentDirectional.bottomCenter, children: [
               PageView(
                 controller: _controller,
                 children: <Widget>[
-                       Image.asset(
+                  Image.asset(
                     'images/slider14.jpg',
                     height: 150,
                     fit: BoxFit.fill,
@@ -123,16 +124,15 @@ class _ThucTapTotNghiepState extends State<ThucTapTotNghiep> {
               ),
             ]),
           ),
-            Container(
+          Container(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Padding(
                   padding: EdgeInsets.all(5),
-                   child: Text('MỐC THỜI GIAN THỰC TẬP KHOÁ 2019',
-                    style: TextStyle(fontSize: 16, color: Colors.black)),
-                  )
-            
+                  child: Text('MỐC THỜI GIAN THỰC TẬP KHOÁ 2019',
+                      style: TextStyle(fontSize: 16, color: Colors.black)),
+                )
               ],
             ),
           ),
@@ -155,16 +155,14 @@ class _ThucTapTotNghiepState extends State<ThucTapTotNghiep> {
 
                     final data = snapshot.requireData;
 
-                    return  ListView.builder(
+                    return ListView.builder(
                         itemCount: data.size,
                         itemBuilder: (context, index) {
                           return Card(
                             child: ListTile(
                               title: Text(data.docs[index]['title']),
                               subtitle: Text(data.docs[index]['sub']),
-                              onTap: (){
-                         
-                              },
+                              onTap: () {},
                             ),
                           );
                         });

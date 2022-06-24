@@ -1,5 +1,9 @@
 // ignore_for_file: avoid_unnecessary_containers, deprecated_member_use, prefer_const_constructors, non_constant_identifier_names, sized_box_for_whitespace
 
+import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
+import 'package:app_tin_tuc_cao_thang/home/phongban/PhongDaoTao/lichdaotao.dart';
+import 'package:app_tin_tuc_cao_thang/home/phongban/PhongDaoTao/lichthi.dart';
+import 'package:app_tin_tuc_cao_thang/home/phongban/PhongDaoTao/thoikhoabieu.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -91,30 +95,26 @@ class _PhongDaoTaoState extends State<PhongDaoTao> {
         ],
       ),
       backgroundColor: Colors.grey.shade200,
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                // Container(
-                //   height: 200,
-                //   child: Image.asset(
-                //     'images/TuyenSinh.jpg',
-                //     height: 200,
-                //     fit: BoxFit.fill,
-                //   ),
-                // ),
-                // _buildDR(),
-                NutBam(),
-                SizedBox(height: 15),
-                TinTuc(),
-                _buildDR(),
-                LienHe()
-              ],
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            NutBam(),
+            SizedBox(height: 15),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                'Tin tức phòng Đào tạo',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.redAccent),
+              ),
             ),
-          ),
-        ],
+            TinTuc(),
+          ],
+        ),
       ),
     );
   }
@@ -142,25 +142,6 @@ class NutBam extends StatelessWidget {
             onPressed: () {}));
   }
 
-  _NutLon(String label) {
-    return Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 7,
-                  offset: const Offset(0, 5))
-            ]),
-        width: 160,
-        height: 120,
-        child: FlatButton(
-            child: Text(label,
-                style: TextStyle(color: Colors.black, fontSize: 12)),
-            onPressed: () {}));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -169,18 +150,68 @@ class NutBam extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _NutNho('Thời khóa biểu'),
-              _NutNho('Lịch thi'),
-              _NutNho('Lịch đào tạo'),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 75,
+                  height: 100,
+                  child: FlatButton(
+                      child: Text('Thời khóa biểu',
+                          style: TextStyle(color: Colors.black, fontSize: 12)),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ThoiKhoaBieu()));
+                      })),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 75,
+                  height: 100,
+                  child: FlatButton(
+                      child: Text('Lịch thi',
+                          style: TextStyle(color: Colors.black, fontSize: 12)),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => LichThi()));
+                      })),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 75,
+                  height: 100,
+                  child: FlatButton(
+                      child: Text('Lịch đào tạo',
+                          style: TextStyle(color: Colors.black, fontSize: 12)),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LichDaoTao()));
+                      })),
               _NutNho('Chương trình đào tạo'),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _NutLon('Đăng ký học kỳ phụ hè 2021'),
-              _NutLon('Lịch phát bằng tốt nghiệp - Cấp bảng điểm'),
             ],
           ),
         ],
@@ -199,134 +230,81 @@ class TinTuc extends StatefulWidget {
 class _TinTucState extends State<TinTuc> {
   @override
   Widget build(BuildContext context) {
-    // final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
-    //     .collection('departments')
-    //     .doc(widget.idPhong)
-    //     .collection('posts')
-    //     .orderBy('time', descending: true)
-    //     .snapshots();
-
     final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
         .collection('posts')
         .where('type', isEqualTo: 'Đào tạo')
+        // .where('type', isEqualTo: 'Lịch đào tạo')
+        // .where('type', isEqualTo: 'Lịch thi')
+        // .where('type', isEqualTo: 'Thời khóa biểu')
         .orderBy('time', descending: true)
         .snapshots();
 
-    return Container(
-      // decoration: BoxDecoration(
-      //   border: Border.all(color: Colors.grey, width: 2),
-      //   borderRadius: BorderRadius.circular(5),
-      // ),
-      height: 400,
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 10.0),
-              child: Text(
-                'Tin tức',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.redAccent),
-              ),
-            ),
-            Expanded(
-              child: StreamBuilder<QuerySnapshot>(
-                stream: posts,
-                builder: (
-                  BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot,
-                ) {
-                  if (snapshot.hasError) {
-                    return const Text('Something went wrong.');
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text('Loading');
-                  }
+    return Expanded(
+      child: StreamBuilder<QuerySnapshot>(
+        stream: posts,
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<QuerySnapshot> snapshot,
+        ) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong.');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Text('Loading');
+          }
 
-                  final data = snapshot.requireData;
+          final data = snapshot.requireData;
 
-                  return ListView.builder(
-                      itemCount: data.size,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
+          return ListView.builder(
+              itemCount: data.size,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text(
+                              data.docs[index]['title'],
+                              // style: const TextStyle(fontSize: 20)
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    title: Text(
-                                      'Title: ${data.docs[index]['title']}',
-                                      // style: const TextStyle(fontSize: 20)
-                                    ),
-                                    // subtitle: Padding(
-                                    //   padding: const EdgeInsets.only(top: 5, bottom: 5),
-                                    //   child: Text('${data.docs[index]['status']}',
-                                    //       style: const TextStyle(fontSize: 16)),
-                                    // ),
-                                    onTap: () {
-                                      print(data.docs[index].id);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChiTietBaiViet(
-                                                      idBaiViet:
-                                                          data.docs[index].id,
-                                                      title: data.docs[index]
-                                                          ['title'],
-                                                      like: data.docs[index]
-                                                          ['like'])));
-                                    },
-                                  ),
-                                  // Container(
-                                  //   decoration: BoxDecoration(
-                                  //       border: Border(
-                                  //           bottom: BorderSide(
-                                  //               color: Colors.grey.shade500,
-                                  //               width: 1))),
-                                  //   child: const Center(heightFactor: 1.5),
-                                  // ),
-                                ],
-                              ),
-                            ),
+                            // subtitle: Padding(
+                            //   padding: const EdgeInsets.only(top: 5, bottom: 5),
+                            //   child: Text('${data.docs[index]['status']}',
+                            //       style: const TextStyle(fontSize: 16)),
+                            // ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => data.docs[index]
+                                                  ['link'] ==
+                                              ''
+                                          ? ChiTietBaiViet(
+                                              idBaiViet: data.docs[index].id,
+                                              title: data.docs[index]['title'],
+                                              like: data.docs[index]['like'],
+                                              content: data.docs[index]
+                                                  ['content'],
+                                              image: data.docs[index]['image'],
+                                            )
+                                          : PDFView(
+                                              url: data.docs[index]['link'])));
+                            },
                           ),
-                        );
-                      });
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class LienHe extends StatelessWidget {
-  const LienHe({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: const [
-          Text('Điện thoại: 028.38212360 (17)',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-          Text('Email: daotao@caothang.edu.vn',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-          Text('Website: daotao.caothang.edu.vn',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-        ],
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              });
+        },
       ),
     );
   }

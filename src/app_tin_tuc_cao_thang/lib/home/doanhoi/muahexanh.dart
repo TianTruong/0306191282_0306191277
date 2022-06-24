@@ -14,8 +14,10 @@ class MuaHeXanh extends StatefulWidget {
 }
 
 class _MuaHeXanhState extends State<MuaHeXanh> {
-  final Stream<QuerySnapshot> muahexanh =
-      FirebaseFirestore.instance.collection('muahexanh').orderBy('time', descending: true).snapshots();
+  final Stream<QuerySnapshot> muahexanh = FirebaseFirestore.instance
+      .collection('muahexanh')
+      .orderBy('time', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -23,7 +25,7 @@ class _MuaHeXanhState extends State<MuaHeXanh> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -189,7 +191,6 @@ class _MuaHeXanhState extends State<MuaHeXanh> {
               ),
             ),
           ),
-     
         ],
       ),
     );

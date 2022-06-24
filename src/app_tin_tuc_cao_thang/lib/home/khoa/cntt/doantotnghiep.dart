@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 class DoAnTotNghiep extends StatefulWidget {
   const DoAnTotNghiep({Key? key}) : super(key: key);
 
@@ -11,8 +12,10 @@ class DoAnTotNghiep extends StatefulWidget {
 }
 
 class _DoAnTotNghiepState extends State<DoAnTotNghiep> {
-  final Stream<QuerySnapshot> datn =
-      FirebaseFirestore.instance.collection('datn').orderBy('number', descending: true).snapshots();
+  final Stream<QuerySnapshot> datn = FirebaseFirestore.instance
+      .collection('datn')
+      .orderBy('number', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -20,7 +23,7 @@ class _DoAnTotNghiepState extends State<DoAnTotNghiep> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -41,9 +44,7 @@ class _DoAnTotNghiepState extends State<DoAnTotNghiep> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -84,14 +85,14 @@ class _DoAnTotNghiepState extends State<DoAnTotNghiep> {
                       style: TextStyle(
                         color: Colors.red,
                       )))),
-                 SizedBox(
+          SizedBox(
             height: 200,
             child:
                 Stack(alignment: AlignmentDirectional.bottomCenter, children: [
               PageView(
                 controller: _controller,
                 children: <Widget>[
-                       Image.asset(
+                  Image.asset(
                     'images/slider14.jpg',
                     height: 150,
                     fit: BoxFit.fill,
@@ -142,7 +143,7 @@ class _DoAnTotNghiepState extends State<DoAnTotNghiep> {
 
                     final data = snapshot.requireData;
 
-                    return  GridView.builder(
+                    return GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
                                 maxCrossAxisExtent: 400,
@@ -169,39 +170,31 @@ class _DoAnTotNghiepState extends State<DoAnTotNghiep> {
                                     alignment: Alignment.topLeft,
                                     child: Text(
                                       data.docs[index]['des1'],
-                                      style: TextStyle(
-                                                  fontSize: 12
-                                         ),
+                                      style: TextStyle(fontSize: 12),
                                     ),
                                   ),
-                                       Container(
+                                  Container(
                                     padding: EdgeInsets.all(5.0),
                                     alignment: Alignment.topLeft,
                                     child: Text(
                                       data.docs[index]['des2'],
-                                      style: TextStyle(
-                                                  fontSize: 12
-                                         ),
+                                      style: TextStyle(fontSize: 12),
                                     ),
                                   ),
-                                              Container(
+                                  Container(
                                     padding: EdgeInsets.all(5.0),
                                     alignment: Alignment.topLeft,
                                     child: Text(
                                       data.docs[index]['des3'],
-                                      style: TextStyle(
-                                                  fontSize: 12
-                                         ),
+                                      style: TextStyle(fontSize: 12),
                                     ),
                                   ),
-                                              Container(
+                                  Container(
                                     padding: EdgeInsets.all(5.0),
                                     alignment: Alignment.topLeft,
                                     child: Text(
                                       data.docs[index]['des4'],
-                                      style: TextStyle(
-                                         fontSize: 12
-                                         ),
+                                      style: TextStyle(fontSize: 12),
                                     ),
                                   ),
                                 ],

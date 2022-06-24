@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, file_names, non_constant_identifier_names
 
+import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,20 +17,20 @@ class PhongHCQT extends StatefulWidget {
 class _PhongHCQTState extends State<PhongHCQT> {
   final user = FirebaseAuth.instance.currentUser!;
 
+  _DuongKeNgang() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 10),
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border(
+                bottom: BorderSide(color: Colors.grey.shade500, width: 1))),
+        child: const Center(heightFactor: 1.5),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    _DuongKeNgang() {
-      return Padding(
-        padding: const EdgeInsets.only(top: 10, bottom: 10),
-        child: Container(
-          decoration: BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(color: Colors.grey.shade500, width: 1))),
-          child: const Center(heightFactor: 1.5),
-        ),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -91,28 +92,33 @@ class _PhongHCQTState extends State<PhongHCQT> {
         ],
       ),
       backgroundColor: Colors.grey.shade200,
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                Container(
-                  height: 200,
-                  child: Image.asset(
-                    'images/TuyenSinh.jpg',
-                    height: 200,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                _DuongKeNgang(),
-                TinTuc(),
-                _DuongKeNgang(),
-                const LienHe()
-              ],
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 200,
+              child: Image.asset(
+                'images/TuyenSinh.jpg',
+                height: 200,
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-        ],
+            _DuongKeNgang(),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                'Tin tức',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.redAccent),
+              ),
+            ),
+            TinTuc(),
+          ],
+        ),
       ),
     );
   }
@@ -133,119 +139,69 @@ class _TinTucState extends State<TinTuc> {
         .orderBy('time', descending: true)
         .snapshots();
 
-    return Container(
-      // decoration: BoxDecoration(
-      //   border: Border.all(color: Colors.grey, width: 2),
-      //   borderRadius: BorderRadius.circular(5),
-      // ),
-      height: 500,
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 10.0),
-              child: Text(
-                'Tin tức',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.redAccent),
-              ),
-            ),
-            Expanded(
-              child: StreamBuilder<QuerySnapshot>(
-                stream: posts,
-                builder: (
-                  BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot,
-                ) {
-                  if (snapshot.hasError) {
-                    return const Text('Something went wrong.');
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text('Loading');
-                  }
+    return Expanded(
+      child: StreamBuilder<QuerySnapshot>(
+        stream: posts,
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<QuerySnapshot> snapshot,
+        ) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong.');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Text('Loading');
+          }
 
-                  final data = snapshot.requireData;
+          final data = snapshot.requireData;
 
-                  return ListView.builder(
-                      itemCount: data.size,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    title: Text(
-                                        'Title: ${data.docs[index]['title']}'),
-                                    // subtitle: Padding(
-                                    //   padding: const EdgeInsets.only(top: 5, bottom: 5),
-                                    //   child: Text('${data.docs[index]['status']}',
-                                    //       style: const TextStyle(fontSize: 16)),
-                                    // ),
-                                    onTap: () {
-                                      print(data.docs[index].id);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChiTietBaiViet(
-                                                      idBaiViet:
-                                                          data.docs[index].id,
-                                                      title: data.docs[index]
-                                                          ['title'],
-                                                      like: data.docs[index]
-                                                          ['like'])));
-                                    },
-                                  ),
-                                  // Container(
-                                  //   decoration: BoxDecoration(
-                                  //       border: Border(
-                                  //           bottom: BorderSide(
-                                  //               color: Colors.grey.shade500,
-                                  //               width: 1))),
-                                  //   child: const Center(heightFactor: 1.5),
-                                  // ),
-                                ],
-                              ),
-                            ),
+          return ListView.builder(
+              itemCount: data.size,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text(data.docs[index]['title']),
+                            // subtitle: Padding(
+                            //   padding: const EdgeInsets.only(top: 5, bottom: 5),
+                            //   child: Text('${data.docs[index]['status']}',
+                            //       style: const TextStyle(fontSize: 16)),
+                            // ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => data.docs[index]
+                                                  ['link'] ==
+                                              ''
+                                          ? ChiTietBaiViet(
+                                              idBaiViet: data.docs[index].id,
+                                              title: data.docs[index]['title'],
+                                              like: data.docs[index]['like'],
+                                              content: data.docs[index]
+                                                  ['content'],
+                                              image: data.docs[index]['image'],
+                                            )
+                                          : PDFView(
+                                              url: data.docs[index]['link'])));
+                            },
                           ),
-                        );
-                      });
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class LienHe extends StatelessWidget {
-  const LienHe({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: const [
-          Text('Điện thoại: 028.38212360 (11)',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-          Text('Email: ktcaothang@caothang.edu.vn',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-          Text('Website: hcqt.caothang.edu.vn',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-        ],
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              });
+        },
       ),
     );
   }

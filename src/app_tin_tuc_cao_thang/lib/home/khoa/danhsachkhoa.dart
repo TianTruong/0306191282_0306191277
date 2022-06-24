@@ -31,7 +31,7 @@ class _ChonKhoaState extends State<ChonKhoa> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -131,14 +131,14 @@ class _ChonKhoaState extends State<ChonKhoa> {
                             child: InkWell(
                                 child: Container(
                                   decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.grey.withOpacity(0.5),
-                                              blurRadius: 7,
-                                              offset: const Offset(0, 5))
-                                        ]),
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            blurRadius: 7,
+                                            offset: const Offset(0, 5))
+                                      ]),
                                   child: Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: ListTile(
@@ -146,38 +146,39 @@ class _ChonKhoaState extends State<ChonKhoa> {
                                           style: const TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       subtitle: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.only(top: 5),
-                                                child: Text(
-                                                    'Điện thoại: ${data.docs[index]['phone']}'),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.only(top: 5),
-                                                child: Text(
-                                                    'Email: ${data.docs[index]['email']}'),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.only(top: 5),
-                                                child: Text(
-                                                    'Website: ${data.docs[index]['website']}'),
-                                              ),
-                                            ],
-                                          ),
+                                        padding:
+                                            const EdgeInsets.only(left: 10.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Text(
+                                                  'Điện thoại: ${data.docs[index]['phone']}'),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Text(
+                                                  'Email: ${data.docs[index]['email']}'),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Text(
+                                                  'Website: ${data.docs[index]['website']}'),
+                                            ),
+                                          ],
                                         ),
+                                      ),
                                     ),
                                   ),
                                 ),
                                 onTap: () {
-                                  switch (int.parse(data.docs[index]['number'])) {
+                                  switch (
+                                      int.parse(data.docs[index]['number'])) {
                                     case 1:
                                       Navigator.push(
                                           context,
@@ -203,7 +204,8 @@ class _ChonKhoaState extends State<ChonKhoa> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => NhietLanh()));
+                                              builder: (context) =>
+                                                  NhietLanh()));
 
                                       break;
                                     case 5:

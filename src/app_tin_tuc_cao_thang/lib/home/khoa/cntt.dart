@@ -7,6 +7,7 @@ import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/thuctaptotnghiep.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/doantotnghiep.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/lichthilai.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 class CNTT extends StatefulWidget {
   const CNTT({Key? key}) : super(key: key);
 
@@ -15,8 +16,10 @@ class CNTT extends StatefulWidget {
 }
 
 class _CNTTState extends State<CNTT> {
-  final Stream<QuerySnapshot> cntt =
-      FirebaseFirestore.instance.collection('cntt').orderBy('number', descending: true).snapshots();
+  final Stream<QuerySnapshot> cntt = FirebaseFirestore.instance
+      .collection('cntt')
+      .orderBy('number', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -24,7 +27,7 @@ class _CNTTState extends State<CNTT> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -92,14 +95,14 @@ class _CNTTState extends State<CNTT> {
                       style: TextStyle(
                         color: Colors.red,
                       )))),
-                 SizedBox(
+          SizedBox(
             height: 200,
             child:
                 Stack(alignment: AlignmentDirectional.bottomCenter, children: [
               PageView(
                 controller: _controller,
                 children: <Widget>[
-                       Image.asset(
+                  Image.asset(
                     'images/slider8.jpg',
                     height: 150,
                     fit: BoxFit.fill,
@@ -150,14 +153,14 @@ class _CNTTState extends State<CNTT> {
 
                     final data = snapshot.requireData;
 
-                    return  ListView.builder(
+                    return ListView.builder(
                         itemCount: data.size,
                         itemBuilder: (context, index) {
                           return Card(
                             child: ListTile(
                               title: Text(data.docs[index]['title']),
-                              onTap: (){
-                                  switch (int.parse(data.docs[index]['number'])) {
+                              onTap: () {
+                                switch (int.parse(data.docs[index]['number'])) {
                                   case 1:
                                     Navigator.push(
                                         context,
@@ -169,24 +172,26 @@ class _CNTTState extends State<CNTT> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => LichThiLai()));
+                                            builder: (context) =>
+                                                LichThiLai()));
 
                                     break;
                                   case 3:
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => ThucTapTotNghiep()));
+                                            builder: (context) =>
+                                                ThucTapTotNghiep()));
 
                                     break;
                                   case 4:
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => DoAnTotNghiep()));
+                                            builder: (context) =>
+                                                DoAnTotNghiep()));
 
                                     break;
-                                
                                 }
                               },
                             ),
