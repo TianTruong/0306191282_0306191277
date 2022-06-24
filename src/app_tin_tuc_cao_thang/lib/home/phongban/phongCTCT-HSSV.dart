@@ -1,5 +1,8 @@
 // ignore_for_file: avoid_unnecessary_containers, camel_case_types, prefer_const_constructors, sized_box_for_whitespace
 
+import 'package:app_tin_tuc_cao_thang/home/phongban/PhongCTCT-HSSV/lichphonghoc.dart';
+import 'package:app_tin_tuc_cao_thang/home/phongban/PhongCTCT-HSSV/lichtiepsv.dart';
+import 'package:app_tin_tuc_cao_thang/home/phongban/PhongCTCT-HSSV/shcn.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -97,14 +100,7 @@ class _PhongCTCT_HSSVState extends State<PhongCTCT_HSSV> {
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
-                Container(
-                  height: 200,
-                  child: Image.asset(
-                    'images/TuyenSinh.jpg',
-                    height: 200,
-                    fit: BoxFit.fill,
-                  ),
-                ),
+                NutBam(),
                 _buildDR(),
                 SoTaySinhVien(),
                 SizedBox(height: 15),
@@ -113,6 +109,106 @@ class _PhongCTCT_HSSVState extends State<PhongCTCT_HSSV> {
                 LienHe()
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class NutBam extends StatelessWidget {
+  const NutBam({Key? key}) : super(key: key);
+
+  _NutNho(String label) {
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  blurRadius: 7,
+                  offset: const Offset(0, 5))
+            ]),
+        width: 75,
+        height: 100,
+        child: FlatButton(
+            child: Text(label,
+                style: TextStyle(color: Colors.black, fontSize: 12)),
+            onPressed: () {}));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 75,
+                  height: 100,
+                  child: FlatButton(
+                      child: Text('SHCN',
+                          style: TextStyle(color: Colors.black, fontSize: 12)),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SHCN()));
+                      })),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 75,
+                  height: 100,
+                  child: FlatButton(
+                      child: Text('Lịch phòng học',
+                          style: TextStyle(color: Colors.black, fontSize: 12)),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => LichPhongHoc()));
+                      })),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 7,
+                            offset: const Offset(0, 5))
+                      ]),
+                  width: 75,
+                  height: 100,
+                  child: FlatButton(
+                      child: Text('Lịch tiếp SV',
+                          style: TextStyle(color: Colors.black, fontSize: 12)),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LichTiepSV()));
+                      })),
+              _NutNho('Thông báo khác'),
+            ],
           ),
         ],
       ),
