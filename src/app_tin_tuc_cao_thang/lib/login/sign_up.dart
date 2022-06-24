@@ -91,6 +91,9 @@ class _SignUpState extends State<SignUp> {
                         child: TextFormField(
                           obscureText: true,
                           controller: _passController,
+                          obscureText: true,
+                        enableSuggestions: false,
+                       autocorrect: false,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
@@ -111,6 +114,9 @@ class _SignUpState extends State<SignUp> {
                         child: TextFormField(
                           obscureText: true,
                           controller: _confirmController,
+                           obscureText: true,
+                           enableSuggestions: false,
+                           autocorrect: false,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
