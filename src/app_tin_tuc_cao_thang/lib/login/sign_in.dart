@@ -101,7 +101,6 @@ class _SignInState extends State<SignIn> {
                         child: TextFormField(
                           obscureText: true,
                           controller: _passController,
-                          obscureText: true,
                           enableSuggestions: false,
                          autocorrect: false,
                           decoration: InputDecoration(
