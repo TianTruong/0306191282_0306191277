@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/caulacbo.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/thuctaptotnghiep.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/doantotnghiep.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class CNTT extends StatefulWidget {
   const CNTT({Key? key}) : super(key: key);
@@ -181,7 +182,7 @@ class _CNTTState extends State<CNTT> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => CauLacBo()));
+                                            builder: (context) => DoAnTotNghiep()));
 
                                     break;
                                 
