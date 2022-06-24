@@ -12,9 +12,11 @@ class ChiTietBaiViet extends StatefulWidget {
       {Key? key,
       required this.idBaiViet,
       required this.title,
+      required this.content,
+      required this.image,
       required this.like})
       : super(key: key);
-  final String idBaiViet, title;
+  final String idBaiViet, title, content, image;
   final int like;
 
   @override
@@ -99,6 +101,8 @@ class _ChiTietBaiVietState extends State<ChiTietBaiViet> {
               padding: const EdgeInsets.all(10.0),
               child: BaiViet(
                 title: widget.title,
+                content: widget.content,
+                image: widget.image,
               )),
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(primary: Colors.grey.shade300),
@@ -139,8 +143,13 @@ class _ChiTietBaiVietState extends State<ChiTietBaiViet> {
 }
 
 class BaiViet extends StatefulWidget {
-  const BaiViet({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const BaiViet(
+      {Key? key,
+      required this.title,
+      required this.content,
+      required this.image})
+      : super(key: key);
+  final String title, content, image;
 
   @override
   State<BaiViet> createState() => _BaiVietState();
@@ -149,44 +158,38 @@ class BaiViet extends StatefulWidget {
 class _BaiVietState extends State<BaiViet> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 2),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      height: 600,
-      child: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Center(
-              child: Text(
-                widget.title,
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.redAccent),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Text(
+            widget.title,
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.redAccent),
+          ),
+        ),
+        widget.content == ''
+            ? Container()
+            : Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  widget.content,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+                ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Text(
-              'Nội dung bài viết: Flutter là mobile UI framework của Google để tạo ra các giao diện chất lượng cao trên iOS và Android trong khoảng thời gian ngắn. Flutter hoạt động với những code sẵn có được sử dụng bởi các lập trình viên, các tổ chức.',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Image.asset(
-              'images/LogoChinh.png',
-              cacheHeight: 150,
-              cacheWidth: 150,
-              fit: BoxFit.contain,
-            ),
-          )
-        ],
-      ),
+        widget.image == ''
+            ? Container()
+            : Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Image.network(
+                  widget.image,
+                  fit: BoxFit.cover,
+                ),
+              )
+      ],
     );
   }
 }
