@@ -1,3 +1,4 @@
+import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -192,12 +193,34 @@ class _SliderState extends State<Slider> {
                 // carouselController: _controller,
                 itemCount: 5,
                 itemBuilder: (context, index, readIndex) {
-                  // final image_path = data.docs[index].avt;
-                  return Text(data.docs[index]['title']);
+                  return Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          height: 200,
+                          width: double.infinity,
+                          child: Image.asset('images/LogoChinh.png')),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(0.7),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20)),
+                        ),
+                        height: 65,
+                        child: Center(
+                          child: Text(data.docs[index]['title']),
+                        ),
+                      ),
+                    ],
+                  );
                 },
                 options: CarouselOptions(
                   initialPage: 0,
-                  // height: 250,
                   autoPlay: true,
                   viewportFraction: 1,
                   enableInfiniteScroll: false,
@@ -207,8 +230,6 @@ class _SliderState extends State<Slider> {
                   onPageChanged: (index, reason) {
                     setState(() {
                       indexPost = index;
-                      // print(index);
-                      // print(i);
                     });
                   },
                 ),
@@ -217,10 +238,15 @@ class _SliderState extends State<Slider> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ChiTietBaiViet(
-                            idBaiViet: data.docs[indexPost].id,
-                            title: data.docs[indexPost]['title'],
-                            like: data.docs[indexPost]['like'])));
+                        builder: (context) => data.docs[indexPost]['link'] == ''
+                            ? ChiTietBaiViet(
+                                idBaiViet: data.docs[indexPost].id,
+                                title: data.docs[indexPost]['title'],
+                                like: data.docs[indexPost]['like'],
+                                content: data.docs[indexPost]['content'],
+                                image: data.docs[indexPost]['image'],
+                              )
+                            : PDFView(url: data.docs[indexPost]['link'])));
               },
             );
           },
@@ -287,10 +313,19 @@ class _TinState extends State<Tin> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ChiTietBaiViet(
-                                          idBaiViet: data.docs[index].id,
-                                          title: data.docs[index]['title'],
-                                          like: data.docs[index]['like'])));
+                                      builder: (context) => data.docs[index]
+                                                  ['link'] ==
+                                              ''
+                                          ? ChiTietBaiViet(
+                                              idBaiViet: data.docs[index].id,
+                                              title: data.docs[index]['title'],
+                                              like: data.docs[index]['like'],
+                                              content: data.docs[index]
+                                                  ['content'],
+                                              image: data.docs[index]['image'],
+                                            )
+                                          : PDFView(
+                                              url: data.docs[index]['link'])));
                             },
                           ),
                         ),

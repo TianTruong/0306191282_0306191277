@@ -2,6 +2,7 @@
 
 import 'package:app_tin_tuc_cao_thang/home/doanhoi/doanhoi.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/danhsachkhoa.dart';
+import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/danhsachphong.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
@@ -268,7 +269,7 @@ class BuildButton extends StatelessWidget {
                             child: Icon(Icons.flag_outlined,
                                 color: Colors.lightBlue[700]),
                           ),
-                             onPressed: () {
+                          onPressed: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -280,7 +281,6 @@ class BuildButton extends StatelessWidget {
                 ],
               ),
             ),
-          
           ],
         ));
   }
@@ -296,6 +296,7 @@ class Slider extends StatefulWidget {
 class _SliderState extends State<Slider> {
   final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
       .collection('posts')
+      .where('type', isEqualTo: 'intro')
       .orderBy('like', descending: true)
       .snapshots();
 
@@ -340,15 +341,7 @@ class _SliderState extends State<Slider> {
                           ),
                           height: 200,
                           width: double.infinity,
-                          child: data.docs[index]['image'] == ''
-                              ? Image.asset(
-                                  'images/LogoChinh.png'
-                                )
-                              : Image.network(
-                                  data.docs[index]['image'],
-                                  fit: BoxFit.fill,
-                                )),
-                      // boder chứa các widget con.
+                          child: Image.asset('images/LogoChinh.png')),
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.grey.withOpacity(0.7),
@@ -383,10 +376,15 @@ class _SliderState extends State<Slider> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ChiTietBaiViet(
-                            idBaiViet: data.docs[indexPost].id,
-                            title: data.docs[indexPost]['title'],
-                            like: data.docs[indexPost]['like'])));
+                        builder: (context) => data.docs[indexPost]['link'] == ''
+                            ? ChiTietBaiViet(
+                                idBaiViet: data.docs[indexPost].id,
+                                title: data.docs[indexPost]['title'],
+                                like: data.docs[indexPost]['like'],
+                                content: data.docs[indexPost]['content'],
+                                image: data.docs[indexPost]['image'],
+                              )
+                            : PDFView(url: data.docs[indexPost]['link'])));
               },
             );
           },
@@ -459,10 +457,19 @@ class _ListPostState extends State<ListPost> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ChiTietBaiViet(
-                                          idBaiViet: data.docs[index].id,
-                                          title: data.docs[index]['title'],
-                                          like: data.docs[index]['like'])));
+                                      builder: (context) => data.docs[index]
+                                                  ['link'] ==
+                                              ''
+                                          ? ChiTietBaiViet(
+                                              idBaiViet: data.docs[index].id,
+                                              title: data.docs[index]['title'],
+                                              like: data.docs[index]['like'],
+                                              content: data.docs[index]
+                                                  ['content'],
+                                              image: data.docs[index]['image'],
+                                            )
+                                          : PDFView(
+                                              url: data.docs[index]['link'])));
                             },
                           ),
                         ),
