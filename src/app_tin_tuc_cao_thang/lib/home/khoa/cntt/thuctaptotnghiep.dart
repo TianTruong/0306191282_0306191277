@@ -92,21 +92,21 @@ class _ThucTapTotNghiepState extends State<ThucTapTotNghiep> {
                 controller: _controller,
                 children: <Widget>[
                        Image.asset(
-                    'images/slider8.jpg',
+                    'images/slider14.jpg',
                     height: 150,
                     fit: BoxFit.fill,
                   ),
                   Image.asset(
-                    'images/slider9.jpg',
+                    'images/slider15.png',
                     height: 150,
                   ),
                   Image.asset(
-                    'images/slider7.png',
+                    'images/slider16.png',
                     height: 150,
                     fit: BoxFit.fill,
                   ),
                   Image.asset(
-                    'images/slider4.jpg',
+                    'images/slider17.jpg',
                     height: 150,
                   ),
                 ],
