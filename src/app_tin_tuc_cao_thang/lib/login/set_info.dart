@@ -19,7 +19,6 @@ class SetInfor extends StatefulWidget {
 class _SetInforState extends State<SetInfor> {
   var _nameController = TextEditingController();
   var _mssvController = TextEditingController();
-  var _sexController = TextEditingController();
   bool check = false;
   late String avatar = '';
   String sex = 'Nam';

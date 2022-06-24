@@ -13,9 +13,9 @@ class BinhLuan extends StatefulWidget {
 }
 
 class _BinhLuanState extends State<BinhLuan> {
-  CollectionReference comment =
-      FirebaseFirestore.instance.collection('departments');
-  var commentDocId;
+  // CollectionReference comment =
+  //     FirebaseFirestore.instance.collection('departments');
+  // var commentDocId;
 
   @override
   void initState() {
@@ -87,48 +87,44 @@ class _BinhLuanState extends State<BinhLuan> {
         ],
       ),
       backgroundColor: Colors.grey.shade200,
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 10.0),
-                    child: Text(
-                      'Bình luận',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.redAccent),
-                    ),
-                  ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 10.0),
+                child: Text(
+                  'Bình luận',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.redAccent),
                 ),
-                Tin(
-                  idBaiViet: widget.idBaiViet,
-                ),
-                VietBinhLuan(
-                  idBaiViet: widget.idBaiViet,
-                )
-              ],
+              ),
             ),
-          ),
-        ],
+            ChiTietBinhLuan(
+              idBaiViet: widget.idBaiViet,
+            ),
+            VietBinhLuan(
+              idBaiViet: widget.idBaiViet,
+            )
+          ],
+        ),
       ),
     );
   }
 }
 
-class Tin extends StatefulWidget {
-  const Tin({Key? key, required this.idBaiViet}) : super(key: key);
+class ChiTietBinhLuan extends StatefulWidget {
+  const ChiTietBinhLuan({Key? key, required this.idBaiViet}) : super(key: key);
   final String idBaiViet;
   @override
-  State<Tin> createState() => _TinState();
+  State<ChiTietBinhLuan> createState() => _ChiTietBinhLuanState();
 }
 
-class _TinState extends State<Tin> {
+class _ChiTietBinhLuanState extends State<ChiTietBinhLuan> {
   final Stream<QuerySnapshot> posts =
       FirebaseFirestore.instance.collection('posts').snapshots();
 
@@ -138,15 +134,15 @@ class _TinState extends State<Tin> {
         .collection('posts')
         .doc(widget.idBaiViet)
         .collection('comments')
-        .orderBy('time', descending: true)
+        .orderBy('time', descending: false)
         .snapshots();
 
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 2),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      height: 600,
+    return Expanded(
+      // decoration: BoxDecoration(
+      //   border: Border.all(color: Colors.grey, width: 2),
+      //   borderRadius: BorderRadius.circular(5),
+      // ),
+      // height: 600,
       child: StreamBuilder<QuerySnapshot>(
         stream: commets,
         builder: (
@@ -244,46 +240,6 @@ class _VietBinhLuanState extends State<VietBinhLuan> {
               ),
             ),
           ),
-          // Nút chọn hình ảnh
-          IconButton(
-              color: Colors.blueAccent,
-              icon: const Icon(
-                Icons.image,
-                size: 35,
-              ),
-              onPressed: () => {
-                    showModalBottomSheet(
-                        context: context,
-                        builder: (context) => Container(
-                            height: 150,
-                            child: Column(children: [
-                              ListTile(
-                                leading: const Icon(Icons.camera_alt),
-                                title: Text('Camera'),
-                                onTap: () {
-                                  // Navigator.of(context).pop();
-                                  // sendBloc.add(SendImageEvent(
-                                  //     widget.chatDocId,
-                                  //     widget.friendUid,
-                                  //     widget.friendName,
-                                  //     ImageSource.camera));
-                                },
-                              ),
-                              ListTile(
-                                leading: const Icon(Icons.image),
-                                title: Text('Gallery'),
-                                onTap: () {
-                                  // Navigator.of(context).pop();
-                                  // sendBloc.add(SendImageEvent(
-                                  //     widget.chatDocId,
-                                  //     widget.friendUid,
-                                  //     widget.friendName,
-                                  //     ImageSource.gallery));
-                                },
-                              )
-                            ])))
-                  }),
-          // Nút gửi tin nhắn
           IconButton(
               color: Colors.blueAccent,
               icon: const Icon(

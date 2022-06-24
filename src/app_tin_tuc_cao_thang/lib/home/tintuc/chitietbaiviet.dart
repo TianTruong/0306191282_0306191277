@@ -104,38 +104,44 @@ class _ChiTietBaiVietState extends State<ChiTietBaiViet> {
                 content: widget.content,
                 image: widget.image,
               )),
-          ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(primary: Colors.grey.shade300),
-            onPressed: () {
-              liked ? like = like - 1 : like = like + 1;
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(primary: Colors.grey.shade300),
+                onPressed: () {
+                  liked ? like = like - 1 : like = like + 1;
 
-              posts.update({
-                'like': like,
-              });
+                  posts.update({
+                    'like': like,
+                  });
 
-              setState(() {
-                liked ? liked = false : liked = true;
-              });
-            },
-            icon: liked
-                ? const Icon(
-                    Icons.thumb_up_outlined,
-                    size: 25,
-                    color: Colors.blue,
-                  )
-                : const Icon(Icons.thumb_up_outlined,
-                    size: 25, color: Colors.black),
-            label: liked
-                ? Text('${like} Đã thích',
-                    style: TextStyle(fontSize: 15, color: Colors.blue))
-                : Text('${like} Thích',
-                    style: TextStyle(fontSize: 15, color: Colors.black)),
-          ),
-          Padding(
+                  setState(() {
+                    liked ? liked = false : liked = true;
+                  });
+                },
+                icon: liked
+                    ? const Icon(
+                        Icons.thumb_up_outlined,
+                        size: 25,
+                        color: Colors.blue,
+                      )
+                    : const Icon(Icons.thumb_up_outlined,
+                        size: 25, color: Colors.black),
+                label: liked
+                    ? Text('Đã thích',
+                        style: TextStyle(fontSize: 15, color: Colors.blue))
+                    : Text('Thích',
+                        style: TextStyle(fontSize: 15, color: Colors.black)),
+              ),
+              Padding(
               padding: const EdgeInsets.all(10.0),
               child: NutBinhLuan(
                 idBaiViet: widget.idBaiViet,
               )),
+            ],
+          ),
+          
         ],
       ),
     );
