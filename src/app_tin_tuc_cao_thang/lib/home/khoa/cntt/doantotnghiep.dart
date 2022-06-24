@@ -2,21 +2,17 @@ import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/caulacbo.dart';
-import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/thuctaptotnghiep.dart';
-import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/doantotnghiep.dart';
-import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/lichthilai.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-class CNTT extends StatefulWidget {
-  const CNTT({Key? key}) : super(key: key);
+class DoAnTotNghiep extends StatefulWidget {
+  const DoAnTotNghiep({Key? key}) : super(key: key);
 
   @override
-  State<CNTT> createState() => _CNTTState();
+  State<DoAnTotNghiep> createState() => _DoAnTotNghiepState();
 }
 
-class _CNTTState extends State<CNTT> {
-  final Stream<QuerySnapshot> cntt =
-      FirebaseFirestore.instance.collection('cntt').orderBy('number', descending: true).snapshots();
+class _DoAnTotNghiepState extends State<DoAnTotNghiep> {
+  final Stream<QuerySnapshot> datn =
+      FirebaseFirestore.instance.collection('datn').orderBy('number', descending: true).snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -46,11 +42,7 @@ class _CNTTState extends State<CNTT> {
                         color: Colors.black,
                       ),
                       onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
+                
                       })),
               SizedBox(
                 width: 10,
@@ -100,21 +92,21 @@ class _CNTTState extends State<CNTT> {
                 controller: _controller,
                 children: <Widget>[
                        Image.asset(
-                    'images/slider8.jpg',
+                    'images/slider14.jpg',
                     height: 150,
                     fit: BoxFit.fill,
                   ),
                   Image.asset(
-                    'images/slider9.jpg',
+                    'images/slider15.png',
                     height: 150,
                   ),
                   Image.asset(
-                    'images/slider7.png',
+                    'images/slider16.png',
                     height: 150,
                     fit: BoxFit.fill,
                   ),
                   Image.asset(
-                    'images/slider4.jpg',
+                    'images/slider17.jpg',
                     height: 150,
                   ),
                 ],
@@ -136,7 +128,7 @@ class _CNTTState extends State<CNTT> {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: cntt,
+                  stream: datn,
                   builder: (
                     BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot,
@@ -150,45 +142,74 @@ class _CNTTState extends State<CNTT> {
 
                     final data = snapshot.requireData;
 
-                    return  ListView.builder(
+                    return  GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 400,
+                                childAspectRatio: 3 / 2,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20),
                         itemCount: data.size,
                         itemBuilder: (context, index) {
-                          return Card(
-                            child: ListTile(
-                              title: Text(data.docs[index]['title']),
-                              onTap: (){
-                                  switch (int.parse(data.docs[index]['number'])) {
-                                  case 1:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => CauLacBo()));
-
-                                    break;
-                                  case 2:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => LichThiLai()));
-
-                                    break;
-                                  case 3:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ThucTapTotNghiep()));
-
-                                    break;
-                                  case 4:
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => DoAnTotNghiep()));
-
-                                    break;
-                                
-                                }
-                              },
+                          return InkWell(
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['title'],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['des1'],
+                                      style: TextStyle(
+                                                  fontSize: 12
+                                         ),
+                                    ),
+                                  ),
+                                       Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['des2'],
+                                      style: TextStyle(
+                                                  fontSize: 12
+                                         ),
+                                    ),
+                                  ),
+                                              Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['des3'],
+                                      style: TextStyle(
+                                                  fontSize: 12
+                                         ),
+                                    ),
+                                  ),
+                                              Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['des4'],
+                                      style: TextStyle(
+                                         fontSize: 12
+                                         ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                  // color: Colors.amber,
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15)),
                             ),
                           );
                         });
@@ -204,7 +225,7 @@ class _CNTTState extends State<CNTT> {
                     style: TextStyle(fontSize: 16, color: Colors.black)),
                 Text('Email: nvdzung@caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Website: cntt.caothang.edu.vn',
+                Text('Website: DoAnTotNghiep.caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
               ],
             ),
