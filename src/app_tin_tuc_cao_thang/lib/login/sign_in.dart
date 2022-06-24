@@ -104,6 +104,7 @@ class _SignInState extends State<SignIn> {
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: TextFormField(
+                                obscureText: true,
                                 controller: _passController,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -179,7 +180,6 @@ class _SignInState extends State<SignIn> {
           )),
     );
   }
-
 
   Future CheckSignIn() async {
     if (_gmailController.text == '' ||

@@ -52,6 +52,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextFormField(
+                        obscureText: true,
                         controller: _passoldController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -71,6 +72,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextFormField(
+                        obscureText: true,
                         controller: _passController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -90,6 +92,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextFormField(
+                        obscureText: true,
                         controller: _confirmController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
