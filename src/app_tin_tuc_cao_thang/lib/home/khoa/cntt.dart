@@ -2,6 +2,11 @@ import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/caulacbo.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/thuctaptotnghiep.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/doantotnghiep.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/lichthilai.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CNTT extends StatefulWidget {
   const CNTT({Key? key}) : super(key: key);
@@ -11,16 +16,18 @@ class CNTT extends StatefulWidget {
 }
 
 class _CNTTState extends State<CNTT> {
-  final Stream<QuerySnapshot> cntt =
-      FirebaseFirestore.instance.collection('cntt').orderBy('time', descending: true).snapshots();
-
+  final Stream<QuerySnapshot> cntt = FirebaseFirestore.instance
+      .collection('cntt')
+      .orderBy('number', descending: true)
+      .snapshots();
+  final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -88,6 +95,45 @@ class _CNTTState extends State<CNTT> {
                       style: TextStyle(
                         color: Colors.red,
                       )))),
+          SizedBox(
+            height: 200,
+            child:
+                Stack(alignment: AlignmentDirectional.bottomCenter, children: [
+              PageView(
+                controller: _controller,
+                children: <Widget>[
+                  Image.asset(
+                    'images/slider8.jpg',
+                    height: 150,
+                    fit: BoxFit.fill,
+                  ),
+                  Image.asset(
+                    'images/slider9.jpg',
+                    height: 150,
+                  ),
+                  Image.asset(
+                    'images/slider7.png',
+                    height: 150,
+                    fit: BoxFit.fill,
+                  ),
+                  Image.asset(
+                    'images/slider4.jpg',
+                    height: 150,
+                  ),
+                ],
+              ),
+              SmoothPageIndicator(
+                controller: _controller,
+                count: 4,
+                effect: JumpingDotEffect(
+                  activeDotColor: Colors.grey,
+                  dotColor: Colors.grey.shade300,
+                  dotHeight: 10,
+                  dotWidth: 10,
+                ),
+              ),
+            ]),
+          ),
           Expanded(
             child: Center(
               child: Padding(
@@ -107,48 +153,47 @@ class _CNTTState extends State<CNTT> {
 
                     final data = snapshot.requireData;
 
-                    return GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 400,
-                                childAspectRatio: 3 / 2,
-                                crossAxisSpacing: 20,
-                                mainAxisSpacing: 20),
+                    return ListView.builder(
                         itemCount: data.size,
                         itemBuilder: (context, index) {
-                          return InkWell(
-                            child: Container(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      data.docs[index]['title'],
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child:
-                                        Text(data.docs[index]['description']),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    child: Image.network(
-                                      data.docs[index]['image'],
-                                      cacheHeight: 120,
-                                      cacheWidth: 270,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                  // color: Colors.amber,
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15)),
+                          return Card(
+                            child: ListTile(
+                              title: Text(data.docs[index]['title']),
+                              onTap: () {
+                                switch (int.parse(data.docs[index]['number'])) {
+                                  case 1:
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => CauLacBo()));
+
+                                    break;
+                                  case 2:
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LichThiLai()));
+
+                                    break;
+                                  case 3:
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ThucTapTotNghiep()));
+
+                                    break;
+                                  case 4:
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                DoAnTotNghiep()));
+
+                                    break;
+                                }
+                              },
                             ),
                           );
                         });

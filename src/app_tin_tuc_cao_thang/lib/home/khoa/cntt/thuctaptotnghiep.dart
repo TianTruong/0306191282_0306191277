@@ -1,26 +1,24 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class DDT extends StatefulWidget {
-  const DDT({Key? key}) : super(key: key);
+class ThucTapTotNghiep extends StatefulWidget {
+  const ThucTapTotNghiep({Key? key}) : super(key: key);
 
   @override
-  State<DDT> createState() => _DDTState();
+  State<ThucTapTotNghiep> createState() => _ThucTapTotNghiepState();
 }
 
-class _DDTState extends State<DDT> {
-  final Stream<QuerySnapshot> ddt = FirebaseFirestore.instance
-      .collection('ddt')
-      .orderBy('time', descending: true)
+class _ThucTapTotNghiepState extends State<ThucTapTotNghiep> {
+  final Stream<QuerySnapshot> tttn = FirebaseFirestore.instance
+      .collection('tttn')
+      .orderBy('number', descending: true)
       .snapshots();
   final PageController _controller = PageController();
-  int i = 0;
   final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,13 +44,7 @@ class _DDTState extends State<DDT> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -89,7 +81,7 @@ class _DDTState extends State<DDT> {
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
-                  child: Text('Khoa Điện - Điện Tử',
+                  child: Text('Khoa Công nghệ thông tin',
                       style: TextStyle(
                         color: Colors.red,
                       )))),
@@ -101,24 +93,28 @@ class _DDTState extends State<DDT> {
                 controller: _controller,
                 children: <Widget>[
                   Image.asset(
-                    'images/slider8.jpg',
+                    'images/slider14.jpg',
                     height: 150,
                     fit: BoxFit.fill,
                   ),
                   Image.asset(
-                    'images/slider9.jpg',
+                    'images/slider15.png',
                     height: 150,
                   ),
                   Image.asset(
-                    'images/slider10.jpg',
+                    'images/slider16.png',
                     height: 150,
                     fit: BoxFit.fill,
+                  ),
+                  Image.asset(
+                    'images/slider17.jpg',
+                    height: 150,
                   ),
                 ],
               ),
               SmoothPageIndicator(
                 controller: _controller,
-                count: 3,
+                count: 4,
                 effect: JumpingDotEffect(
                   activeDotColor: Colors.grey,
                   dotColor: Colors.grey.shade300,
@@ -128,12 +124,24 @@ class _DDTState extends State<DDT> {
               ),
             ]),
           ),
+          Container(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Text('MỐC THỜI GIAN THỰC TẬP KHOÁ 2019',
+                      style: TextStyle(fontSize: 16, color: Colors.black)),
+                )
+              ],
+            ),
+          ),
           Expanded(
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: ddt,
+                  stream: tttn,
                   builder: (
                     BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot,
@@ -152,13 +160,9 @@ class _DDTState extends State<DDT> {
                         itemBuilder: (context, index) {
                           return Card(
                             child: ListTile(
-                              leading: Image.asset(
-                                data.docs[index]['image'],
-                                cacheHeight: 60,
-                                cacheWidth: 40,
-                              ),
                               title: Text(data.docs[index]['title']),
                               subtitle: Text(data.docs[index]['sub']),
+                              onTap: () {},
                             ),
                           );
                         });
@@ -170,11 +174,11 @@ class _DDTState extends State<DDT> {
           Container(
             child: Column(
               children: const [
-                Text(' Điện thoại: 028.38212360 (21 & 22)',
+                Text('Điện thoại: 028.38212360 (33)',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Email: pvthanh@caothang.edu.vn',
+                Text('Email: nvdzung@caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Website: ddt.caothang.edu.vn',
+                Text('Website: ThucTapTotNghiep.caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
               ],
             ),

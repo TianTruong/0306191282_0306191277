@@ -1,26 +1,27 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/caulacbo.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/thuctaptotnghiep.dart';
+import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/doantotnghiep.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class DDT extends StatefulWidget {
-  const DDT({Key? key}) : super(key: key);
+class LichThiLai extends StatefulWidget {
+  const LichThiLai({Key? key}) : super(key: key);
 
   @override
-  State<DDT> createState() => _DDTState();
+  State<LichThiLai> createState() => _LichThiLaiState();
 }
 
-class _DDTState extends State<DDT> {
-  final Stream<QuerySnapshot> ddt = FirebaseFirestore.instance
-      .collection('ddt')
+class _LichThiLaiState extends State<LichThiLai> {
+  final Stream<QuerySnapshot> lichthilai = FirebaseFirestore.instance
+      .collection('lichthilai')
       .orderBy('time', descending: true)
       .snapshots();
   final PageController _controller = PageController();
-  int i = 0;
   final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +90,7 @@ class _DDTState extends State<DDT> {
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
-                  child: Text('Khoa Điện - Điện Tử',
+                  child: Text('Khoa Công nghệ thông tin',
                       style: TextStyle(
                         color: Colors.red,
                       )))),
@@ -110,15 +111,19 @@ class _DDTState extends State<DDT> {
                     height: 150,
                   ),
                   Image.asset(
-                    'images/slider10.jpg',
+                    'images/slider7.png',
                     height: 150,
                     fit: BoxFit.fill,
+                  ),
+                  Image.asset(
+                    'images/slider4.jpg',
+                    height: 150,
                   ),
                 ],
               ),
               SmoothPageIndicator(
                 controller: _controller,
-                count: 3,
+                count: 4,
                 effect: JumpingDotEffect(
                   activeDotColor: Colors.grey,
                   dotColor: Colors.grey.shade300,
@@ -133,7 +138,7 @@ class _DDTState extends State<DDT> {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: ddt,
+                  stream: lichthilai,
                   builder: (
                     BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot,
@@ -152,13 +157,8 @@ class _DDTState extends State<DDT> {
                         itemBuilder: (context, index) {
                           return Card(
                             child: ListTile(
-                              leading: Image.asset(
-                                data.docs[index]['image'],
-                                cacheHeight: 60,
-                                cacheWidth: 40,
-                              ),
                               title: Text(data.docs[index]['title']),
-                              subtitle: Text(data.docs[index]['sub']),
+                              onTap: () {},
                             ),
                           );
                         });
@@ -170,11 +170,11 @@ class _DDTState extends State<DDT> {
           Container(
             child: Column(
               children: const [
-                Text(' Điện thoại: 028.38212360 (21 & 22)',
+                Text('Điện thoại: 028.38212360 (33)',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Email: pvthanh@caothang.edu.vn',
+                Text('Email: nvdzung@caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Website: ddt.caothang.edu.vn',
+                Text('Website: LichThiLai.caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
               ],
             ),

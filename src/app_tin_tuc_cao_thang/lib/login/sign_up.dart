@@ -51,119 +51,112 @@ class _SignUpState extends State<SignUp> {
                 if (snapshot.hasData) {
                   return SetInfor();
                 }
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 125,
-                    ),
-                    Container(
-                      width: 150,
-                      height: 250,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        shape: BoxShape.rectangle,
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListView(
+                    children: [
+                      Container(
+                        width: 150,
+                        height: 250,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          shape: BoxShape.rectangle,
+                        ),
+                        child: const Image(
+                          image: AssetImage('images/LogoChinh.png'),
+                          fit: BoxFit.contain,
+                        ),
                       ),
-                      child: const Image(
-                        image: AssetImage('images/LogoChinh.png'),
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    Expanded(
-                        child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: TextFormField(
-                            controller: _gmailController,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
-                                      color: Colors.black, width: 5),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 61, 97, 216),
-                                        width: 3)),
-                                hintText: 'Gmail'),
-                            keyboardType: TextInputType.text,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: TextFormField(
-                            obscureText: true,
-                            controller: _passController,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
-                                      color: Colors.black, width: 5),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 61, 97, 216),
-                                        width: 3)),
-                                hintText: 'Mật khẩu'),
-                            keyboardType: TextInputType.text,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: TextFormField(
-                            obscureText: true,
-                            controller: _confirmController,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
-                                      color: Colors.black, width: 5),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                    borderSide: BorderSide(
-                                        color: Color.fromARGB(255, 61, 97, 216),
-                                        width: 3)),
-                                hintText: 'Xác nhận mật khẩu'),
-                            keyboardType: TextInputType.text,
-                          ),
-                        ),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: const Color.fromARGB(255, 61, 97, 216),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.0)),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 10),
-                              child: Text(
-                                'Đăng ký',
-                                style: TextStyle(fontSize: 15),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextFormField(
+                          controller: _gmailController,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: const BorderSide(
+                                    color: Colors.black, width: 5),
                               ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 61, 97, 216),
+                                      width: 3)),
+                              hintText: 'Gmail'),
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextFormField(
+                          obscureText: true,
+                          controller: _passController,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: const BorderSide(
+                                    color: Colors.black, width: 5),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 61, 97, 216),
+                                      width: 3)),
+                              hintText: 'Mật khẩu'),
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextFormField(
+                          obscureText: true,
+                          controller: _confirmController,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: const BorderSide(
+                                    color: Colors.black, width: 5),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 61, 97, 216),
+                                      width: 3)),
+                              hintText: 'Xác nhận mật khẩu'),
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color.fromARGB(255, 61, 97, 216),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0)),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 10),
+                            child: Text(
+                              'Đăng ký',
+                              style: TextStyle(fontSize: 15),
                             ),
-                            onPressed: CheckSignUp),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CupertinoButton(
-                                padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
-                                child: const Text('Đã có tài khoản',
-                                    style: TextStyle(
-                                        color: Color.fromARGB(255, 61, 97, 216),
-                                        fontSize: 20)),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                })
-                          ],
-                        )
-                      ],
-                    ))
-                  ],
+                          ),
+                          onPressed: CheckSignUp),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CupertinoButton(
+                              padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
+                              child: const Text('Đã có tài khoản',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 61, 97, 216),
+                                      fontSize: 20)),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              })
+                        ],
+                      )
+                    ],
+                  ),
                 );
               },
             ),

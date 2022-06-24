@@ -14,15 +14,17 @@ class KHPT extends StatefulWidget {
 }
 
 class _KHPTState extends State<KHPT> {
-  final Stream<QuerySnapshot> khptdoanhoi =
-      FirebaseFirestore.instance.collection('khptdoanhoi').orderBy('time', descending: true).snapshots();
+  final Stream<QuerySnapshot> khptdoanhoi = FirebaseFirestore.instance
+      .collection('khptdoanhoi')
+      .orderBy('time', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -43,9 +45,7 @@ class _KHPTState extends State<KHPT> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                 
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -160,7 +160,7 @@ class _KHPTState extends State<KHPT> {
                                       data.docs[index]['title'],
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                           fontSize: 18,
+                                          fontSize: 18,
                                           color: Color.fromARGB(
                                               255, 255, 255, 255),
                                           backgroundColor: Colors.blue),
@@ -174,7 +174,6 @@ class _KHPTState extends State<KHPT> {
                                       style: TextStyle(fontSize: 10),
                                     ),
                                   ),
-                           
                                   Container(
                                     padding: EdgeInsets.all(5.0),
                                     alignment: Alignment.topLeft,
@@ -191,7 +190,7 @@ class _KHPTState extends State<KHPT> {
                                       style: TextStyle(fontSize: 10),
                                     ),
                                   ),
-                                        Container(
+                                  Container(
                                     padding: EdgeInsets.all(5.0),
                                     alignment: Alignment.topLeft,
                                     child: Text(
@@ -207,7 +206,7 @@ class _KHPTState extends State<KHPT> {
                                       style: TextStyle(fontSize: 10),
                                     ),
                                   ),
-                                          Container(
+                                  Container(
                                     padding: EdgeInsets.all(5.0),
                                     alignment: Alignment.topLeft,
                                     child: Text(
@@ -237,7 +236,6 @@ class _KHPTState extends State<KHPT> {
               ),
             ),
           ),
-
         ],
       ),
     );

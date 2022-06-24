@@ -1,4 +1,4 @@
- // ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors
 
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,19 +14,25 @@ class HocPhi extends StatefulWidget {
 }
 
 class _HocPhiState extends State<HocPhi> {
-  final Stream<QuerySnapshot> hocphi =
-      FirebaseFirestore.instance.collection('hocphi').orderBy('number', descending: true).snapshots();
-   final Stream<QuerySnapshot> hocbong =
-      FirebaseFirestore.instance.collection('hocbong').orderBy('number', descending: true).snapshots();
-         final Stream<QuerySnapshot> vayvon =
-      FirebaseFirestore.instance.collection('vayvon').orderBy('number', descending: true).snapshots();
+  final Stream<QuerySnapshot> hocphi = FirebaseFirestore.instance
+      .collection('hocphi')
+      .orderBy('number', descending: true)
+      .snapshots();
+  final Stream<QuerySnapshot> hocbong = FirebaseFirestore.instance
+      .collection('hocbong')
+      .orderBy('number', descending: true)
+      .snapshots();
+  final Stream<QuerySnapshot> vayvon = FirebaseFirestore.instance
+      .collection('vayvon')
+      .orderBy('number', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -47,9 +53,7 @@ class _HocPhiState extends State<HocPhi> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                 
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -90,11 +94,10 @@ class _HocPhiState extends State<HocPhi> {
                       style: TextStyle(
                         color: Colors.red,
                       )))),
-      
           Expanded(
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(4, 10, 4,0),
+                padding: const EdgeInsets.fromLTRB(4, 10, 4, 0),
                 child: StreamBuilder<QuerySnapshot>(
                   stream: hocphi,
                   builder: (
@@ -130,85 +133,93 @@ class _HocPhiState extends State<HocPhi> {
                                       data.docs[index]['title'],
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                           fontSize: 18,
+                                          fontSize: 18,
                                           color: Color.fromARGB(
                                               255, 255, 255, 255),
                                           backgroundColor: Colors.blue),
                                     ),
                                   ),
                                   Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: ListTile(
-                                      title: Text(
-                                      data.docs[index]['des1'],
-                                      style: TextStyle(fontSize: 13,  fontWeight: FontWeight.bold,),
-                                    ),
-                                    subtitle: Column(children: [
-                                        Text(
-                                      data.docs[index]['hocphinganh'],
-                                      style: TextStyle(fontSize: 12),
-                                    ),Text(
-                                      data.docs[index]['hocphinghe'],
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    Text(
-                                      data.docs[index]['ketoan'],
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                            
-                                    ],) 
-                                    )
-                                  ),
-                           
-                                      Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: ListTile(
-                                      title: Text(
-                                      data.docs[index]['des2'],
-                                      style: TextStyle(fontSize: 13,  fontWeight: FontWeight.bold,),
-                                    ),
-                                    subtitle: Column(children: [
-                                        Text(
-                                      data.docs[index]['hocphinganh'],
-                                      style: TextStyle(fontSize: 12),
-                                    ),Text(
-                                      data.docs[index]['hocphinghe'],
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    Text(
-                                      data.docs[index]['ketoan'],
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                           
-                                    ],) 
-                                    )
-                                  ),
-                                             Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: ListTile(
-                                      title: Text(
-                                      data.docs[index]['des3'],
-                                      style: TextStyle(fontSize: 13,  fontWeight: FontWeight.bold,),
-                                    ),
-                                    subtitle: Column(children: [
-                                        Text(
-                                      data.docs[index]['hocphinganh'],
-                                      style: TextStyle(fontSize: 12),
-                                    ),Text(
-                                      data.docs[index]['hocphinghe'],
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    Text(
-                                      data.docs[index]['ketoan'],
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                           
-                                    ],) 
-                                    )
-                                  ),
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: ListTile(
+                                          title: Text(
+                                            data.docs[index]['des1'],
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          subtitle: Column(
+                                            children: [
+                                              Text(
+                                                data.docs[index]['hocphinganh'],
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              Text(
+                                                data.docs[index]['hocphinghe'],
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              Text(
+                                                data.docs[index]['ketoan'],
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                            ],
+                                          ))),
+                                  Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: ListTile(
+                                          title: Text(
+                                            data.docs[index]['des2'],
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          subtitle: Column(
+                                            children: [
+                                              Text(
+                                                data.docs[index]['hocphinganh'],
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              Text(
+                                                data.docs[index]['hocphinghe'],
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              Text(
+                                                data.docs[index]['ketoan'],
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                            ],
+                                          ))),
+                                  Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: ListTile(
+                                          title: Text(
+                                            data.docs[index]['des3'],
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          subtitle: Column(
+                                            children: [
+                                              Text(
+                                                data.docs[index]['hocphinganh'],
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              Text(
+                                                data.docs[index]['hocphinghe'],
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              Text(
+                                                data.docs[index]['ketoan'],
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                            ],
+                                          ))),
                                 ],
                               ),
                               decoration: BoxDecoration(
@@ -223,10 +234,10 @@ class _HocPhiState extends State<HocPhi> {
               ),
             ),
           ),
- Expanded(
+          Expanded(
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(4,6,4,0),
+                padding: const EdgeInsets.fromLTRB(4, 6, 4, 0),
                 child: StreamBuilder<QuerySnapshot>(
                   stream: hocbong,
                   builder: (
@@ -262,57 +273,47 @@ class _HocPhiState extends State<HocPhi> {
                                       data.docs[index]['title'],
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                           fontSize: 18,
+                                          fontSize: 18,
                                           color: Color.fromARGB(
                                               255, 255, 255, 255),
                                           backgroundColor: Colors.blue),
                                     ),
                                   ),
                                   Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: 
-                                     Text(
-                                      data.docs[index]['des1'],
-                                      style: TextStyle(fontSize: 15),
-                                        ) 
-                                  ),
-                                       Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: 
-                                     Text(
-                                      data.docs[index]['des2'],
-                                      style: TextStyle(fontSize: 15),
-                                        ) 
-                                  ),
-                                       Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: 
-                                     Text(
-                                      data.docs[index]['des3'],
-                                      style: TextStyle(fontSize: 15),
-                                        ) 
-                                  ),
-                                   Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: 
-                                     Text(
-                                      data.docs[index]['des4'],
-                                      style: TextStyle(fontSize: 15),
-                                        ) 
-                                  ),
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        data.docs[index]['des1'],
+                                        style: TextStyle(fontSize: 15),
+                                      )),
                                   Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: 
-                                     Text(
-                                      data.docs[index]['des5'],
-                                      style: TextStyle(fontSize: 15),
-                                        ) 
-                                  ),
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        data.docs[index]['des2'],
+                                        style: TextStyle(fontSize: 15),
+                                      )),
+                                  Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        data.docs[index]['des3'],
+                                        style: TextStyle(fontSize: 15),
+                                      )),
+                                  Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        data.docs[index]['des4'],
+                                        style: TextStyle(fontSize: 15),
+                                      )),
+                                  Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        data.docs[index]['des5'],
+                                        style: TextStyle(fontSize: 15),
+                                      )),
                                 ],
                               ),
                               decoration: BoxDecoration(
@@ -327,10 +328,10 @@ class _HocPhiState extends State<HocPhi> {
               ),
             ),
           ),
- Expanded(
+          Expanded(
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(4,6,4,0),
+                padding: const EdgeInsets.fromLTRB(4, 6, 4, 0),
                 child: StreamBuilder<QuerySnapshot>(
                   stream: vayvon,
                   builder: (
@@ -366,57 +367,47 @@ class _HocPhiState extends State<HocPhi> {
                                       data.docs[index]['title'],
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                           fontSize: 18,
+                                          fontSize: 18,
                                           color: Color.fromARGB(
                                               255, 255, 255, 255),
                                           backgroundColor: Colors.blue),
                                     ),
                                   ),
                                   Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: 
-                                     Text(
-                                      data.docs[index]['des1'],
-                                      style: TextStyle(fontSize: 15),
-                                        ) 
-                                  ),
-                                       Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: 
-                                     Text(
-                                      data.docs[index]['des2'],
-                                      style: TextStyle(fontSize: 15),
-                                        ) 
-                                  ),
-                                       Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: 
-                                     Text(
-                                      data.docs[index]['des3'],
-                                      style: TextStyle(fontSize: 15),
-                                        ) 
-                                  ),
-                                   Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: 
-                                     Text(
-                                      data.docs[index]['des4'],
-                                      style: TextStyle(fontSize: 15),
-                                        ) 
-                                  ),
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        data.docs[index]['des1'],
+                                        style: TextStyle(fontSize: 15),
+                                      )),
                                   Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: 
-                                     Text(
-                                      data.docs[index]['des5'],
-                                      style: TextStyle(fontSize: 15),
-                                        ) 
-                                  ),
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        data.docs[index]['des2'],
+                                        style: TextStyle(fontSize: 15),
+                                      )),
+                                  Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        data.docs[index]['des3'],
+                                        style: TextStyle(fontSize: 15),
+                                      )),
+                                  Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        data.docs[index]['des4'],
+                                        style: TextStyle(fontSize: 15),
+                                      )),
+                                  Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        data.docs[index]['des5'],
+                                        style: TextStyle(fontSize: 15),
+                                      )),
                                 ],
                               ),
                               decoration: BoxDecoration(
@@ -431,7 +422,6 @@ class _HocPhiState extends State<HocPhi> {
               ),
             ),
           ),
-
         ],
       ),
     );

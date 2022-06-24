@@ -1,26 +1,23 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class DDT extends StatefulWidget {
-  const DDT({Key? key}) : super(key: key);
+class CauLacBo extends StatefulWidget {
+  const CauLacBo({Key? key}) : super(key: key);
 
   @override
-  State<DDT> createState() => _DDTState();
+  State<CauLacBo> createState() => _CauLacBoState();
 }
 
-class _DDTState extends State<DDT> {
-  final Stream<QuerySnapshot> ddt = FirebaseFirestore.instance
-      .collection('ddt')
+class _CauLacBoState extends State<CauLacBo> {
+  final Stream<QuerySnapshot> caulacbo = FirebaseFirestore.instance
+      .collection('caulacbo')
       .orderBy('time', descending: true)
       .snapshots();
-  final PageController _controller = PageController();
-  int i = 0;
+
   final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,51 +86,16 @@ class _DDTState extends State<DDT> {
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
-                  child: Text('Khoa Điện - Điện Tử',
+                  child: Text('Khoa Công nghệ thông tin',
                       style: TextStyle(
                         color: Colors.red,
                       )))),
-          SizedBox(
-            height: 200,
-            child:
-                Stack(alignment: AlignmentDirectional.bottomCenter, children: [
-              PageView(
-                controller: _controller,
-                children: <Widget>[
-                  Image.asset(
-                    'images/slider8.jpg',
-                    height: 150,
-                    fit: BoxFit.fill,
-                  ),
-                  Image.asset(
-                    'images/slider9.jpg',
-                    height: 150,
-                  ),
-                  Image.asset(
-                    'images/slider10.jpg',
-                    height: 150,
-                    fit: BoxFit.fill,
-                  ),
-                ],
-              ),
-              SmoothPageIndicator(
-                controller: _controller,
-                count: 3,
-                effect: JumpingDotEffect(
-                  activeDotColor: Colors.grey,
-                  dotColor: Colors.grey.shade300,
-                  dotHeight: 10,
-                  dotWidth: 10,
-                ),
-              ),
-            ]),
-          ),
           Expanded(
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: ddt,
+                  stream: caulacbo,
                   builder: (
                     BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot,
@@ -147,18 +109,47 @@ class _DDTState extends State<DDT> {
 
                     final data = snapshot.requireData;
 
-                    return ListView.builder(
+                    return GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 400,
+                                childAspectRatio: 3 / 2,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20),
                         itemCount: data.size,
                         itemBuilder: (context, index) {
-                          return Card(
-                            child: ListTile(
-                              leading: Image.asset(
-                                data.docs[index]['image'],
-                                cacheHeight: 60,
-                                cacheWidth: 40,
+                          return InkWell(
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      data.docs[index]['title'],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(data.docs[index]['des']),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    child: Image.asset(
+                                      data.docs[index]['image'],
+                                      cacheHeight: 170,
+                                      cacheWidth: 320,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              title: Text(data.docs[index]['title']),
-                              subtitle: Text(data.docs[index]['sub']),
+                              decoration: BoxDecoration(
+                                  // color: Colors.amber,
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15)),
                             ),
                           );
                         });
@@ -170,11 +161,11 @@ class _DDTState extends State<DDT> {
           Container(
             child: Column(
               children: const [
-                Text(' Điện thoại: 028.38212360 (21 & 22)',
+                Text('Điện thoại: 028.38212360 (33)',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Email: pvthanh@caothang.edu.vn',
+                Text('Email: nvdzung@caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Website: ddt.caothang.edu.vn',
+                Text('Website: cntt.caothang.edu.vn',
                     style: TextStyle(fontSize: 16, color: Colors.black)),
               ],
             ),
