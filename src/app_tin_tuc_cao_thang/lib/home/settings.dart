@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:app_tin_tuc_cao_thang/account/change_pass_account.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/contact.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -106,7 +107,7 @@ class _SettingsState extends State<Settings> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const Information()));
+                                          const ChangePassword()));
                             },
                           ),
                         ),
@@ -123,8 +124,14 @@ class _SettingsState extends State<Settings> {
                           ]),
                           padding: const EdgeInsets.all(3.0),
                           child: ListTile(
-                            title: const Text('Tài khoản và mật khẩu'),
-                            onTap: () {},
+                            title: const Text('Thay đổi mật khẩu'),
+                            onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ChangePassword()));
+                            },
                           ),
                         ),
                       ),

@@ -272,7 +272,8 @@ class _SignInState extends State<SignIn> {
         if (count < 5) {
           await FirebaseAuth.instance.signInWithEmailAndPassword(
               email: _gmailController.text.trim(),
-              password: _passController.text.trim());
+              password: _passController.text.trim()
+              );
         } else if (capcha == _capchaController.text.trim()) {
           await FirebaseAuth.instance.signInWithEmailAndPassword(
               email: _gmailController.text.trim(),
