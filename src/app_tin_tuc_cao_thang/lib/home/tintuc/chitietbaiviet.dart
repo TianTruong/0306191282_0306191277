@@ -2,13 +2,20 @@
 
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/binhluan.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class ChiTietBaiViet extends StatefulWidget {
-  const ChiTietBaiViet({Key? key, required this.idPhong, required this.idBaiViet, required this.title})
+  const ChiTietBaiViet(
+      {Key? key,
+      required this.idBaiViet,
+      required this.title,
+      required this.like})
       : super(key: key);
-  final String idPhong, idBaiViet, title;
+  final String idBaiViet, title;
+  final int like;
 
   @override
   State<ChiTietBaiViet> createState() => _ChiTietBaiVietState();
@@ -16,12 +23,18 @@ class ChiTietBaiViet extends StatefulWidget {
 
 class _ChiTietBaiVietState extends State<ChiTietBaiViet> {
   final user = FirebaseAuth.instance.currentUser!;
+  bool liked = false;
 
   @override
   Widget build(BuildContext context) {
+    var posts =
+        FirebaseFirestore.instance.collection('posts').doc(widget.idBaiViet);
+
+    int like = widget.like;
+
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -87,7 +100,38 @@ class _ChiTietBaiVietState extends State<ChiTietBaiViet> {
               child: BaiViet(
                 title: widget.title,
               )),
-          Padding(padding: const EdgeInsets.all(10.0), child: NutBinhLuan(idPhong: widget.idPhong, idBaiViet: widget.idBaiViet,)),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(primary: Colors.grey.shade300),
+            onPressed: () {
+              liked ? like = like - 1 : like = like + 1;
+
+              posts.update({
+                'like': like,
+              });
+
+              setState(() {
+                liked ? liked = false : liked = true;
+              });
+            },
+            icon: liked
+                ? const Icon(
+                    Icons.thumb_up_outlined,
+                    size: 25,
+                    color: Colors.blue,
+                  )
+                : const Icon(Icons.thumb_up_outlined,
+                    size: 25, color: Colors.black),
+            label: liked
+                ? Text('${like} Đã thích',
+                    style: TextStyle(fontSize: 15, color: Colors.blue))
+                : Text('${like} Thích',
+                    style: TextStyle(fontSize: 15, color: Colors.black)),
+          ),
+          Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: NutBinhLuan(
+                idBaiViet: widget.idBaiViet,
+              )),
         ],
       ),
     );
@@ -148,8 +192,7 @@ class _BaiVietState extends State<BaiViet> {
 }
 
 class NutBinhLuan extends StatefulWidget {
-  const NutBinhLuan({Key? key,required this.idPhong, required this.idBaiViet}) : super(key: key);
-  final String idPhong;
+  const NutBinhLuan({Key? key, required this.idBaiViet}) : super(key: key);
   final String idBaiViet;
 
   @override
@@ -167,7 +210,10 @@ class _NutBinhLuanState extends State<NutBinhLuan> {
         child: ElevatedButton(
       child: Text('Bình luận'),
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>BinhLuan(idPhong: widget.idPhong, idBaiViet: widget.idBaiViet)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BinhLuan(idBaiViet: widget.idBaiViet)));
       },
     ));
   }

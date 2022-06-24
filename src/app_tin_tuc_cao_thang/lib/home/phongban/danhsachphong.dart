@@ -177,9 +177,8 @@ class _DepartmentsState extends State<Departments> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => PhongDaoTao(
-                                                  idPhong: data.docs[index]
-                                                      .reference.id)));
+                                              builder: (context) =>
+                                                  PhongDaoTao()));
 
                                       break;
                                     case 2:
@@ -194,9 +193,7 @@ class _DepartmentsState extends State<Departments> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  PhongCTCT_HSSV(
-                                                      idPhong: data.docs[index]
-                                                          .reference.id)));
+                                                  PhongCTCT_HSSV()));
 
                                       break;
                                     case 4:
@@ -204,9 +201,7 @@ class _DepartmentsState extends State<Departments> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  PhongCTCT_HSSV(
-                                                      idPhong: data.docs[index]
-                                                          .reference.id)));
+                                                  PhongHCQT()));
 
                                       break;
                                   }
