@@ -1,3 +1,4 @@
+import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -133,27 +134,17 @@ class _ThoiKhoaBieuState extends State<ThoiKhoaBieu> {
                                 children: [
                                   ListTile(
                                     title: Text(
-                                      'Title: ${data.docs[index]['title']}',
-                                      // style: const TextStyle(fontSize: 20)
+                                      data.docs[index]['title'],
                                     ),
                                     onTap: () {
                                       print(data.docs[index].id);
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) =>
-                                      //             ChiTietBaiViet(
-                                      //                 idBaiViet: data
-                                      //                     .docs[
-                                      //                         index]
-                                      //                     .id,
-                                      //                 title: data.docs[
-                                      //                         index]
-                                      //                     ['title'],
-                                      //                 like: data.docs[
-                                      //                         index]
-                                      //                     [
-                                      //                     'like'])));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => PDFView(
+                                                    url: data.docs[index]
+                                                        ['link'],
+                                                  )));
                                     },
                                   ),
                                 ],

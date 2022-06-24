@@ -1,8 +1,11 @@
-
+import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:pdf_render/pdf_render_widgets.dart';
 
 class LichDaoTao extends StatefulWidget {
   const LichDaoTao({Key? key}) : super(key: key);
@@ -110,8 +113,7 @@ class _LichDaoTaoState extends State<LichDaoTao> {
                   if (snapshot.hasError) {
                     return const Text('Something went wrong.');
                   }
-                  if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Text('Loading');
                   }
 
@@ -125,8 +127,7 @@ class _LichDaoTaoState extends State<LichDaoTao> {
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),
@@ -134,27 +135,17 @@ class _LichDaoTaoState extends State<LichDaoTao> {
                                 children: [
                                   ListTile(
                                     title: Text(
-                                      'Title: ${data.docs[index]['title']}',
-                                      // style: const TextStyle(fontSize: 20)
+                                      data.docs[index]['title'],
                                     ),
                                     onTap: () {
                                       print(data.docs[index].id);
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) =>
-                                      //             ChiTietBaiViet(
-                                      //                 idBaiViet: data
-                                      //                     .docs[
-                                      //                         index]
-                                      //                     .id,
-                                      //                 title: data.docs[
-                                      //                         index]
-                                      //                     ['title'],
-                                      //                 like: data.docs[
-                                      //                         index]
-                                      //                     [
-                                      //                     'like'])));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => PDFView(
+                                                    url: data.docs[index]
+                                                        ['link'],
+                                                  )));
                                     },
                                   ),
                                 ],
