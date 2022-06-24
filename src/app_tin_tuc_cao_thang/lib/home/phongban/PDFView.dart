@@ -45,8 +45,8 @@ class _PDFViewState extends State<PDFView> {
                   center: _doubleTapDetails!.localPosition,
                 ),
             child: PdfViewer.openFutureFile(
-              () async => (await DefaultCacheManager().getSingleFile(
-                  widget.url)).path,
+              () async =>
+                  (await DefaultCacheManager().getSingleFile(widget.url)).path,
               viewerController: controller,
               onError: (err) => print(err),
               params: const PdfViewerParams(

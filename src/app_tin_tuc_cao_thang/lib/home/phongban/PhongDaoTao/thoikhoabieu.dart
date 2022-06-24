@@ -110,8 +110,7 @@ class _ThoiKhoaBieuState extends State<ThoiKhoaBieu> {
                   if (snapshot.hasError) {
                     return const Text('Something went wrong.');
                   }
-                  if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Text('Loading');
                   }
 
@@ -125,8 +124,7 @@ class _ThoiKhoaBieuState extends State<ThoiKhoaBieu> {
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),

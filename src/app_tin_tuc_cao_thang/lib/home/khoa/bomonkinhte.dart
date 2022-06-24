@@ -14,15 +14,17 @@ class BoMonKinhTe extends StatefulWidget {
 }
 
 class _BoMonKinhTeState extends State<BoMonKinhTe> {
-  final Stream<QuerySnapshot> bomonkinhte =
-      FirebaseFirestore.instance.collection('bomonkinhte').orderBy('time', descending: true).snapshots();
+  final Stream<QuerySnapshot> bomonkinhte = FirebaseFirestore.instance
+      .collection('bomonkinhte')
+      .orderBy('time', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,

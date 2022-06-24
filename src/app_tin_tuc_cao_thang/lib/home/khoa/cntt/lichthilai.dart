@@ -6,6 +6,7 @@ import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/caulacbo.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/thuctaptotnghiep.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/doantotnghiep.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 class LichThiLai extends StatefulWidget {
   const LichThiLai({Key? key}) : super(key: key);
 
@@ -14,8 +15,10 @@ class LichThiLai extends StatefulWidget {
 }
 
 class _LichThiLaiState extends State<LichThiLai> {
-  final Stream<QuerySnapshot> lichthilai=
-      FirebaseFirestore.instance.collection('lichthilai').orderBy('time', descending: true).snapshots();
+  final Stream<QuerySnapshot> lichthilai = FirebaseFirestore.instance
+      .collection('lichthilai')
+      .orderBy('time', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -23,7 +26,7 @@ class _LichThiLaiState extends State<LichThiLai> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -91,14 +94,14 @@ class _LichThiLaiState extends State<LichThiLai> {
                       style: TextStyle(
                         color: Colors.red,
                       )))),
-                 SizedBox(
+          SizedBox(
             height: 200,
             child:
                 Stack(alignment: AlignmentDirectional.bottomCenter, children: [
               PageView(
                 controller: _controller,
                 children: <Widget>[
-                       Image.asset(
+                  Image.asset(
                     'images/slider8.jpg',
                     height: 150,
                     fit: BoxFit.fill,
@@ -149,14 +152,13 @@ class _LichThiLaiState extends State<LichThiLai> {
 
                     final data = snapshot.requireData;
 
-                    return  ListView.builder(
+                    return ListView.builder(
                         itemCount: data.size,
                         itemBuilder: (context, index) {
                           return Card(
                             child: ListTile(
                               title: Text(data.docs[index]['title']),
-                              onTap: (){
-                              },
+                              onTap: () {},
                             ),
                           );
                         });

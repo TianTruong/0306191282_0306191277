@@ -69,9 +69,7 @@ class _SetInforState extends State<SetInfor> {
 
     print(downloadURL);
 
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   @override
@@ -166,8 +164,9 @@ class _SetInforState extends State<SetInfor> {
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 50),
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(width: 1, color: Colors.grey),
-                  color: Colors.white, borderRadius: BorderRadius.circular(15)),
+                  border: Border.all(width: 1, color: Colors.grey),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15)),
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: DropdownButton(

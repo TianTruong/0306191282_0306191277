@@ -14,8 +14,10 @@ class AnhHoatDong extends StatefulWidget {
 }
 
 class _AnhHoatDongState extends State<AnhHoatDong> {
-  final Stream<QuerySnapshot> anhhoatdong =
-      FirebaseFirestore.instance.collection('anhhoatdongdoanhoi').orderBy('time', descending: true).snapshots();
+  final Stream<QuerySnapshot> anhhoatdong = FirebaseFirestore.instance
+      .collection('anhhoatdongdoanhoi')
+      .orderBy('time', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -23,7 +25,7 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -189,7 +191,6 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
               ),
             ),
           ),
-     
         ],
       ),
     );

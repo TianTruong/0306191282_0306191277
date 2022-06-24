@@ -14,15 +14,17 @@ class CKDL extends StatefulWidget {
 }
 
 class _CKDLState extends State<CKDL> {
-  final Stream<QuerySnapshot> ckdl =
-      FirebaseFirestore.instance.collection('ckdl').orderBy('time', descending: true).snapshots();
+  final Stream<QuerySnapshot> ckdl = FirebaseFirestore.instance
+      .collection('ckdl')
+      .orderBy('time', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,

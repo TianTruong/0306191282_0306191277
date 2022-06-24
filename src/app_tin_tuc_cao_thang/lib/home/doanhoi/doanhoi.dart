@@ -18,8 +18,10 @@ class DoanHoi extends StatefulWidget {
 }
 
 class _DoanHoiState extends State<DoanHoi> {
-  final Stream<QuerySnapshot> doanhoi =
-      FirebaseFirestore.instance.collection('doanhoi').orderBy('number', descending: true).snapshots();
+  final Stream<QuerySnapshot> doanhoi = FirebaseFirestore.instance
+      .collection('doanhoi')
+      .orderBy('number', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -27,7 +29,7 @@ class _DoanHoiState extends State<DoanHoi> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -95,7 +97,6 @@ class _DoanHoiState extends State<DoanHoi> {
                       style: TextStyle(
                         color: Colors.red,
                       )))),
-
           Expanded(
             child: Center(
               child: Padding(
@@ -125,41 +126,41 @@ class _DoanHoiState extends State<DoanHoi> {
                         itemCount: data.size,
                         itemBuilder: (context, index) {
                           return InkWell(
-                            child: Container(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      data.docs[index]['title'],
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        data.docs[index]['title'],
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    child: Image.network(
-                                      data.docs[index]['image'],
-                                      cacheHeight: 120,
-                                      cacheWidth: 270,
+                                    Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      child: Image.network(
+                                        data.docs[index]['image'],
+                                        cacheHeight: 120,
+                                        cacheWidth: 270,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                    // color: Colors.amber,
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15)),
                               ),
-                              decoration: BoxDecoration(
-                                  // color: Colors.amber,
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15)),
-                           
-                            ),
-                           onTap: () {
+                              onTap: () {
                                 switch (int.parse(data.docs[index]['number'])) {
                                   case 1:
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => AnhHoatDong()));
+                                            builder: (context) =>
+                                                AnhHoatDong()));
 
                                     break;
                                   case 2:
@@ -183,17 +184,14 @@ class _DoanHoiState extends State<DoanHoi> {
                                             builder: (context) => KHPT()));
 
                                     break;
-                             
                                 }
-                                }
-                          );
+                              });
                         });
                   },
                 ),
               ),
             ),
           ),
-     
         ],
       ),
     );

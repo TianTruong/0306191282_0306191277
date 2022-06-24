@@ -14,17 +14,19 @@ class BieuMau extends StatefulWidget {
 }
 
 class _BieuMauState extends State<BieuMau> {
-  final Stream<QuerySnapshot> bieumau=
-      FirebaseFirestore.instance.collection('bieumau').orderBy('time', descending: true).snapshots();
+  final Stream<QuerySnapshot> bieumau = FirebaseFirestore.instance
+      .collection('bieumau')
+      .orderBy('time', descending: true)
+      .snapshots();
   final PageController _controller = PageController();
   int i = 0;
-  int number=3;
+  int number = 3;
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading : false,
+        automaticallyImplyLeading: false,
         title: Image.asset(
           'images/logo.png',
           cacheHeight: 40,
@@ -92,7 +94,6 @@ class _BieuMauState extends State<BieuMau> {
                       style: TextStyle(
                         color: Colors.red,
                       )))),
-     
           Expanded(
             child: Center(
               child: Padding(
@@ -112,57 +113,51 @@ class _BieuMauState extends State<BieuMau> {
 
                     final data = snapshot.requireData;
 
-                    return  Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                        itemCount: data.size,
-                        itemBuilder: (context, index) {
-                          return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                           mainAxisAlignment: MainAxisAlignment.start,
-                            children:[
-                              Container(   
-                                 padding: EdgeInsets.fromLTRB(3, 5, 3, 5), 
-                                child:Text(data.docs[index]['title'],
-                                  style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                         
-                                          ),
-                                ),
-                              Container(  
-                                padding: EdgeInsets.fromLTRB(3, 5, 3, 5), 
-                              child: Text(data.docs[index]['des']), 
-                            ),
-                            ]  
-                            
-                          );
-                        }
-                        ),
-              ),
-                 number < data.size
-                  ? TextButton(
-                      onPressed: () {
-                        setState(() {
-                          number = number + 1;
-                        });
-                      },
-                      child: Text('Xem thêm'))
-                  : TextButton(
-                      onPressed: () {
-                        setState(() {
-                          number = 3;
-                        });
-                      },
-                      child: Text('Rút gọn'))
-                   ]
-                );
+                    return Column(children: [
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: data.size,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.fromLTRB(3, 5, 3, 5),
+                                      child: Text(
+                                        data.docs[index]['title'],
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.fromLTRB(3, 5, 3, 5),
+                                      child: Text(data.docs[index]['des']),
+                                    ),
+                                  ]);
+                            }),
+                      ),
+                      number < data.size
+                          ? TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  number = number + 1;
+                                });
+                              },
+                              child: Text('Xem thêm'))
+                          : TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  number = 3;
+                                });
+                              },
+                              child: Text('Rút gọn'))
+                    ]);
                   },
                 ),
               ),
             ),
           ),
-      
         ],
       ),
     );
