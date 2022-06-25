@@ -1,7 +1,8 @@
+// ignore_for_file: prefer_final_fields, sized_box_for_whitespace, prefer_const_constructors
+
 import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChangeInfoAccount extends StatefulWidget {
@@ -54,8 +55,7 @@ class _ChangeInfoAccountState extends State<ChangeInfoAccount> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    
-                      Padding(
+                    Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: TextFormField(
                         controller: _nameController,
@@ -68,7 +68,8 @@ class _ChangeInfoAccountState extends State<ChangeInfoAccount> {
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 61, 97, 216), width: 3)),
+                                    color: Color.fromARGB(255, 61, 97, 216),
+                                    width: 3)),
                             hintText: 'Họ và Tên'),
                         keyboardType: TextInputType.text,
                       ),
@@ -76,7 +77,7 @@ class _ChangeInfoAccountState extends State<ChangeInfoAccount> {
                     Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: TextFormField(
-                        controller:   _codeController,
+                        controller: _codeController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -86,7 +87,8 @@ class _ChangeInfoAccountState extends State<ChangeInfoAccount> {
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 61, 97, 216), width: 3)),
+                                    color: Color.fromARGB(255, 61, 97, 216),
+                                    width: 3)),
                             hintText: 'MSSV:'),
                         keyboardType: TextInputType.text,
                       ),
@@ -94,7 +96,7 @@ class _ChangeInfoAccountState extends State<ChangeInfoAccount> {
                     Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: TextFormField(
-                        controller:  _classController,
+                        controller: _classController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -104,15 +106,16 @@ class _ChangeInfoAccountState extends State<ChangeInfoAccount> {
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 61, 97, 216), width: 3)),
+                                    color: Color.fromARGB(255, 61, 97, 216),
+                                    width: 3)),
                             hintText: 'Lớp: '),
                         keyboardType: TextInputType.text,
                       ),
                     ),
-                     Padding(
+                    Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: TextFormField(
-                        controller:  _birthdayController,
+                        controller: _birthdayController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -122,15 +125,16 @@ class _ChangeInfoAccountState extends State<ChangeInfoAccount> {
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 61, 97, 216), width: 3)),
+                                    color: Color.fromARGB(255, 61, 97, 216),
+                                    width: 3)),
                             hintText: 'Ngày sinh:'),
                         keyboardType: TextInputType.text,
                       ),
                     ),
-                     Padding(
+                    Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: TextFormField(
-                        controller:  _sexController,
+                        controller: _sexController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -140,7 +144,8 @@ class _ChangeInfoAccountState extends State<ChangeInfoAccount> {
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 61, 97, 216), width: 3)),
+                                    color: Color.fromARGB(255, 61, 97, 216),
+                                    width: 3)),
                             hintText: 'Giới tính'),
                         keyboardType: TextInputType.text,
                       ),
@@ -160,8 +165,8 @@ class _ChangeInfoAccountState extends State<ChangeInfoAccount> {
                           ),
                         ),
                         onPressed: () {
-                              Navigator.pop(context);
-                            }),
+                          Navigator.pop(context);
+                        }),
                   ],
                 );
               },
@@ -169,6 +174,4 @@ class _ChangeInfoAccountState extends State<ChangeInfoAccount> {
           )),
     );
   }
-
-
 }

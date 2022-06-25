@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:app_tin_tuc_cao_thang/home/settings/contact.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,13 +38,7 @@ class _SettingsState extends State<Settings> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               const SizedBox(
                 width: 10,
               ),

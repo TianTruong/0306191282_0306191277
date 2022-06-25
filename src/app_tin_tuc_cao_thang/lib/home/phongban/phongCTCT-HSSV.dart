@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_unnecessary_containers, camel_case_types, prefer_const_constructors, sized_box_for_whitespace
-
 import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/PhongCTCT-HSSV/lichphonghoc.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/PhongCTCT-HSSV/lichtiepsv.dart';
@@ -57,13 +55,7 @@ class _PhongCTCT_HSSVState extends State<PhongCTCT_HSSV> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -303,11 +295,6 @@ class _TinTucState extends State<TinTuc> {
                         children: [
                           ListTile(
                             title: Text(data.docs[index]['title']),
-                            // subtitle: Padding(
-                            //   padding: const EdgeInsets.only(top: 5, bottom: 5),
-                            //   child: Text('${data.docs[index]['status']}',
-                            //       style: const TextStyle(fontSize: 16)),
-                            // ),
                             onTap: () {
                               Navigator.push(
                                   context,

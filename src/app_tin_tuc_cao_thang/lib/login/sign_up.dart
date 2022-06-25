@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, deprecated_member_use, avoid_print, prefer_final_fields, sized_box_for_whitespace
-
 import 'dart:ui';
 
 import 'package:app_tin_tuc_cao_thang/login/set_info.dart';
@@ -31,7 +29,6 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          // height: double.infinity,
           width: double.infinity,
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -91,8 +88,8 @@ class _SignUpState extends State<SignUp> {
                         child: TextFormField(
                           obscureText: true,
                           controller: _passController,
-                        enableSuggestions: false,
-                       autocorrect: false,
+                          enableSuggestions: false,
+                          autocorrect: false,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
@@ -113,8 +110,8 @@ class _SignUpState extends State<SignUp> {
                         child: TextFormField(
                           obscureText: true,
                           controller: _confirmController,
-                           enableSuggestions: false,
-                           autocorrect: false,
+                          enableSuggestions: false,
+                          autocorrect: false,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),

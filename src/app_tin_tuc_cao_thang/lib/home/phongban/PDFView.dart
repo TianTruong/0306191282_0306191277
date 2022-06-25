@@ -54,20 +54,6 @@ class _PDFViewState extends State<PDFView> {
                 minScale: 1.0,
               ),
             )),
-        // floatingActionButton: Column(
-        //   mainAxisAlignment: MainAxisAlignment.end,
-        //   children: [
-        //     FloatingActionButton(
-        //       child: const Icon(Icons.first_page),
-        //       onPressed: () => controller.ready?.goToPage(pageNumber: 1),
-        //     ),
-        //     FloatingActionButton(
-        //       child: const Icon(Icons.last_page),
-        //       onPressed: () =>
-        //           controller.ready?.goToPage(pageNumber: controller.pageCount),
-        //     ),
-        //   ],
-        // ),
       ),
     );
   }

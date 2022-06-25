@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/doanhoi/bieumau.dart';
 import 'package:app_tin_tuc_cao_thang/home/doanhoi/muahexanh.dart';
@@ -8,7 +6,6 @@ import 'package:app_tin_tuc_cao_thang/home/doanhoi/khpt.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class DoanHoi extends StatefulWidget {
   const DoanHoi({Key? key}) : super(key: key);
@@ -46,18 +43,12 @@ class _DoanHoiState extends State<DoanHoi> {
                   width: 40,
                   height: 40,
                   child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
-              SizedBox(
+                      onPressed: () {})),
+              const SizedBox(
                 width: 10,
               ),
               Padding(
@@ -66,7 +57,7 @@ class _DoanHoiState extends State<DoanHoi> {
                     child: InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Information()));
+                        MaterialPageRoute(builder: (context) => const Information()));
                   },
                   child: user.photoURL != null
                       ? Image.network(
@@ -92,7 +83,7 @@ class _DoanHoiState extends State<DoanHoi> {
         children: [
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-              child: Center(
+              child: const Center(
                   child: Text('Đoàn Hội ',
                       style: TextStyle(
                         color: Colors.red,
@@ -130,16 +121,16 @@ class _DoanHoiState extends State<DoanHoi> {
                                 child: Column(
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.all(5.0),
+                                      padding: const EdgeInsets.all(5.0),
                                       alignment: Alignment.topLeft,
                                       child: Text(
                                         data.docs[index]['title'],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.all(5.0),
+                                      padding: const EdgeInsets.all(5.0),
                                       child: Image.network(
                                         data.docs[index]['image'],
                                         cacheHeight: 120,
@@ -149,7 +140,6 @@ class _DoanHoiState extends State<DoanHoi> {
                                   ],
                                 ),
                                 decoration: BoxDecoration(
-                                    // color: Colors.amber,
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(15)),
                               ),
@@ -160,28 +150,28 @@ class _DoanHoiState extends State<DoanHoi> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                AnhHoatDong()));
+                                                const AnhHoatDong()));
 
                                     break;
                                   case 2:
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => BieuMau()));
+                                            builder: (context) => const BieuMau()));
 
                                     break;
                                   case 3:
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => MuaHeXanh()));
+                                            builder: (context) => const MuaHeXanh()));
 
                                     break;
                                   case 4:
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => KHPT()));
+                                            builder: (context) => const KHPT()));
 
                                     break;
                                 }

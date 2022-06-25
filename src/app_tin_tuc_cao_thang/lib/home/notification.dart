@@ -37,13 +37,7 @@ class _NotiState extends State<Noti> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),

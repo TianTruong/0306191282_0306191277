@@ -1,10 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: unused_field
 
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BieuMau extends StatefulWidget {
   const BieuMau({Key? key}) : super(key: key);
@@ -43,18 +42,12 @@ class _BieuMauState extends State<BieuMau> {
                   width: 40,
                   height: 40,
                   child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
-              SizedBox(
+                      onPressed: () {})),
+              const SizedBox(
                 width: 10,
               ),
               Padding(
@@ -63,7 +56,7 @@ class _BieuMauState extends State<BieuMau> {
                     child: InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Information()));
+                        MaterialPageRoute(builder: (context) => const Information()));
                   },
                   child: user.photoURL != null
                       ? Image.network(
@@ -89,7 +82,7 @@ class _BieuMauState extends State<BieuMau> {
         children: [
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-              child: Center(
+              child: const Center(
                   child: Text('Đoàn hội',
                       style: TextStyle(
                         color: Colors.red,
@@ -123,15 +116,15 @@ class _BieuMauState extends State<BieuMau> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.fromLTRB(3, 5, 3, 5),
+                                      padding: const EdgeInsets.fromLTRB(3, 5, 3, 5),
                                       child: Text(
                                         data.docs[index]['title'],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.fromLTRB(3, 5, 3, 5),
+                                      padding: const EdgeInsets.fromLTRB(3, 5, 3, 5),
                                       child: Text(data.docs[index]['des']),
                                     ),
                                   ]);

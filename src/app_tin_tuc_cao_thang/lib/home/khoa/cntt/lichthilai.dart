@@ -1,10 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/caulacbo.dart';
-import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/thuctaptotnghiep.dart';
-import 'package:app_tin_tuc_cao_thang/home/khoa/cntt/doantotnghiep.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class LichThiLai extends StatefulWidget {
@@ -47,13 +46,7 @@ class _LichThiLaiState extends State<LichThiLai> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),

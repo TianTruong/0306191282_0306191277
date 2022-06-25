@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,10 +11,6 @@ class BinhLuan extends StatefulWidget {
 }
 
 class _BinhLuanState extends State<BinhLuan> {
-  // CollectionReference comment =
-  //     FirebaseFirestore.instance.collection('departments');
-  // var commentDocId;
-
   @override
   void initState() {
     super.initState();
@@ -49,13 +43,7 @@ class _BinhLuanState extends State<BinhLuan> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -138,11 +126,6 @@ class _ChiTietBinhLuanState extends State<ChiTietBinhLuan> {
         .snapshots();
 
     return Expanded(
-      // decoration: BoxDecoration(
-      //   border: Border.all(color: Colors.grey, width: 2),
-      //   borderRadius: BorderRadius.circular(5),
-      // ),
-      // height: 600,
       child: StreamBuilder<QuerySnapshot>(
         stream: commets,
         builder: (
@@ -167,12 +150,7 @@ class _ChiTietBinhLuanState extends State<ChiTietBinhLuan> {
                     child: ListTile(
                       title: Text(data.docs[index]['userSend']),
                       subtitle: Text(data.docs[index]['comment']),
-                      onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => ChiTietBaiViet()));
-                      },
+                      onTap: () {},
                     ),
                   ),
                 );
@@ -217,7 +195,6 @@ class _VietBinhLuanState extends State<VietBinhLuan> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Nhập nội dung tin nhắn
           Expanded(
             child: TextField(
               cursorColor: Colors.blueAccent,
@@ -229,14 +206,12 @@ class _VietBinhLuanState extends State<VietBinhLuan> {
                     borderRadius: BorderRadius.circular(30),
                     borderSide:
                         const BorderSide(color: Colors.blueAccent, width: 3)),
-
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide:
                       const BorderSide(color: Colors.blueAccent, width: 3),
                 ),
                 hintText: 'Nhập nội dung ...',
-                // labelText: 'Name'
               ),
             ),
           ),

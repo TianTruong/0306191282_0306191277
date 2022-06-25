@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
-
 import 'package:app_tin_tuc_cao_thang/home/doanhoi/doanhoi.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/danhsachkhoa.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
@@ -59,13 +57,7 @@ class _NewsState extends State<News> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -135,7 +127,6 @@ class BuildButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // Tin tức
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(
@@ -173,8 +164,6 @@ class BuildButton extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Khoa, bộ môn
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(
@@ -209,8 +198,6 @@ class BuildButton extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Phòng ban
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(
@@ -245,8 +232,6 @@ class BuildButton extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Đoàn, hội
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(
@@ -328,7 +313,6 @@ class _SliderState extends State<Slider> {
 
             return InkWell(
               child: CarouselSlider.builder(
-                // carouselController: _controller,
                 itemCount: 5,
                 itemBuilder: (context, index, readIndex) {
                   return Stack(
@@ -449,9 +433,7 @@ class _ListPostState extends State<ListPost> {
                             title: Text(
                               data.docs[index]['title'],
                               style: TextStyle(
-                                  // color: Colors.grey[700],
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             onTap: () {
                               Navigator.push(

@@ -46,13 +46,7 @@ class _MuaHeXanhState extends State<MuaHeXanh> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -180,7 +174,6 @@ class _MuaHeXanhState extends State<MuaHeXanh> {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  // color: Colors.amber,
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15)),
                             ),

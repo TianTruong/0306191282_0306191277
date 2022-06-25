@@ -1,10 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: unused_field, prefer_const_constructors
 
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HocPhi extends StatefulWidget {
   const HocPhi({Key? key}) : super(key: key);
@@ -223,7 +222,6 @@ class _HocPhiState extends State<HocPhi> {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  // color: Colors.amber,
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15)),
                             ),
@@ -317,7 +315,6 @@ class _HocPhiState extends State<HocPhi> {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  // color: Colors.amber,
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15)),
                             ),
@@ -411,7 +408,6 @@ class _HocPhiState extends State<HocPhi> {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  // color: Colors.amber,
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15)),
                             ),

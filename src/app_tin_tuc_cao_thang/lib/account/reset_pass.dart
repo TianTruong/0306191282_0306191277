@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, deprecated_member_use, avoid_print, prefer_final_fields, sized_box_for_whitespace
+// ignore_for_file: prefer_final_fields, sized_box_for_whitespace, deprecated_member_use, unused_catch_clause
 
 import 'dart:ui';
 
@@ -6,7 +6,6 @@ import 'package:app_tin_tuc_cao_thang/login/set_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:basic_utils/basic_utils.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({Key? key}) : super(key: key);
@@ -16,8 +15,7 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
-  TextEditingController _emailController= TextEditingController();
-
+  TextEditingController _emailController = TextEditingController();
 
   @override
   void dispose() {
@@ -30,7 +28,6 @@ class _ResetPasswordState extends State<ResetPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          // height: double.infinity,
           width: double.infinity,
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -48,7 +45,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 }
 
                 if (snapshot.hasData) {
-                  return SetInfor();
+                  return const SetInfor();
                 }
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -57,7 +54,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       Container(
                         width: 150,
                         height: 250,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(50)),
                           shape: BoxShape.rectangle,
                         ),
@@ -78,7 +75,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                       color: Color.fromARGB(255, 61, 97, 216),
                                       width: 3)),
                               hintText: 'Email'),
@@ -86,26 +83,26 @@ class _ResetPasswordState extends State<ResetPassword> {
                         ),
                       ),
                       ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: const Color.fromARGB(255, 61, 97, 216),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0)),
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color.fromARGB(255, 61, 97, 216),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0)),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 10),
+                          child: Text(
+                            'Gửi',
+                            style: TextStyle(fontSize: 15),
                           ),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 10),
-                            child: Text(
-                              'Gửi',
-                              style: TextStyle(fontSize: 15),
-                            ),
-                          ),
-                          onPressed: resetPassword,
-                          ),
+                        ),
+                        onPressed: resetPassword,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CupertinoButton(
-                              padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
+                              padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
                               child: const Text('Quay lại',
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 61, 97, 216),
@@ -124,13 +121,14 @@ class _ResetPasswordState extends State<ResetPassword> {
     );
   }
 
-Future resetPassword() async {
-  try{
- await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim()); 
-  showDialog(
+  Future resetPassword() async {
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: _emailController.text.trim());
+      showDialog(
           context: context,
           builder: (context) => AlertDialog(
-                content: Text('Gửi mail thành công'),
+                content: const Text('Gửi mail thành công'),
                 actions: [
                   FlatButton(
                       child: const Text('OK'),
@@ -139,11 +137,11 @@ Future resetPassword() async {
                       }),
                 ],
               ));
-  } on FirebaseAuthException catch (e){
-    showDialog(
+    } on FirebaseAuthException catch (e) {
+      showDialog(
           context: context,
           builder: (context) => AlertDialog(
-                content: Text('Gửi thất bại'),
+                content: const Text('Gửi thất bại'),
                 actions: [
                   FlatButton(
                       child: const Text('OK'),
@@ -152,6 +150,6 @@ Future resetPassword() async {
                       }),
                 ],
               ));
+    }
   }
-}
 }

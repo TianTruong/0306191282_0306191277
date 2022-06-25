@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_unnecessary_containers, deprecated_member_use, prefer_const_constructors, non_constant_identifier_names, sized_box_for_whitespace
-
 import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/PhongDaoTao/lichdaotao.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/PhongDaoTao/lichthi.dart';
@@ -57,13 +55,7 @@ class _PhongDaoTaoState extends State<PhongDaoTao> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -233,9 +225,6 @@ class _TinTucState extends State<TinTuc> {
     final Stream<QuerySnapshot> posts = FirebaseFirestore.instance
         .collection('posts')
         .where('type', isEqualTo: 'Đào tạo')
-        // .where('type', isEqualTo: 'Lịch đào tạo')
-        // .where('type', isEqualTo: 'Lịch thi')
-        // .where('type', isEqualTo: 'Thời khóa biểu')
         .orderBy('time', descending: true)
         .snapshots();
 
@@ -272,13 +261,7 @@ class _TinTucState extends State<TinTuc> {
                           ListTile(
                             title: Text(
                               data.docs[index]['title'],
-                              // style: const TextStyle(fontSize: 20)
                             ),
-                            // subtitle: Padding(
-                            //   padding: const EdgeInsets.only(top: 5, bottom: 5),
-                            //   child: Text('${data.docs[index]['status']}',
-                            //       style: const TextStyle(fontSize: 16)),
-                            // ),
                             onTap: () {
                               Navigator.push(
                                   context,

@@ -45,13 +45,7 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -204,7 +198,6 @@ class _BoMonKinhTeState extends State<BoMonKinhTe> {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  // color: Colors.amber,
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15)),
                             ),

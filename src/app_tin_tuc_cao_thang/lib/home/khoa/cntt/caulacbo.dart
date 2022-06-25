@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
+
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,13 +45,7 @@ class _CauLacBoState extends State<CauLacBo> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -147,7 +143,6 @@ class _CauLacBoState extends State<CauLacBo> {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  // color: Colors.amber,
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15)),
                             ),

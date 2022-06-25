@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, deprecated_member_use, avoid_print, sized_box_for_whitespace, prefer_final_fields
-
 import 'dart:async';
 import 'dart:ui';
 
@@ -62,7 +60,6 @@ class _SignInState extends State<SignIn> {
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: ListView(
-                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         width: 150,
@@ -102,7 +99,7 @@ class _SignInState extends State<SignIn> {
                           obscureText: true,
                           controller: _passController,
                           enableSuggestions: false,
-                         autocorrect: false,
+                          autocorrect: false,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
@@ -159,9 +156,6 @@ class _SignInState extends State<SignIn> {
                                           capcha,
                                           style: TextStyle(
                                             fontSize: 18,
-                                            // color: Color.fromARGB(
-                                            //     255, 255, 255, 255),
-                                            // backgroundColor: Colors.blue
                                           ),
                                         ),
                                       )),
@@ -217,7 +211,6 @@ class _SignInState extends State<SignIn> {
                         children: [
                           Column(
                             children: [
-                           
                               CupertinoButton(
                                   child: const Text('Quên mật khẩu?',
                                       style: TextStyle(

@@ -1,10 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/binhluan.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class ChiTietBaiViet extends StatefulWidget {
@@ -57,13 +54,7 @@ class _ChiTietBaiVietState extends State<ChiTietBaiViet> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -135,13 +126,12 @@ class _ChiTietBaiVietState extends State<ChiTietBaiViet> {
                         style: TextStyle(fontSize: 15, color: Colors.black)),
               ),
               Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: NutBinhLuan(
-                idBaiViet: widget.idBaiViet,
-              )),
+                  padding: const EdgeInsets.all(10.0),
+                  child: NutBinhLuan(
+                    idBaiViet: widget.idBaiViet,
+                  )),
             ],
           ),
-          
         ],
       ),
     );
@@ -212,10 +202,6 @@ class _NutBinhLuanState extends State<NutBinhLuan> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        // decoration: BoxDecoration(
-        //   border: Border.all(color: Colors.grey, width: 2),
-        //   borderRadius: BorderRadius.circular(5),
-        // ),
         child: ElevatedButton(
       child: Text('Bình luận'),
       onPressed: () {

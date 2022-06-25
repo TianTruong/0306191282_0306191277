@@ -41,12 +41,12 @@ class _KHPTState extends State<KHPT> {
                   width: 40,
                   height: 40,
                   child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.search,
                         color: Colors.black,
                       ),
                       onPressed: () {})),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Padding(
@@ -55,7 +55,7 @@ class _KHPTState extends State<KHPT> {
                     child: InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Information()));
+                        MaterialPageRoute(builder: (context) => const Information()));
                   },
                   child: user.photoURL != null
                       ? Image.network(
@@ -81,7 +81,7 @@ class _KHPTState extends State<KHPT> {
         children: [
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-              child: Center(
+              child: const Center(
                   child: Text('Kế hoạch - phong trào',
                       style: TextStyle(
                         color: Colors.red,
@@ -154,7 +154,7 @@ class _KHPTState extends State<KHPT> {
                               child: Column(
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.all(5.0),
+                                    padding: const EdgeInsets.all(5.0),
                                     alignment: Alignment.topLeft,
                                     child: Text(
                                       data.docs[index]['title'],
@@ -225,7 +225,6 @@ class _KHPTState extends State<KHPT> {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  // color: Colors.amber,
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15)),
                             ),

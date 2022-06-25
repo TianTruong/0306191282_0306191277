@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, unnecessary_string_interpolations
-
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -42,7 +40,6 @@ class Information extends StatelessWidget {
         centerTitle: true,
         title: Text(users.displayName!,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-        // title: const Text('Cloud Firestore Demo'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -143,47 +140,5 @@ class Information extends StatelessWidget {
             )),
       ),
     );
-
-    // final user = FirebaseAuth.instance.currentUser!;
-    // return Scaffold(
-    //   body: Padding(
-    //     padding: const EdgeInsets.all(15.0),
-    //     child: ListView(
-    //       children: [
-    //         user.photoURL != null
-    //             ? Center(
-    //                 child: ClipOval(
-    //                   child: Image.network(
-    //                     user.photoURL!,
-    //                     fit: BoxFit.cover,
-    //                     cacheHeight: 160,
-    //                     cacheWidth: 160,
-    //                   ),
-    //                 ),
-    //               )
-    //             : Center(
-    //                 child: ClipOval(
-    //                   child: Image.asset(
-    //                     'images/logo.png',
-    //                     fit: BoxFit.cover,
-    //                     cacheHeight: 160,
-    //                     cacheWidth: 160,
-    //                   ),
-    //                 ),
-    //               ),
-    //         Center(
-    //           child: Padding(
-    //             padding: const EdgeInsets.all(10.0),
-    //             child: Text('${user.displayName!}',
-    //                 style:
-    //                     TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-    //           ),
-    //         ),
-    //         Card(child: ListTile(title: Text('ID: ${user.uid}'))),
-    //         Card(child: ListTile(title: Text('Gmail: ${user.email!}'))),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }

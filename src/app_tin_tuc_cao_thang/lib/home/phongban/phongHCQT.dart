@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, file_names, non_constant_identifier_names
-
 import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';
@@ -54,13 +52,7 @@ class _PhongHCQTState extends State<PhongHCQT> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -171,11 +163,6 @@ class _TinTucState extends State<TinTuc> {
                         children: [
                           ListTile(
                             title: Text(data.docs[index]['title']),
-                            // subtitle: Padding(
-                            //   padding: const EdgeInsets.only(top: 5, bottom: 5),
-                            //   child: Text('${data.docs[index]['status']}',
-                            //       style: const TextStyle(fontSize: 16)),
-                            // ),
                             onTap: () {
                               Navigator.push(
                                   context,

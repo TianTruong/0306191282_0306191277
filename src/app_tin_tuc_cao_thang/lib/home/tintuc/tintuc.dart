@@ -5,8 +5,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:number_paginator/number_paginator.dart';
-import 'package:readmore/readmore.dart';
 
 class TinTuc extends StatefulWidget {
   const TinTuc({Key? key}) : super(key: key);
@@ -70,13 +68,7 @@ class _TinTucState extends State<TinTuc> {
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
+                      onPressed: () {})),
               SizedBox(
                 width: 10,
               ),
@@ -190,7 +182,6 @@ class _SliderState extends State<Slider> {
 
             return InkWell(
               child: CarouselSlider.builder(
-                // carouselController: _controller,
                 itemCount: 5,
                 itemBuilder: (context, index, readIndex) {
                   return Stack(
@@ -305,9 +296,7 @@ class _TinState extends State<Tin> {
                             title: Text(
                               data.docs[index]['title'],
                               style: TextStyle(
-                                  // color: Colors.grey[700],
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             onTap: () {
                               Navigator.push(
@@ -375,36 +364,3 @@ class _TinState extends State<Tin> {
     );
   }
 }
-
-
-// class Trang extends StatefulWidget {
-//   const Trang({Key? key}) : super(key: key);
-
-//   @override
-//   State<Trang> createState() => _TrangState();
-// }
-
-// class _TrangState extends State<Trang> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.only(top: 10.0),
-//       child: Container(
-//         // decoration: BoxDecoration(
-//         //   border: Border.all(color: Colors.grey, width: 2),
-//         //   borderRadius: BorderRadius.circular(5),
-//         // ),
-//         child: NumberPaginator(
-//           height: 40,
-//           numberPages: 10,
-//           buttonShape: BeveledRectangleBorder(),
-//           buttonUnselectedForegroundColor: Colors.blueAccent,
-//           buttonSelectedBackgroundColor: Colors.blueAccent,
-//           onPageChange: (int index) {
-//             setState(() {});
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }

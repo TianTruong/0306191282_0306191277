@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,18 +40,12 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
                   width: 40,
                   height: 40,
                   child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.search,
                         color: Colors.black,
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => TinTuc(),
-                        //     ));
-                      })),
-              SizedBox(
+                      onPressed: () {})),
+              const SizedBox(
                 width: 10,
               ),
               Padding(
@@ -62,7 +54,7 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
                     child: InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Information()));
+                        MaterialPageRoute(builder: (context) => const Information()));
                   },
                   child: user.photoURL != null
                       ? Image.network(
@@ -88,7 +80,7 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
         children: [
           Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-              child: Center(
+              child: const Center(
                   child: Text('Hình ảnh hoạt động',
                       style: TextStyle(
                         color: Colors.red,
@@ -161,16 +153,16 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
                               child: Column(
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.all(5.0),
+                                    padding: const EdgeInsets.all(5.0),
                                     alignment: Alignment.topLeft,
                                     child: Text(
                                       data.docs[index]['title'],
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Container(
-                                    padding: EdgeInsets.all(5.0),
+                                    padding: const EdgeInsets.all(5.0),
                                     child: Image.network(
                                       data.docs[index]['image'],
                                       cacheHeight: 200,
@@ -180,7 +172,6 @@ class _AnhHoatDongState extends State<AnhHoatDong> {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                  // color: Colors.amber,
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15)),
                             ),
