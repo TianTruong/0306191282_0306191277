@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_print, file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:pdf_render/pdf_render_widgets.dart';

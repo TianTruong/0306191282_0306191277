@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, prefer_typing_uninitialized_variables, sized_box_for_whitespace, avoid_print
+
 import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';

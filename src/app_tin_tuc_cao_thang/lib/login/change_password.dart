@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields, sized_box_for_whitespace, prefer_const_constructors
+
 import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';

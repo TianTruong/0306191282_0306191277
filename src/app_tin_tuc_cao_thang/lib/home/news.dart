@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, deprecated_member_use, prefer_const_constructors_in_immutables, avoid_print
+
 import 'package:app_tin_tuc_cao_thang/home/doanhoi/doanhoi.dart';
 import 'package:app_tin_tuc_cao_thang/home/khoa/danhsachkhoa.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';

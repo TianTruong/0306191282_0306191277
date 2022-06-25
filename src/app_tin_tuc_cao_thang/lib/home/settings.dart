@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, deprecated_member_use
+
 import 'package:app_tin_tuc_cao_thang/home/settings/contact.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app_tin_tuc_cao_thang/home/hocphi/hocphi.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/phongCTCT-HSSV.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/phongHCQT.dart';

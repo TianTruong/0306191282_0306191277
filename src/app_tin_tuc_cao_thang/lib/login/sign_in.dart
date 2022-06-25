@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields, sized_box_for_whitespace, prefer_const_constructors, non_constant_identifier_names, deprecated_member_use
+
 import 'dart:async';
 import 'dart:ui';
 
@@ -64,7 +66,7 @@ class _SignInState extends State<SignIn> {
                       Container(
                         width: 150,
                         height: 250,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(50)),
                           shape: BoxShape.rectangle,
                         ),
@@ -286,9 +288,7 @@ class _SignInState extends State<SignIn> {
                   ));
         }
       } on FirebaseAuthException catch (e) {
-        print(e);
         count++;
-        print(count);
         showDialog(
             context: context,
             builder: (context) => AlertDialog(

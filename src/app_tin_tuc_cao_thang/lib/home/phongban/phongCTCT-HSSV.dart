@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, non_constant_identifier_names, avoid_unnecessary_containers, deprecated_member_use
+
 import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/PhongCTCT-HSSV/lichphonghoc.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/PhongCTCT-HSSV/lichtiepsv.dart';

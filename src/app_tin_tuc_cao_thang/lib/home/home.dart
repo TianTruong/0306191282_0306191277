@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:app_tin_tuc_cao_thang/home/news.dart';
 import 'package:app_tin_tuc_cao_thang/home/notification.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields, sized_box_for_whitespace, prefer_const_constructors, deprecated_member_use, non_constant_identifier_names, avoid_print
+
 import 'dart:ui';
 
 import 'package:app_tin_tuc_cao_thang/login/set_info.dart';

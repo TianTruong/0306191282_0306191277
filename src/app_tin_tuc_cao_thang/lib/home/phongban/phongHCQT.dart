@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, sized_box_for_whitespace
+
 import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
 import 'package:app_tin_tuc_cao_thang/home/settings/information.dart';
 import 'package:app_tin_tuc_cao_thang/home/tintuc/chitietbaiviet.dart';

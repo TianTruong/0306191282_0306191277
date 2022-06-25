@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element, prefer_const_constructors, non_constant_identifier_names, deprecated_member_use, avoid_unnecessary_containers
+
 import 'package:app_tin_tuc_cao_thang/home/phongban/PDFView.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/PhongDaoTao/lichdaotao.dart';
 import 'package:app_tin_tuc_cao_thang/home/phongban/PhongDaoTao/lichthi.dart';
