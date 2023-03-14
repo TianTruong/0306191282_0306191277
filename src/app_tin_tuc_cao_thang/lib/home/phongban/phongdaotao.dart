@@ -130,7 +130,7 @@ class NutBam extends StatelessWidget {
             ]),
         width: 75,
         height: 100,
-        child: FlatButton(
+        child: TextButton(
             child: Text(label,
                 style: TextStyle(color: Colors.black, fontSize: 12)),
             onPressed: () {}));
@@ -156,7 +156,7 @@ class NutBam extends StatelessWidget {
                       ]),
                   width: 75,
                   height: 100,
-                  child: FlatButton(
+                  child: TextButton(
                       child: Text('Thời khóa biểu',
                           style: TextStyle(color: Colors.black, fontSize: 12)),
                       onPressed: () {
@@ -177,7 +177,7 @@ class NutBam extends StatelessWidget {
                       ]),
                   width: 75,
                   height: 100,
-                  child: FlatButton(
+                  child: TextButton(
                       child: Text('Lịch thi',
                           style: TextStyle(color: Colors.black, fontSize: 12)),
                       onPressed: () {
@@ -196,7 +196,7 @@ class NutBam extends StatelessWidget {
                       ]),
                   width: 75,
                   height: 100,
-                  child: FlatButton(
+                  child: TextButton(
                       child: Text('Lịch đào tạo',
                           style: TextStyle(color: Colors.black, fontSize: 12)),
                       onPressed: () {

@@ -231,7 +231,7 @@ class _VietBinhLuanState extends State<VietBinhLuan> {
                             builder: (context) => AlertDialog(
                                   content: const Text('Nhập ít nhất 5 ký tự'),
                                   actions: [
-                                    FlatButton(
+                                    TextButton(
                                         child: const Text('OK'),
                                         onPressed: () {
                                           Navigator.pop(context);

@@ -146,7 +146,7 @@ class BuildButton extends StatelessWidget {
                           ]),
                       width: 65,
                       height: 65,
-                      child: FlatButton(
+                      child: TextButton(
                           child: Center(
                             child: Icon(Icons.newspaper,
                                 color: Colors.lightBlue[700]),
@@ -183,7 +183,7 @@ class BuildButton extends StatelessWidget {
                           ]),
                       width: 65,
                       height: 65,
-                      child: FlatButton(
+                      child: TextButton(
                           child: Center(
                             child: Icon(Icons.book_outlined,
                                 color: Colors.lightBlue[700]),
@@ -217,7 +217,7 @@ class BuildButton extends StatelessWidget {
                           ]),
                       width: 65,
                       height: 65,
-                      child: FlatButton(
+                      child: TextButton(
                           child: Center(
                             child: Icon(Icons.home_outlined,
                                 color: Colors.lightBlue[700]),
@@ -251,7 +251,7 @@ class BuildButton extends StatelessWidget {
                           ]),
                       width: 65,
                       height: 65,
-                      child: FlatButton(
+                      child: TextButton(
                           child: Center(
                             child: Icon(Icons.flag_outlined,
                                 color: Colors.lightBlue[700]),

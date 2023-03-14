@@ -179,7 +179,7 @@ class _SignUpState extends State<SignUp> {
           builder: (context) => AlertDialog(
                 content: Text('Please enter some text'),
                 actions: [
-                  FlatButton(
+                  TextButton(
                       child: const Text('OK'),
                       onPressed: () {
                         Navigator.pop(context);
@@ -193,7 +193,7 @@ class _SignUpState extends State<SignUp> {
             builder: (context) => AlertDialog(
                   content: Text('xác nhận mật khẩu không đúng'),
                   actions: [
-                    FlatButton(
+                    TextButton(
                         child: const Text('OK'),
                         onPressed: () {
                           Navigator.pop(context);
@@ -212,7 +212,7 @@ class _SignUpState extends State<SignUp> {
               builder: (context) => AlertDialog(
                     content: Text(e.toString().trim()),
                     actions: [
-                      FlatButton(
+                      TextButton(
                           child: const Text('OK'),
                           onPressed: () {
                             Navigator.pop(context);
