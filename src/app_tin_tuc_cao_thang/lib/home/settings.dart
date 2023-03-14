@@ -195,13 +195,13 @@ class _SettingsState extends State<Settings> {
                       builder: (context) => AlertDialog(
                             content: const Text('Bạn muốn đăng xuất?'),
                             actions: [
-                              FlatButton(
+                              TextButton(
                                   child: const Text('Có'),
                                   onPressed: () {
                                     Navigator.pop(context);
                                     FirebaseAuth.instance.signOut();
                                   }),
-                              FlatButton(
+                              TextButton(
                                   child: const Text('Không'),
                                   onPressed: () {
                                     Navigator.pop(context);

@@ -130,7 +130,7 @@ class _ResetPasswordState extends State<ResetPassword> {
           builder: (context) => AlertDialog(
                 content: const Text('Gửi mail thành công'),
                 actions: [
-                  FlatButton(
+                  TextButton(
                       child: const Text('OK'),
                       onPressed: () {
                         Navigator.pop(context);
@@ -143,7 +143,7 @@ class _ResetPasswordState extends State<ResetPassword> {
           builder: (context) => AlertDialog(
                 content: const Text('Gửi thất bại'),
                 actions: [
-                  FlatButton(
+                  TextButton(
                       child: const Text('OK'),
                       onPressed: () {
                         Navigator.pop(context);

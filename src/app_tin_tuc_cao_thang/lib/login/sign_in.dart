@@ -252,7 +252,7 @@ class _SignInState extends State<SignIn> {
           builder: (context) => AlertDialog(
                 content: Text('Please enter some text'),
                 actions: [
-                  FlatButton(
+                  TextButton(
                       child: const Text('OK'),
                       onPressed: () {
                         setState(() {
@@ -277,7 +277,7 @@ class _SignInState extends State<SignIn> {
               builder: (context) => AlertDialog(
                     content: Text('Captcha sai'),
                     actions: [
-                      FlatButton(
+                      TextButton(
                           child: const Text('OK'),
                           onPressed: () {
                             setState(() {
@@ -294,7 +294,7 @@ class _SignInState extends State<SignIn> {
             builder: (context) => AlertDialog(
                   content: Text(e.toString().trim()),
                   actions: [
-                    FlatButton(
+                    TextButton(
                         child: const Text('OK'),
                         onPressed: () {
                           setState(() {
